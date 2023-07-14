@@ -6,11 +6,14 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        main: "#be9c42",
-        hover: "#ab8c3b",
+        main: "#22419a",
+        hover: "#1f3b8b",
+        dark: "#0c1739",
+        popup: "rgba(0,0,0,.4)",
+        danger: "#dc3545",
+        succuss: "#28a745"
       },
-    },
   },
   plugins: [],
 }
-
+}
