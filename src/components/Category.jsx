@@ -1,13 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 
-const Category = ({icon ,title}) => {
+const Category = ({icon ,title , url}) => {
   return (
-    <div className='flex justify-center items-center bg-main rounded-md text-white'>
+   <Link to={url}>
+      <div className='flex justify-center items-center bg-main rounded-md text-white'>
         <div className='text-center py-9 px-6'>
             <FontAwesomeIcon icon={icon} className='text-lg' />
             <h3 className='text-lg pt-2'>{title}</h3>
         </div>
-    </div>
+      </div>
+   </Link>
   )
 }
 
