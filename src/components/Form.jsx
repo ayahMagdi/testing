@@ -46,6 +46,8 @@ const Form = ({getUser}) => {
                         placeholder="اسم المستخدم" 
                         autoComplete='off'
                         required
+                        onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
+                        onInput={F => F.target.setCustomValidity('')} 
                         className="bg-gray-200 w-full p-4 px-10 rounded-lg focus:outline-main" 
                     />
                 </div>
@@ -58,6 +60,8 @@ const Form = ({getUser}) => {
                         type="password" 
                         onChange={handleChange}
                         required
+                        onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
+                        onInput={F => F.target.setCustomValidity('')} 
                         placeholder="كلمة المرور" 
                         className="bg-gray-200 w-full p-4 pr-10 rounded-lg focus:outline-main" 
                     />
