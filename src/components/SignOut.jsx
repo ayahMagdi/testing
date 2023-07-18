@@ -9,7 +9,10 @@ const SignOut = ({user}) => {
   const [show , setShow] = useState(false)
   const navigate = useNavigate();
   const logOut = () => {setShow(() => !show)}
-  const handleConfirm = () => {navigate('/')}
+  const handleConfirm = () => {
+            localStorage.clear()
+            navigate('/')
+        }
   const handleCancel = () => {setShow(() => false)}
 
   return (
@@ -20,7 +23,7 @@ const SignOut = ({user}) => {
             className='rotate-180 text-main text-xl font-light cursor-pointer' 
             onClick={logOut}
         />
-        {show && <ConfirmationButton confirm={handleConfirm} cancel={handleCancel} />}
+        {show && <ConfirmationButton title='هل تريد تسجيل الخروج؟' confirm={handleConfirm} cancel={handleCancel} />}
     </div>
   )
 }

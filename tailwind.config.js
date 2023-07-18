@@ -6,13 +6,15 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        main: "#22419a",
+        main: "#4353b2",
         hover: "#1f3b8b",
         dark: "#0c1739",
         popup: "rgba(0,0,0,.4)",
         danger: "#dc3545",
-        succuss: "#28a745"
+        succuss: "#28a745",
+        tablerow: "#e9ecf5",
       },
+      backgroundColor: ['odd'],
   },
   plugins: [],
 }
