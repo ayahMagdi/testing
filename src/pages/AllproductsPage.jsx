@@ -2,7 +2,7 @@ import Buttons from "../components/Buttons"
 import Navbar from "../components/Navbar"
 import TableContent from "../components/TableContent"
 
-const AllproductsPage = ({user}) => {
+const AllproductsPage = ({user , editedProduct , getRecord}) => {
   return (
     <div className="container mx-auto">
         <Navbar user={user} />
@@ -10,7 +10,7 @@ const AllproductsPage = ({user}) => {
              title='اضافة منتج جديد' 
              urlBack={'/homepage'} 
              urlAdd={'/addProduct'} />
-        <TableContent />
+        <TableContent editedProduct ={editedProduct} getRecord={getRecord}/>
     </div>
   )
 }

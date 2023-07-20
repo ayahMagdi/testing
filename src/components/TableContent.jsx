@@ -2,31 +2,30 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStateValue } from '../context/stateProvider';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
-const TableContent = () => {
+const TableContent = ({getRecord}) => {
 
- const [{product}, dispatch] = useStateValue();
+ const {items} = useStateValue();
  const [show , setShow] = useState(false)
  const [code ,setCode] = useState(null)
  const [input ,setInput] = useState(null)
  const [err ,setErr] = useState(false)
+ const navigate = useNavigate();
 
- const handleDelete = (e) => {
+ const {deleteItem} = useStateValue()
+
+ const handlePopup = (e) => {
     setShow(true)
     setCode(e)
  }
-
- const handleDefault = () => {
+ const handleDelete = (e) => {
+    deleteItem(e)
     setShow(false)
-    setErr(false)
  }
-
- const removeElement = (e) => {
-    dispatch({
-        type: 'REMOVE_PRODUCT',
-        item: e
-        })
-    setShow(prev => !prev)
+ const handleEdit = (e) => {
+    getRecord(e)
+    navigate('/editProduct')
  }
 
   return (
@@ -44,17 +43,17 @@ const TableContent = () => {
                 </tr>
             </thead>
             <tbody>
-                {product?.map(e => (
+                {items?.map(e => (
                     <tr className='border-b border-slate-300 odd:bg-tablerow' key={e.code}>
                         <td className="px-6 py-3">{e.code}</td>
                         <td className="px-6 py-3">{e.name}</td>
                         <td className="px-6 py-3">{e.unit}</td>
                         <td className="px-6 py-3">{e.income}</td>
                         <td className="px-6 py-3">{e.outcome}</td>
-                        <td className="px-6 py-3 cursor-pointer">
+                        <td className="px-6 py-3 cursor-pointer" onClick={() => handleEdit(e)}>
                             <FontAwesomeIcon icon={faEdit} />
                         </td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handleDelete(e)}>
+                        <td className="px-6 py-3 cursor-pointer" onClick={() => handlePopup(e.code)} >
                             <FontAwesomeIcon icon={faTrashAlt} />
                         </td>
                     </tr>
@@ -76,13 +75,12 @@ const TableContent = () => {
                     <div className='flex justify-center items-center mt-2 gap-4'>
                         <button 
                             className='bg-main rounded-md text-white py-3 px-6 w-2/4'
-                            onClick={code.code !== input ? () => setErr(true) : () => removeElement(code)}
-                        >
+                            onClick={code === input ? () => handleDelete(code) : () => setErr(true)}>
                             تأكيد
                         </button>
                         <button 
                             className='rounded-md text-red-500 border w-2/4 border-red-500 py-3 px-6'
-                            onClick={handleDefault}
+                            onClick={() => setShow(false)}
                         >
                             الغاء
                         </button>
