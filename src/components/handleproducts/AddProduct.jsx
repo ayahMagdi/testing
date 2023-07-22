@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { useStateValue } from '../context/stateProvider';
+import { useStateValue } from '../../context/stateProvider';
 import { useNavigate } from 'react-router-dom';
-import ConfirmationButton from './ConfirmationButton';
-import FormItemsModel from './FormItemsModel';
-import ModelBtns from './ModelBtns';
+import ConfirmationButton from '../ConfirmationButton';
+import FormItemsModel from '../formmodels/FormItemsModel';
+import ModelBtns from '../ModelBtns';
 
 const AddProduct = () => {
   

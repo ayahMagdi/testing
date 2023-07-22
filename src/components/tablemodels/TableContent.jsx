@@ -1,32 +1,32 @@
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useStateValue } from '../context/stateProvider';
+import { useStateValue } from '../../context/stateProvider';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 const TableContent = ({getRecord}) => {
 
- const {items} = useStateValue();
- const [show , setShow] = useState(false)
- const [code ,setCode] = useState(null)
- const [input ,setInput] = useState(null)
- const [err ,setErr] = useState(false)
- const navigate = useNavigate();
+    const {items} = useStateValue();
+    const [show , setShow] = useState(false)
+    const [code ,setCode] = useState(null)
+    const [input ,setInput] = useState(null)
+    const [err ,setErr] = useState(false)
+    const navigate = useNavigate();
 
- const {deleteItem} = useStateValue()
+    const {deleteItem} = useStateValue()
 
- const handlePopup = (e) => {
-    setShow(true)
-    setCode(e)
- }
- const handleDelete = (e) => {
-    deleteItem(e)
-    setShow(false)
- }
- const handleEdit = (e) => {
-    getRecord(e)
-    navigate('/editProduct')
- }
+    const handlePopup = (e) => {
+        setShow(true)
+        setCode(e)
+    }
+    const handleDelete = (e) => {
+        deleteItem(e)
+        setShow(false)
+    }
+    const handleEdit = (e) => {
+        getRecord(e)
+        navigate('/editProduct')
+    }
 
   return (
     <div>

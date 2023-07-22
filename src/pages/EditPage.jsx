@@ -1,4 +1,4 @@
-import EditProduct from '../components/EditProduct'
+import EditProduct from "../components/handleproducts/EditProduct"
 
 const EditPage = ({record}) => {
   return (

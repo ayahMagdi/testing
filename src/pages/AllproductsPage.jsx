@@ -1,6 +1,6 @@
 import Buttons from "../components/Buttons"
 import Navbar from "../components/Navbar"
-import TableContent from "../components/TableContent"
+import TableContent from "../components/tablemodels/TableContent"
 
 const AllproductsPage = ({user , editedProduct , getRecord}) => {
   return (

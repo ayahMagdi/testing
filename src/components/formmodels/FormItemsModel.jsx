@@ -1,5 +1,5 @@
 
-const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal ,nameVal ,incomeVal ,outcomeVal}) => {
+const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal ,nameVal ,unitVal ,incomeVal ,outcomeVal}) => {
 
   return (
     <div>
@@ -53,7 +53,7 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal 
                         />
                     </div> 
                     <div>
-                        <label className='mb-3 block'>الوحدة</label>
+                        <label className='mb-3 block' value={unitVal}>الوحدة</label>
                         <select name="unit" onChange={handleChange} className='w-full border p-3 rounded-md shadow-md focus:outline-none focus:empty:border-main focus:invalid:border-red-500'>
                             <option value="قطعة">قطعة</option>
                             <option value="كرتونة">كرتونة</option>
