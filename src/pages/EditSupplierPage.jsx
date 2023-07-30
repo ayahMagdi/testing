@@ -1,9 +1,9 @@
 import EditSupplier from "../components/handlesuppliers/EditSupplier"
 
-const EditSupplierPage = ({supplier}) => {
+const EditSupplierPage = ({supplier , isEdited}) => {
   return (
-    <div className='container mx-auto'>
-       <EditSupplier supplier={supplier} />
+    <div className='container mx-auto px-4'>
+       <EditSupplier supplier={supplier} isEdited={isEdited} />
     </div>
   )
 }

@@ -5,7 +5,7 @@ import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormClientsModel from '../formmodels/FormClientsModel';
 
-const AddClient = () => {
+const AddClient = ({isAdded}) => {
 
 
     const [clientInfo , setClientInfo] = useState(
@@ -31,13 +31,15 @@ const AddClient = () => {
     e.preventDefault()
     setSuccess(true)
     addClient(code , name , phone ,address)
+    isAdded(true)
     navigate('/allclients')
  }
+
 
   return (
     <div className='mt-8'>
        <FormClientsModel title="اضافة عميل جديد" handleSubmit={handleSubmit} handleChange={handleChange} />
-       <ModelBtns handlecancel={() => setShow(true)} title="تسجيل" />
+       <ModelBtns handlecancel={() => setShow(true)} title="تسجيل" cancelTitle='الغاء' />
        {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={() => navigate('/allsuppliers')} cancel={() => setShow(false)} />}
     </div>
   )

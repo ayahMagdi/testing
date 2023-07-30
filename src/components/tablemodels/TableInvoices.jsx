@@ -1,75 +1,58 @@
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useStateValue } from '../../context/stateProvider';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react";
 
-const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
+const TableInvoices = ({getRecord , purchases , handleDelete ,deletCode ,handleEdit}) => {
 
-    const {items} = useStateValue();
     const [show , setShow] = useState(false)
     const [code ,setCode] = useState(null)
     const [input ,setInput] = useState(null)
     const [err ,setErr] = useState(false)
-    const navigate = useNavigate();
-
-    const {deleteItem} = useStateValue()
 
     const handlePopup = (e) => {
         setShow(true)
         setCode(e)
+        deletCode(e)
     }
-    const handleDelete = (e) => {
-        deleteItem(e)
+
+    const checkDelete = () => {
+        handleDelete()
         setShow(false)
-        isDeleted(true)
     }
-    const handleEdit = (e) => {
+
+    const checkEdit = (e) => {
         getRecord(e)
-        navigate('/editProduct')
+        handleEdit()
     }
 
   return (
-    <div>
-        <table className="table-auto w-full text-center">
+    <div className="mt-10">
+        <table className="table-auto w-full text-center border">
             <thead>
                 <tr className='border-b border-slate-300'>
                     <th scope="col" className="px-6 py-3">كود المنتج</th>
                     <th scope="col" className="px-6 py-3">اسم المنتج</th>
                     <th scope="col" className="px-6 py-3">الوحدة</th>
-                    <th scope="col" className="px-6 py-3">سعر الداخل</th>
-                    <th scope="col" className="px-6 py-3">سعر الخارج</th>
+                    <th scope="col" className="px-6 py-3">الكمية</th>
+                    <th scope="col" className="px-6 py-3">السعر</th>
+                    <th scope="col" className="px-6 py-3">الاجمالي</th>
                     <th scope="col" className="px-6 py-3">تعديل</th>
                     <th scope="col" className="px-6 py-3">حذف</th>
                 </tr>
             </thead>
             <tbody>
-                {isSearched ? filteredItems.map(e => (
-                    <tr className='border-b border-slate-300 odd:bg-tablerow' key={e.code}>
-                        <td className="px-6 py-3">{e.code}</td>
-                        <td className="px-6 py-3">{e.name}</td>
+                {purchases?.map(e => (
+                    <tr className='border-b border-slate-300 odd:bg-tablerow' key={e.itemCode}>
+                        <td className="px-6 py-3">{e.itemCode}</td>
+                        <td className="px-6 py-3">{e.itemName}</td>
                         <td className="px-6 py-3">{e.unit}</td>
-                        <td className="px-6 py-3">{e.income}</td>
-                        <td className="px-6 py-3">{e.outcome}</td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handleEdit(e)}>
+                        <td className="px-6 py-3">{e.qty}</td>
+                        <td className="px-6 py-3">{e.price}</td>
+                        <td className="px-6 py-3">{e.price * e.qty}</td>
+                        <td className="px-6 py-3 cursor-pointer" onClick={() => checkEdit(e)}>
                             <FontAwesomeIcon icon={faEdit} />
                         </td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handlePopup(e.code)} >
-                            <FontAwesomeIcon icon={faTrashAlt} />
-                        </td>
-                    </tr>
-                ))
-                : items?.map(e => (
-                    <tr className='border-b border-slate-300 odd:bg-tablerow' key={e.code}>
-                        <td className="px-6 py-3">{e.code}</td>
-                        <td className="px-6 py-3">{e.name}</td>
-                        <td className="px-6 py-3">{e.unit}</td>
-                        <td className="px-6 py-3">{e.income}</td>
-                        <td className="px-6 py-3">{e.outcome}</td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handleEdit(e)}>
-                            <FontAwesomeIcon icon={faEdit} />
-                        </td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handlePopup(e.code)} >
+                        <td className="px-6 py-3 cursor-pointer" onClick={() => handlePopup(e.itemCode)} >
                             <FontAwesomeIcon icon={faTrashAlt} />
                         </td>
                     </tr>
@@ -91,7 +74,7 @@ const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
                     <div className='flex justify-center items-center mt-2 gap-4'>
                         <button 
                             className='bg-main rounded-md text-white py-3 px-6 w-2/4'
-                            onClick={code === input ? () => handleDelete(code) : () => setErr(true)}>
+                            onClick={code === input ? checkDelete : () => setErr(true)}>
                             تأكيد
                         </button>
                         <button 
@@ -108,4 +91,4 @@ const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
   )
 }
 
-export default TableContent
+export default TableInvoices

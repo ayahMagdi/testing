@@ -5,7 +5,7 @@ import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormClientsModel from '../formmodels/FormClientsModel';
 
-const EditClient = ({client}) => {
+const EditClient = ({client,isEdited}) => {
 
     const {editClient} = useStateValue()
     const [success ,setSuccess] = useState(false)
@@ -36,6 +36,7 @@ const EditClient = ({client}) => {
         e.preventDefault()
         setSuccess(true)
         editClient(client.code , editedClients)
+        isEdited(true)
         navigate('/allclients')
     }
 
@@ -50,7 +51,7 @@ const EditClient = ({client}) => {
             phoneVal={newArr.phone}
             addressVal={newArr.address}
     />
-    <ModelBtns handlecancel={() => setShow(true)} title="تعديل" />
+    <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' />
     {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={() => navigate('/AllProducts')} cancel={() => setShow(false)} />}
 </div>
   )

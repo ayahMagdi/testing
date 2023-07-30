@@ -1,5 +1,3 @@
-import React from 'react'
-
 const FormClientsModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal ,phoneVal ,addressVal}) => {
   return (
     <div>
@@ -11,7 +9,7 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal ,
                     <label className='mb-4 block'>كود المورد</label>
                     <input
                         type='text'
-                        className='w-full border p-3 rounded-md shadow-md focus:outline-none focus:empty:border-main focus:invalid:border-red-500'
+                        className='w-full border p-4 rounded-md shadow-md focus:outline-none focus:empty:border-main focus:invalid:border-red-500'
                         name='code'
                         required
                         autoComplete='off'
@@ -40,7 +38,10 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal ,
                 <div>
                     <label className='mb-3 block'>رقم الهاتف</label>
                     <input
-                        type='text'
+                        type='tel'
+                        pattern="[0-9]{11}" 
+                        minlength="11" 
+                        maxlength="11"
                         className='w-full border p-4 rounded-md focus:empty:border-main shadow-md focus:outline-none focus:invalid:border-red-500'
                         name='phone'
                         required

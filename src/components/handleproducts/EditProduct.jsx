@@ -5,7 +5,7 @@ import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormItemsModel from '../formmodels/FormItemsModel';
 
-const EditProduct = ({record}) => {
+const EditProduct = ({record , isEdited}) => {
 
     const {editItem} = useStateValue()
     const [success ,setSuccess] = useState(false)
@@ -38,6 +38,7 @@ const EditProduct = ({record}) => {
         e.preventDefault()
         setSuccess(true)
         editItem(record.code , editedItems)
+        isEdited(true)
         navigate('/AllProducts')
     }
 
@@ -54,7 +55,7 @@ const EditProduct = ({record}) => {
                 incomeVal={newArr.income}
                 outcomeVal={newArr.outcome}
         />
-        <ModelBtns handlecancel={() => setShow(true)} title="تعديل" />
+        <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' />
         {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={() => navigate('/AllProducts')} cancel={() => setShow(false)} />}
     </div>
   )

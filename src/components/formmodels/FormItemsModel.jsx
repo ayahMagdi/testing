@@ -1,3 +1,4 @@
+import Barcode from 'react-barcode';
 
 const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal ,nameVal ,unitVal ,incomeVal ,outcomeVal}) => {
 
@@ -11,7 +12,7 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal 
                         <label className='mb-4 block'>كود المنتج</label>
                         <input
                             type='text'
-                            className='w-full border p-3 rounded-md shadow-md focus:outline-none focus:empty:border-main focus:invalid:border-red-500'
+                            className='w-full border px-4 h-14 rounded-md shadow-md focus:outline-none focus:border-main'
                             name='code'
                             required
                             autoComplete='off'
@@ -24,7 +25,10 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal 
                     </div>
                     <div>
                         <label className='mb-3 block'>الباركود</label>
-                        <input
+                        <div className='w-full border rounded-md shadow-md h-14'>
+                           <Barcode value={codeVal} displayValue={false} height={35} />
+                        </div>
+                        {/* <input
                             type='text'
                             className='w-full border p-4 rounded-md shadow-md focus:empty:border-main focus:outline-none focus:invalid:border-red-500'
                             name='barcode'
@@ -35,13 +39,13 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal 
                             onChange={handleChange}
                             placeholder='123456789987654'
                             value={barcodeVal}
-                        />
+                        /> */}
                     </div>
                     <div>
                         <label className='mb-3 block'>اسم المنتج</label>
                         <input
                             type='text'
-                            className='w-full border p-4 rounded-md shadow-md focus:empty:border-main focus:outline-none focus:invalid:border-red-500'
+                            className='w-full border px-4 h-14 rounded-md shadow-md focus:empty:border-main focus:outline-none focus:invalid:border-red-500'
                             name='name'
                             required
                             autoComplete='off'
@@ -54,7 +58,7 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal 
                     </div> 
                     <div>
                         <label className='mb-3 block' value={unitVal}>الوحدة</label>
-                        <select name="unit" onChange={handleChange} className='w-full border p-3 rounded-md shadow-md focus:outline-none focus:empty:border-main focus:invalid:border-red-500'>
+                        <select name="unit" onChange={handleChange} className='w-full border px-4 h-14 rounded-md shadow-md focus:outline-none focus:empty:border-main focus:invalid:border-red-500'>
                             <option value="قطعة">قطعة</option>
                             <option value="كرتونة">كرتونة</option>
                         </select>
@@ -63,8 +67,9 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal 
                         <label className='mb-3 block'>سعر الداخل</label>
                         <input
                             type='text'
-                            className='w-full border p-4 rounded-md focus:empty:border-main shadow-md focus:outline-none focus:invalid:border-red-500'
+                            className='w-full border px-4 h-14 rounded-md focus:empty:border-main shadow-md focus:outline-none focus:invalid:border-red-500'
                             name='income'
+                            pattern="^\d+(\.\d{1,3})?$" 
                             required
                             autoComplete='off'
                             onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
@@ -78,10 +83,11 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,codeVal ,barcodeVal 
                         <label className='mb-3 block'>سعر الخارج</label>
                         <input
                             type='text'
-                            className='w-full border p-4 rounded-md focus:empty:border-main shadow-md focus:outline-none focus:invalid:border-red-500'
+                            className='w-full border px-4 h-14 rounded-md focus:empty:border-main shadow-md focus:outline-none focus:invalid:border-red-500'
                             name='outcome'
                             required
                             autoComplete='off'
+                            pattern="^\d+(\.\d{1,3})?$"
                             onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                             onInput={F => F.target.setCustomValidity('')}
                             placeholder='6000'

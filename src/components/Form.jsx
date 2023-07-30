@@ -17,6 +17,7 @@ const Form = ({getUser}) => {
     const handleSubmit = async (e) => {
       e.preventDefault()
       setSuccess(true)
+      localStorage.setItem("success" , "true")
       navigate('/homepage')
     }
 

@@ -5,7 +5,7 @@ import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormSuppliersModel from '../formmodels/FormSuppliersModel'
 
-const EditSupplier = ({supplier}) => {
+const EditSupplier = ({supplier,isEdited}) => {
 
     const {editSupplier} = useStateValue()
     const [success ,setSuccess] = useState(false)
@@ -35,6 +35,7 @@ const EditSupplier = ({supplier}) => {
         e.preventDefault()
         setSuccess(true)
         editSupplier(supplier.code , editedSuppliers)
+        isEdited(true)
         navigate('/allSuppliers')
     }
 
@@ -48,7 +49,7 @@ const EditSupplier = ({supplier}) => {
             nameVal={newArr.name}
             phoneVal={newArr.phone}
     />
-    <ModelBtns handlecancel={() => setShow(true)} title="تعديل" />
+    <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' />
     {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={() => navigate('/allSuppliers')} cancel={() => setShow(false)} />}
 </div>
   )

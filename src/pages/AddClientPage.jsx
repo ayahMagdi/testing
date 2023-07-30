@@ -1,9 +1,9 @@
 import AddClient from "../components/handleclients/AddClient"
 
-const AddClientPage = () => {
+const AddClientPage = ({isAdded}) => {
   return (
-    <div className='container mx-auto'>
-       <AddClient />
+    <div className='container mx-auto px-4'>
+       <AddClient isAdded={isAdded} />
     </div>
   )
 }

@@ -2,7 +2,7 @@ import logoImg from '../assets/logo2.jpg'
 import Search from './Search'
 import SignOut from './SignOut'
 
-const Navbar = ({user}) => {
+const Navbar = ({user , handleSearch , searchItem}) => {
   
   return (
     <nav className='bg-white py-6'>
@@ -11,7 +11,7 @@ const Navbar = ({user}) => {
                 <img src={logoImg} alt='logo' className='h-20' />
             </div>
             <div className='shadow-[0px_0px_25px_0px_rgba(0,0,0,.1)] py-3 px-5 rounded-md w-11/12 flex justify-between items-center'>
-            <Search />
+            <Search handleSearch={handleSearch} searchItem={searchItem} />
             <SignOut user={user} />
             </div>
        </div>

@@ -11,6 +11,8 @@ import EditSupplierPage from "./pages/EditSupplierPage";
 import AllClientsPage from "./pages/AllClientsPage";
 import AddClientPage from "./pages/AddClientPage";
 import EditClientPage from "./pages/EditClientPage";
+import PurchasesPage from "./pages/PurchasesPage";
+import StorePage from "./pages/StorePage";
 
 function App() {
 
@@ -18,6 +20,13 @@ function App() {
   const [record , setRecord] = useState('')
   const [supplier , setSupplier] = useState('')
   const [client , setClient] = useState('')
+  const [search , setSearch] = useState('')
+  const [addItemMsg , setAddItemMsg] = useState(false)
+  const [editItemMsg , setEditItemMsg] = useState(false)
+  const [addSupplierMsg , setAddSupplierMsg] = useState(false)
+  const [editSupplierMsg , setEditSupplierMsg] = useState(false)
+  const [addClientMsg , setAddClientMsg] = useState(false)
+  const [editClientMsg , setEditClientMsg] = useState(false)
 
   let getUser = (name) => {
      setUser(name)
@@ -32,21 +41,44 @@ function App() {
   const getClient = (client) => {
     setClient(client)
   }
+  const searchItem = (search) => {
+    setSearch(search)
+  }
+  const isAddedItem = (added) => {
+    setAddItemMsg(added)
+  }
+  const isAddedSupplier = (added) => {
+    setAddSupplierMsg(added)
+  }
+  const isAddedClient = (added) => {
+    setAddClientMsg(added)
+  }
+  const isEditedItem = (edited) => {
+    setEditItemMsg(edited)
+  }
+  const isEditedSupplier = (edited) => {
+    setEditSupplierMsg(edited)
+  }
+  const isEditedClient = (edited) => {
+    setEditClientMsg(edited)
+  }
 
   return (
     <div className="App">
       <Routes>
          <Route exact path="/" element={<Login getUser={getUser} />} />
-         <Route path="/homepage" element={<Homepage user={localStorage.getItem("username")} />} />
-         <Route path="/allproducts" element={<AllproductsPage user={localStorage.getItem("username")} getRecord={getRecord} />} />
-         <Route path="/allsuppliers" element={<AllsuppliersPage user={localStorage.getItem("username")} getSupplier={getSupplier} />} />
-         <Route path="/allclients" element={<AllClientsPage user={localStorage.getItem("username")} getClient={getClient} />} />
-         <Route path="/addproduct" element={<AddPage user={localStorage.getItem("username")} />} />
-         <Route path="/addSupplier" element={<AddSupplierPage user={localStorage.getItem("username")} />} />
-         <Route path="/addClient" element={<AddClientPage user={localStorage.getItem("username")} />} />
-         <Route path="/editproduct" element={<EditPage user={localStorage.getItem("username")} record={record} />} />
-         <Route path="/editSupplier" element={<EditSupplierPage user={localStorage.getItem("username")} supplier={supplier} />} />
-         <Route path="/editClient" element={<EditClientPage user={localStorage.getItem("username")} client={client} />} />
+         <Route path="/homepage" element={<Homepage user={localStorage.getItem("username")} searchItem={searchItem} search={search}  />} />
+         <Route path="/allproducts" element={<AllproductsPage user={localStorage.getItem("username")} getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
+         <Route path="/allsuppliers" element={<AllsuppliersPage user={localStorage.getItem("username")} getSupplier={getSupplier} searchItem={searchItem} search={search} addMsg={addSupplierMsg} editMsg={editSupplierMsg} />} />
+         <Route path="/allclients" element={<AllClientsPage user={localStorage.getItem("username")} getClient={getClient} searchItem={searchItem} search={search} addMsg={addClientMsg} editMsg={editClientMsg} />} />
+         <Route path="/addproduct" element={<AddPage user={localStorage.getItem("username")} isAdded={isAddedItem} />} />
+         <Route path="/addSupplier" element={<AddSupplierPage user={localStorage.getItem("username")} isAdded={isAddedSupplier} />} />
+         <Route path="/addClient" element={<AddClientPage user={localStorage.getItem("username")} isAdded={isAddedClient} />} />
+         <Route path="/editproduct" element={<EditPage user={localStorage.getItem("username")} record={record} isEdited={isEditedItem} />} />
+         <Route path="/editSupplier" element={<EditSupplierPage user={localStorage.getItem("username")} supplier={supplier} isEdited={isEditedSupplier} />} />
+         <Route path="/editClient" element={<EditClientPage user={localStorage.getItem("username")} client={client} isEdited={isEditedClient} />} />
+         <Route path="/purchases" element={<PurchasesPage user={localStorage.getItem("username")} searchItem={searchItem} />} />
+         <Route path="/store" element={<StorePage user={localStorage.getItem("username")} searchItem={searchItem} />} />
       </Routes>
     </div>
   );
