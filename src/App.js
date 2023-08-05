@@ -13,6 +13,7 @@ import AddClientPage from "./pages/AddClientPage";
 import EditClientPage from "./pages/EditClientPage";
 import PurchasesPage from "./pages/PurchasesPage";
 import StorePage from "./pages/StorePage";
+import SalesPage from "./pages/SalesPage";
 
 function App() {
 
@@ -78,6 +79,7 @@ function App() {
          <Route path="/editSupplier" element={<EditSupplierPage user={localStorage.getItem("username")} supplier={supplier} isEdited={isEditedSupplier} />} />
          <Route path="/editClient" element={<EditClientPage user={localStorage.getItem("username")} client={client} isEdited={isEditedClient} />} />
          <Route path="/purchases" element={<PurchasesPage user={localStorage.getItem("username")} searchItem={searchItem} />} />
+         <Route path="/sales" element={<SalesPage user={localStorage.getItem("username")} searchItem={searchItem} />} />
          <Route path="/store" element={<StorePage user={localStorage.getItem("username")} searchItem={searchItem} />} />
       </Routes>
     </div>

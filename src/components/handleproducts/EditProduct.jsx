@@ -42,6 +42,11 @@ const EditProduct = ({record , isEdited}) => {
         navigate('/AllProducts')
     }
 
+    const cancelEdit = () => {
+        isEdited(false)
+        navigate('/AllProducts')
+    }
+
   return (
     <div className='mt-8'>
         <FormItemsModel 
@@ -55,8 +60,8 @@ const EditProduct = ({record , isEdited}) => {
                 incomeVal={newArr.income}
                 outcomeVal={newArr.outcome}
         />
-        <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' />
-        {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={() => navigate('/AllProducts')} cancel={() => setShow(false)} />}
+        <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
+        {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={cancelEdit} cancel={() => setShow(false)} />}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStateValue } from '../../context/stateProvider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
@@ -11,6 +11,7 @@ const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
     const [code ,setCode] = useState(null)
     const [input ,setInput] = useState(null)
     const [err ,setErr] = useState(false)
+    const [noItems ,setNoItems] = useState(false)
     const navigate = useNavigate();
 
     const {deleteItem} = useStateValue()
@@ -29,47 +30,55 @@ const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
         navigate('/editProduct')
     }
 
+    useEffect(() => {
+
+       const checkItems = filteredItems?.length > 0 ? setNoItems(false) : setNoItems(true)
+
+    }, [filteredItems])
+
+    console.log(noItems)
+
   return (
-    <div>
-        <table className="table-auto w-full text-center">
-            <thead>
+    <div className={`my-10 h-96 border shadow overflow-y-scroll ${noItems ? 'hidden' : 'visible' } ${isSearched && 'h-auto'}`}>
+        <table className="table-auto w-full text-center border h-fit" style={{borderCollapse: 'collapse'}}>
+            <thead className="sticky top-0 bg-white border-b">
                 <tr className='border-b border-slate-300'>
-                    <th scope="col" className="px-6 py-3">كود المنتج</th>
-                    <th scope="col" className="px-6 py-3">اسم المنتج</th>
-                    <th scope="col" className="px-6 py-3">الوحدة</th>
-                    <th scope="col" className="px-6 py-3">سعر الداخل</th>
-                    <th scope="col" className="px-6 py-3">سعر الخارج</th>
-                    <th scope="col" className="px-6 py-3">تعديل</th>
-                    <th scope="col" className="px-6 py-3">حذف</th>
+                    <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>كود المنتج</th>
+                    <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>اسم المنتج</th>
+                    <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>الوحدة</th>
+                    <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>سعر الداخل</th>
+                    <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>سعر الخارج</th>
+                    <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>تعديل</th>
+                    <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>حذف</th>
                 </tr>
             </thead>
             <tbody>
                 {isSearched ? filteredItems.map(e => (
                     <tr className='border-b border-slate-300 odd:bg-tablerow' key={e.code}>
-                        <td className="px-6 py-3">{e.code}</td>
-                        <td className="px-6 py-3">{e.name}</td>
-                        <td className="px-6 py-3">{e.unit}</td>
-                        <td className="px-6 py-3">{e.income}</td>
-                        <td className="px-6 py-3">{e.outcome}</td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handleEdit(e)}>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.code}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.name}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.unit}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.income}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.outcome}</td>
+                        <td className="px-6 py-3 cursor-pointer" onClick={() => handleEdit(e)} style={{border: '1px solid #00000024'}}>
                             <FontAwesomeIcon icon={faEdit} />
                         </td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handlePopup(e.code)} >
+                        <td className="px-6 py-3 cursor-pointer" onClick={() => handlePopup(e.code)} style={{border: '1px solid #00000024'}}>
                             <FontAwesomeIcon icon={faTrashAlt} />
                         </td>
                     </tr>
                 ))
                 : items?.map(e => (
                     <tr className='border-b border-slate-300 odd:bg-tablerow' key={e.code}>
-                        <td className="px-6 py-3">{e.code}</td>
-                        <td className="px-6 py-3">{e.name}</td>
-                        <td className="px-6 py-3">{e.unit}</td>
-                        <td className="px-6 py-3">{e.income}</td>
-                        <td className="px-6 py-3">{e.outcome}</td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handleEdit(e)}>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.code}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.name}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.unit}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.income}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.outcome}</td>
+                        <td className="px-6 py-3 cursor-pointer" onClick={() => handleEdit(e)} style={{border: '1px solid #00000024'}}>
                             <FontAwesomeIcon icon={faEdit} />
                         </td>
-                        <td className="px-6 py-3 cursor-pointer" onClick={() => handlePopup(e.code)} >
+                        <td className="px-6 py-3 cursor-pointer" onClick={() => handlePopup(e.code)} style={{border: '1px solid #00000024'}}>
                             <FontAwesomeIcon icon={faTrashAlt} />
                         </td>
                     </tr>

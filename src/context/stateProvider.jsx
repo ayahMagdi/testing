@@ -1,17 +1,23 @@
 import { createContext , useContext, useState } from "react";
-import { faBusinessTime, faEdit, faMoneyCheckAlt, faPeopleGroup, faSackDollar, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faBalanceScaleLeft, faBusinessTime, faClipboardList, faEdit, faMoneyCheckAlt, faPeopleGroup, faSackDollar, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 export const StateContext = createContext(null)
 
 export const StateProvider = (props) => {
 
     const [items , setItems] = useState([
-        {code: "1111111" , barcode: "123456789" , name: "لابتوب" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "2222222" , barcode: "123456789" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "3333333" , barcode: "123456789" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "4444444" , barcode: "123456789" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "5555555" , barcode: "123456789" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "6666666" , barcode: "123456789" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "1" , name: "لابتوب" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "2" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "3" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "4" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "5" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "6" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "7" , name: "لابتوب" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "8" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "9" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "10" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "11" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "12" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
     ])
     const [suppliers , setSuppliers] = useState([
         {code: "1" , name: "هند مجدي" , phone:"01020202020"},
@@ -22,20 +28,22 @@ export const StateProvider = (props) => {
         {code: "6" , name: "ايه مجدي" , phone:"01020202020"},
     ])
     const [clients , setClients] = useState([
-        {code: "1111111" , name: "هند مجدي" , phone:"01020202020" ,address: "مصر محافظة الشرقية"},
-        {code: "666666" , name: "بسمة مجدي" , phone:"01020202020",address: "مصر محافظة الشرقية"},
-        {code: "555555" , name: "هبة مجدي" , phone:"01020202020",address: "مصر محافظة الشرقية"},
-        {code: "444444" , name: "ايه مجدي" , phone:"01020202020",address: "مصر محافظة الشرقية"},
-        {code: "222222" , name: "رنا عبدالعزيز" , phone:"01020202020",address: "مصر محافظة الشرقية"},
-        {code: "333333" , name: "اسراء فكري" , phone:"01020202020",address: "مصر محافظة الشرقية"},
+        {code: "1" , name: "هند مجدي" , phone:"01020202020" ,address: "مصر محافظة الشرقية"},
+        {code: "2" , name: "بسمة مجدي" , phone:"01020202020",address: "مصر محافظة الشرقية"},
+        {code: "3" , name: "هبة مجدي" , phone:"01020202020",address: "مصر محافظة الشرقية"},
+        {code: "4" , name: "ايه مجدي" , phone:"01020202020",address: "مصر محافظة الشرقية"},
+        {code: "5" , name: "رنا عبدالعزيز" , phone:"01020202020",address: "مصر محافظة الشرقية"},
+        {code: "6" , name: "اسراء فكري" , phone:"01020202020",address: "مصر محافظة الشرقية"},
     ])
     const [categorys , setCategorys] = useState([
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'الموردين' , icon: faUsers , url: '/allsuppliers'},
         {title: 'العملاء' , icon: faPeopleGroup , url: '/allclients'},
         {title: 'المشتريات' , icon: faSackDollar , url: '/purchases'},
-        {title: 'الحسابات' , icon: faMoneyCheckAlt},
+        {title: 'المبيعات' , icon: faBalanceScaleLeft , url: '/sales'},
         {title: 'المخزن' , icon: faStore , url: '/store'},
+        {title: 'فواتير الموردين' , icon: faClipboardList , url: '/allproducts'},
+        {title: 'الحسابات' , icon: faMoneyCheckAlt},
         {title: 'الواردات' , icon: faBusinessTime},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
@@ -51,16 +59,27 @@ export const StateProvider = (props) => {
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
+        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
+    ])
+    const [sales , setSales] = useState([
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111110" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111111" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111112" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111113" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111114" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111115" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111116" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111117" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
     ])
     const [purchases , setPurchases] = useState([
-        {itemCode: "11111110" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {itemCode: "11111111" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {itemCode: "11111112" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {itemCode: "11111113" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {itemCode: "11111114" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {itemCode: "11111115" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {itemCode: "11111116" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {itemCode: "11111117" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111110" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111111" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111112" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111113" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111114" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111115" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111116" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111117" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
     ])
     const [store , setStore] = useState([
         {code: "1" , name: "لابتوب" , unit: "قطع" ,income:"2000" ,outcome: "500" ,avlqty:"60",soldqty: "11",store: "", total: ""},
@@ -79,8 +98,8 @@ export const StateProvider = (props) => {
         {code: "14" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"250",soldqty: "20",store: "", total: ""},
     ])
 
-    const addItem = (code, barcode, name, unit, income, outcome) => {
-        setItems([{code,barcode,name,unit,income,outcome} , ...items])
+    const addItem = (code ,name, unit, income, outcome) => {
+        setItems([{code,name,unit,income,outcome} , ...items])
     }
 
     const addSupplier = (code, name , phone) => {
@@ -90,8 +109,11 @@ export const StateProvider = (props) => {
     const addClient = (code, name , phone , address) => {
         setClients([{code, name , phone , address} , ...clients])
     }
-    const addPurchases = (itemCode,itemName ,unit ,qty ,price) => {
-        setPurchases([{itemCode,itemName,unit ,qty ,price} , ...purchases])
+    const addPurchases = (purchas ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price) => {
+        setPurchases([{purchas ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price} , ...purchases])
+    }
+    const addSales = (purchas ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price) => {
+        setSales([{purchas ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price} , ...sales])
     }
     
     const deleteItem = (code) => {
@@ -106,6 +128,9 @@ export const StateProvider = (props) => {
     const deletePurchases = (code) => {
         setPurchases(purchases.filter(e => e.itemCode !== code))
     }
+    const deleteSales = (code) => {
+        setSales(sales.filter(e => e.itemCode !== code))
+    }
 
     const editItem = (code,editedItems) => {
         setItems(items.map(e => e.code === code ? editedItems : e))
@@ -119,14 +144,20 @@ export const StateProvider = (props) => {
     const editPurchases = (code,editedPurchases) => {
         setPurchases(purchases.map(e => e.itemCode === code ? editedPurchases : e))
     }
+    const editSales = (code,editedSales) => {
+        setSales(sales.map(e => e.itemCode === code ? editedSales : e))
+    }
 
-    const editStore = (arr) => {
-       setStore(store.map(e => e.code === arr.itemCode? {...e , avlqty: parseInt(e.avlqty) + parseInt(arr.qty)}  : e))
+    const addToStore = (arr) => {
+       setStore(store.map(e => e.code === arr.itemCode? {...e , avlqty: parseInt(e.avlqty) + parseInt(arr.qty)} : e))
+    }
+    const deleteFromStore = (arr) => {
+       setStore(store.map(e => e.code === arr.itemCode? {...e , soldqty: parseInt(e.soldqty) + parseInt(arr.qty)} : e))
     }
 
     return (
         <StateContext.Provider value={
-            {items,addItem,deleteItem, editItem , suppliers , addSupplier , deleteSupplier ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,addPurchases,deletePurchases,editPurchases ,store ,editStore}
+            {items,addItem,deleteItem, editItem , suppliers , addSupplier , deleteSupplier ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,addPurchases,deletePurchases,editPurchases,sales,store ,addToStore,deleteFromStore,addSales,deleteSales,editSales}
          }>
             {props.children}
         </StateContext.Provider>

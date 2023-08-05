@@ -40,6 +40,11 @@ const EditClient = ({client,isEdited}) => {
         navigate('/allclients')
     }
 
+    const cancelEdit = () => {
+        isEdited(false)
+        navigate('/allclients')
+    }
+
   return (
     <div className='mt-8'>
     <FormClientsModel 
@@ -51,8 +56,8 @@ const EditClient = ({client,isEdited}) => {
             phoneVal={newArr.phone}
             addressVal={newArr.address}
     />
-    <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' />
-    {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={() => navigate('/AllProducts')} cancel={() => setShow(false)} />}
+    <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
+    {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={cancelEdit} cancel={() => setShow(false)} />}
 </div>
   )
 }

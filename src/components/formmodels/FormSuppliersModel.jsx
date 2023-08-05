@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal ,phoneVal}) => {
+const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal ,phoneVal ,checkPhone}) => {
   return (
     <div>
          <div className='mt-8'>
@@ -11,23 +11,22 @@ const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal
                         <label className='mb-4 block'>كود المورد</label>
                         <input
                             type='text'
-                            className='w-full border p-4 rounded-md shadow-md focus:outline-none focus:empty:border-main focus:invalid:border-red-500'
+                            className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
                             name='code'
-                            required
-                            autoComplete='off'
-                            onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
-                            onInput={F => F.target.setCustomValidity('')}
+                            disabled
                             onChange={handleChange}
                             placeholder='مثال (123456789112288)'
                             value={codeVal}
                         />
                     </div>
                     <div>
-                        <label className='mb-3 block'>اسم المورد</label>
+                        <label className='mb-4 block'>اسم المورد</label>
                         <input
                             type='text'
-                            className='w-full border p-4 rounded-md shadow-md focus:empty:border-main focus:outline-none focus:invalid:border-red-500'
+                            className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
                             name='name'
+                            minLength='3'
+                            maxLength='20'
                             required
                             autoComplete='off'
                             onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
@@ -38,22 +37,19 @@ const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal
                         />
                     </div> 
                     <div>
-                        <label className='mb-3 block'>رقم الهاتف</label>
+                        <label className='mb-4 block'>رقم الهاتف</label>
                         <input
                             type='tel'
-                            pattern="[0-9]{11}" 
-                            minlength="11" 
-                            maxlength="11"
-                            className='w-full border p-4 rounded-md focus:empty:border-main shadow-md focus:outline-none focus:invalid:border-red-500'
+                            minLength="11" 
+                            maxLength="11"
+                            className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
                             name='phone'
-                            required
                             autoComplete='off'
-                            onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
-                            onInput={F => F.target.setCustomValidity('')}
                             placeholder='01123456789'
                             onChange={handleChange}
                             value={phoneVal}
                         />
+                        {checkPhone && <p className='text-red-500 mt-3'> رقم الهاتف يبدأ ب (01) </p>}
                     </div>
                 </div>   
             </form>

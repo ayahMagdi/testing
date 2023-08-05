@@ -39,6 +39,11 @@ const EditSupplier = ({supplier,isEdited}) => {
         navigate('/allSuppliers')
     }
 
+    const cancelEdit = () => {
+        isEdited(false)
+        navigate('/allSuppliers')
+    }
+
   return (
     <div className='mt-8'>
     <FormSuppliersModel 
@@ -49,8 +54,8 @@ const EditSupplier = ({supplier,isEdited}) => {
             nameVal={newArr.name}
             phoneVal={newArr.phone}
     />
-    <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' />
-    {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={() => navigate('/allSuppliers')} cancel={() => setShow(false)} />}
+    <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
+    {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={cancelEdit} cancel={() => setShow(false)} />}
 </div>
   )
 }

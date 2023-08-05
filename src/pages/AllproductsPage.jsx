@@ -15,6 +15,7 @@ const AllproductsPage = ({user , editedProduct , getRecord , searchItem , search
   const handleSearch = items.filter(item => 
      item.code.includes(search)
   )
+
   const isDeleted = (deletedMsg) => {
     setDeletedMsg(deletedMsg)
   }
