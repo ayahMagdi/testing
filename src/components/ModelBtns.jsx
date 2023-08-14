@@ -1,10 +1,11 @@
 
-const ModelBtns = ({handlecancel , title , cancelTitle ,btnStyle , margin}) => {
+const ModelBtns = ({handlecancel , title , cancelTitle ,btnStyle , margin ,handleRegistration ,form}) => {
   return (
     <div className={`flex justify-center gap-6 ${margin}`}>
         <button 
               className={`bg-main text-white rounded-md cursor-pointer ${btnStyle}`}
-              form='my-form' type="submit"
+              form={form} type="submit"
+              onClick={handleRegistration}
         >
            {title}
         </button>

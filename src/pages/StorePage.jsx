@@ -1,16 +1,19 @@
 import Navbar from '../components/Navbar'
 import TableStore from '../components/tablemodels/TableStore';
+import { useStateValue } from '../context/stateProvider';
 
-const StorePage = ({user , searchItem}) => {
+const StorePage = ({user ,search , searchItem}) => {
 
-  const handleSearch = () => {
-    return;
-  }
+  const {stores} = useStateValue()
+
+  const handleSearch = stores.filter(item => 
+     item.code.includes(search)
+  )
 
   return (
-    <div className='container mx-auto px-4'>
+    <div className='container mx-auto px-4 max-h-screen'>
       <Navbar user={user} handleSearch={() => handleSearch} searchItem={searchItem} />
-      <TableStore />
+      <TableStore isSearched={handleSearch.length && search.length} filteredItems={handleSearch} />
     </div>
   )
 }

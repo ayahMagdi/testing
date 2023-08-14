@@ -53,6 +53,8 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal
                         type='text'
                         className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
                         name='address'
+                        minLength='3'
+                        maxLength='30'
                         required
                         autoComplete='off'
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 

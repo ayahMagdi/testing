@@ -14,6 +14,8 @@ import EditClientPage from "./pages/EditClientPage";
 import PurchasesPage from "./pages/PurchasesPage";
 import StorePage from "./pages/StorePage";
 import SalesPage from "./pages/SalesPage";
+import InwardBills from "./pages/InwardBills";
+import OutwardBills from "./pages/OutwardBills";
 
 function App() {
 
@@ -80,7 +82,9 @@ function App() {
          <Route path="/editClient" element={<EditClientPage user={localStorage.getItem("username")} client={client} isEdited={isEditedClient} />} />
          <Route path="/purchases" element={<PurchasesPage user={localStorage.getItem("username")} searchItem={searchItem} />} />
          <Route path="/sales" element={<SalesPage user={localStorage.getItem("username")} searchItem={searchItem} />} />
-         <Route path="/store" element={<StorePage user={localStorage.getItem("username")} searchItem={searchItem} />} />
+         <Route path="/store" element={<StorePage user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
+         <Route path="/inwardbills" element={<InwardBills />} />
+         <Route path="/outwardbills" element={<OutwardBills />} />
       </Routes>
     </div>
   );

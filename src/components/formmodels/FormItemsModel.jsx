@@ -1,7 +1,8 @@
 import Barcode from 'react-barcode';
+import Select from 'react-select'
 
-const FormItemsModel = ({handleSubmit ,title ,handleChange ,invalidPrice ,codeVal ,barcodeVal ,nameVal ,unitVal ,incomeVal ,outcomeVal}) => {
-
+const FormItemsModel = ({handleSubmit ,title,options,handleChange,handleSelectChange ,invalidPrice ,codeVal ,barcodeVal ,nameVal ,unitVal ,incomeVal ,outcomeVal}) => {
+ 
   return (
     <div>
         <div className='mt-8'>
@@ -14,7 +15,7 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,invalidPrice ,codeVa
                             type='text'
                             className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
                             name='code'
-                            disabled
+                            required
                             onChange={handleChange}
                             placeholder='مثال (123456789112288)'
                             value={codeVal}
@@ -44,11 +45,29 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,invalidPrice ,codeVa
                         />
                     </div> 
                     <div>
-                        <label className='mb-4 block' value={unitVal}>الوحدة</label>
-                        <select name="unit" onChange={handleChange} className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200 appearance-none'>
-                            <option value="قطعة">قطعة</option>
-                            <option value="كرتونة">كرتونة</option>
-                        </select>
+                        <label className='mb-4 block'>الوحدة</label>
+                        <Select name="unit" value={unitVal} onChange={handleSelectChange}
+                            options={options}
+                            getOptionValue={(option) => option.value}
+                            placeholder='قطعة'
+                            className='w-full rounded-2xl shadow-md'
+                            styles={{
+                                control: (baseStyles, state) => ({
+                                  ...baseStyles,
+                                  borderColor: 'rgb(229 231 235)',
+                                  borderRadius: '1rem',
+                                  height: '3.5rem',
+                                  padding: '0 1rem',
+                                }),
+                              }}
+                              theme={theme => ({
+                                ...theme,
+                                colors: {
+                                    ...theme.colors,
+                                    neutral50: '#a9a9a9',
+                                },
+                            })}
+                        />
                     </div>  
                     <div>
                         <label className='mb-3 block'>سعر الداخل</label>
@@ -64,7 +83,7 @@ const FormItemsModel = ({handleSubmit ,title ,handleChange ,invalidPrice ,codeVa
                             onChange={handleChange}
                             value={incomeVal}
                         />
-                        {invalidPrice && <p className='text-red-500 mt-3'>سعر الداخل اكبر من سعر الخارج!</p>}
+                        {invalidPrice && <p className='text-red-500 mt-3'>سعر الداخل يجب ان يكون اقل من سعر الخارج</p>}
                     </div>
                     <div>
                         <label className='mb-3 block'>سعر الخارج</label>

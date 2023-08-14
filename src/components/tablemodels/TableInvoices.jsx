@@ -26,7 +26,7 @@ const TableInvoices = ({purchases , handleDelete ,deletCode , getRecord ,handleE
     }
 
   return (
-    <div className="mt-4 h-56 border shadow overflow-y-scroll">
+    <div className="mt-4 h-auto max-h-56 border shadow overflow-y-auto">
         <table className="table-auto w-full text-center border h-fit" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-white border-b">
                 <tr className='border-b border-slate-300'>
@@ -48,7 +48,7 @@ const TableInvoices = ({purchases , handleDelete ,deletCode , getRecord ,handleE
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.unit}</td>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.qty}</td>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.price}</td>
-                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.price * e.qty}</td>
+                        <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.total}</td>
                         <td className="px-6 py-3 cursor-pointer" onClick={() => checkEdit(e)} style={{border: '1px solid #00000024'}}>
                             <FontAwesomeIcon icon={faEdit} />
                         </td>

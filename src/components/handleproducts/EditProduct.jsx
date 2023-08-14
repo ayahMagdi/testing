@@ -60,7 +60,7 @@ const EditProduct = ({record , isEdited}) => {
                 incomeVal={newArr.income}
                 outcomeVal={newArr.outcome}
         />
-        <ModelBtns handlecancel={() => setShow(true)} title="تعديل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
+        <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تعديل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
         {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={cancelEdit} cancel={() => setShow(false)} />}
     </div>
   )

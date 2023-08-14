@@ -1,7 +1,7 @@
 
 const ConfirmationButton = ({confirm , cancel , title}) => {
   return (
-    <div className='bg-popup fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center'>
+    <div className='bg-popup fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-20'>
         <div className='bg-white p-6 rounded-lg'>
             <h3 className='text-lg'>{title}</h3>
             <div className='flex pt-6 justify-between items-center gap-2'>

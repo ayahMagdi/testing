@@ -36,10 +36,8 @@ const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
 
     }, [filteredItems])
 
-    console.log(noItems)
-
   return (
-    <div className={`my-10 h-96 border shadow overflow-y-scroll ${noItems ? 'hidden' : 'visible' } ${isSearched && 'h-auto'}`}>
+    <div className={`my-10 h-auto max-h-96 border shadow overflow-y-scroll ${noItems ? 'hidden' : 'visible' }`}>
         <table className="table-auto w-full text-center border h-fit" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-white border-b">
                 <tr className='border-b border-slate-300'>

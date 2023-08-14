@@ -9,9 +9,17 @@ import ModelBtns from '../ModelBtns';
 const AddProduct = ({isAdded}) => {
   
     const {addItem ,items} = useStateValue()
+
+    const options = [
+        {value: 'قطع' , label: 'قطع'},
+        {value: 'علبة' , label: 'علبه'},
+        {value: 'كرتونه' , label: 'كرتونه'}
+     ]
+     
     const [productInfo , setProductInfo] = useState(
-           {code: parseInt(items.length) + 1,name: '',unit: 'قطعة',income: '',outcome: ''}
+           {code: '',name: '',unit: options[0].value,income: '',outcome: ''}
         )
+
     const [show ,setShow] = useState(false)
     const [invalidPrice ,setInvalidPrice] = useState(false)
     const navigate = useNavigate();
@@ -30,13 +38,21 @@ const AddProduct = ({isAdded}) => {
         setProductInfo(prevData => {
             return {
                 ...prevData,
-                code: parseInt(items.length) + 1,
                 [event.target.name] : event.target.value
             }
         })
        }
     }
 
+    function handleSelectChange(selectedOption){
+        setProductInfo(prevData => {
+            return {
+                ...prevData,
+                unit: selectedOption.value
+            }
+        }) 
+    }
+    
     const {code , name , unit , income , outcome} = productInfo
 
     useEffect(() => {
@@ -72,8 +88,10 @@ const AddProduct = ({isAdded}) => {
           outcomeVal={productInfo.outcome}
           unitVal={productInfo.unit}
           invalidPrice={invalidPrice}
+          options={options}
+          handleSelectChange={handleSelectChange}
         />
-        <ModelBtns handlecancel={() => setShow(true)} title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
+        <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
         {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}
     </div>
   )

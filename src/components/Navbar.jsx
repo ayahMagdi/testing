@@ -1,4 +1,4 @@
-import logoImg from '../assets/logo2.jpg'
+import logoImg from '../assets/Web capture_11-8-2023_151533_.jpeg'
 import Search from './Search'
 import SignOut from './SignOut'
 

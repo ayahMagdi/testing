@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 
 const FormInvoicesModel = (
-     {title,handleSubmit, edit,handleChange,supplierErr,itemErr,qtyErr,avlQty,purchasVal,dateVal,supplierCodeVal,supplierNameVal,itemCodeVal,itemNameVal,unitVal,qtyVal,priceVal,totalVal}
+     {title,handleSubmit, edit,handleChange,supplierErr,itemErr,qtyErr,nameText,codeText,errorText,avlQty,purchasVal,existing,dateVal,supplierCodeVal,supplierNameVal,itemCodeVal,itemNameVal,unitVal,qtyVal,priceVal,totalVal}
  ) => {
 
     const userRef = useRef()
@@ -40,7 +40,7 @@ const FormInvoicesModel = (
                     />
                 </div> 
                 <div>
-                    <label className='mb-2 block font-bold'>كود المورد</label>
+                    <label className='mb-2 block font-bold'>{codeText}</label>
                     <input
                         type='text'
                         className={`w-full border p-2 rounded-lg focus:border-2 focus:outline-none ${supplierErr ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
@@ -48,17 +48,17 @@ const FormInvoicesModel = (
                         ref={userRef} 
                         required
                         autoComplete="off"
-                        disabled={edit ? true : false}
+                        disabled={edit || existing ? true : false}
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                         onInput={F => F.target.setCustomValidity('')}
                         placeholder='مثال (123456789123)'
                         onChange={handleChange}
                         value={supplierCodeVal}
                     />
-                    {supplierErr && <p className="text-sm text-red-500 m-0">كود المورد غير صحيح</p>}
+                    {supplierErr && <p className="text-sm text-red-500 m-0">{errorText}</p>}
                 </div>
                 <div>
-                    <label className='mb-2 block font-bold'>اسم المورد</label>
+                    <label className='mb-2 block font-bold'>{nameText}</label>
                     <input
                         type='text'
                         className='w-full border p-2 rounded-lg border-gray-500 focus:outline-none'

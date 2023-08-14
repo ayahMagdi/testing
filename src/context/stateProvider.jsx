@@ -1,23 +1,25 @@
 import { createContext , useContext, useState } from "react";
-import { faBalanceScaleLeft, faBusinessTime, faClipboardList, faEdit, faMoneyCheckAlt, faPeopleGroup, faSackDollar, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faBalanceScaleLeft, faBold, faBusinessTime, faClipboardCheck, faClipboardList, faEdit, faMoneyCheckAlt, faPeopleGroup, faSackDollar, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 export const StateContext = createContext(null)
 
 export const StateProvider = (props) => {
 
     const [items , setItems] = useState([
-        {code: "1" , name: "لابتوب" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "2" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "3" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "4" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "5" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "6" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "7" , name: "لابتوب" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "8" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "9" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "10" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "11" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
-        {code: "12" , name: "موبايل" ,unit:"قطعه" ,income: "500" , outcome: "600"},
+        {code: "1" , name: "لابتوب" , unit: "قطع" ,income:"2000" ,outcome: "5000"},
+        {code: "2" , name: "موبايل" , unit: "قطع" ,income:"1000" ,outcome: "5000"},
+        {code: "3" , name: "تابلت" , unit: "قطع" ,income:"500" ,outcome: "500"},
+        {code: "4" , name: "ايفون" , unit: "قطع" ,income:"4000" ,outcome: "5500"},
+        {code: "5" , name: "شامبو" , unit: "قطع" ,income:"8000" ,outcome: "9500"},
+        {code: "6" , name: "بلسم" , unit: "قطع" ,income:"400" ,outcome: "500"},
+        {code: "7" , name: "هيدفون" , unit: "قطع" ,income:"200" ,outcome: "500"},
+        {code: "8" , name: "صن بلوك" , unit: "قطع" ,income:"200" ,outcome: "500"},
+        {code: "9" , name: "زيت" , unit: "قطع" ,income:"200" ,outcome: "500"},
+        {code: "10" , name: "حمام كريم" , unit: "قطع" ,income:"200" ,outcome: "500"},
+        {code: "11" , name: "غسول" , unit: "قطع" ,income:"200" ,outcome: "500"},
+        {code: "12" , name: "مرطب" , unit: "قطع" ,income:"200" ,outcome: "500"},
+        {code: "13" , name: "جل صبار" , unit: "قطع" ,income:"200" ,outcome: "500"},
+        {code: "14" , name: "سيروم" , unit: "قطع" ,income:"200" ,outcome: "500"},
     ])
     const [suppliers , setSuppliers] = useState([
         {code: "1" , name: "هند مجدي" , phone:"01020202020"},
@@ -42,7 +44,8 @@ export const StateProvider = (props) => {
         {title: 'المشتريات' , icon: faSackDollar , url: '/purchases'},
         {title: 'المبيعات' , icon: faBalanceScaleLeft , url: '/sales'},
         {title: 'المخزن' , icon: faStore , url: '/store'},
-        {title: 'فواتير الموردين' , icon: faClipboardList , url: '/allproducts'},
+        {title: 'فواتير الداخل' , icon: faClipboardList , url: '/inwardbills'},
+        {title: 'فواتير الخارج' , icon: faClipboardCheck , url: '/outwardbills'},
         {title: 'الحسابات' , icon: faMoneyCheckAlt},
         {title: 'الواردات' , icon: faBusinessTime},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
@@ -52,56 +55,85 @@ export const StateProvider = (props) => {
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
     ])
     const [sales , setSales] = useState([
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111110" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111111" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111112" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111113" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111114" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111115" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111116" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111117" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111110" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
+        // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111111" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
+        // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111112" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
+        // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111113" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
+        // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111114" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
+        // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111115" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
+        // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111116" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
+        // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111117" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
     ])
     const [purchases , setPurchases] = useState([
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111110" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111111" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111112" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111113" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111114" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111115" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111116" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
-        {purchas: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111117" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500"},
+        // {purchas: '1',date: '20/7/2020', supplierName: 'هند مجدي', supplierCode: '1' ,itemCode: "11111110" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,totalPur: '25000'},
+        // {purchas: '1',date: '20/7/2020', supplierName: 'هند مجدي', supplierCode: '1' ,itemCode: "11111111" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,totalPur: '25000'},
+        // {purchas: '1',date: '20/7/2020', supplierName: 'هند مجدي', supplierCode: '1' ,itemCode: "11111112" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,totalPur: '25000'},
+        // {purchas: '1',date: '20/7/2020', supplierName: 'هند مجدي', supplierCode: '1' ,itemCode: "11111113" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,totalPur: '25000'},
+        // {purchas: '1',date: '20/7/2020', supplierName: 'هند مجدي', supplierCode: '1' ,itemCode: "11111114" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,totalPur: '25000'},
+        // {purchas: '1',date: '20/7/2020', supplierName: 'هند مجدي', supplierCode: '1' ,itemCode: "11111115" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,totalPur: '25000'},
+        // {purchas: '1',date: '20/7/2020', supplierName: 'هند مجدي', supplierCode: '1' ,itemCode: "11111116" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,totalPur: '25000'},
+        // {purchas: '1',date: '20/7/2020', supplierName: 'هند مجدي', supplierCode: '1' ,itemCode: "11111117" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,totalPur: '25000'},
     ])
-    const [store , setStore] = useState([
-        {code: "1" , name: "لابتوب" , unit: "قطع" ,income:"2000" ,outcome: "500" ,avlqty:"60",soldqty: "11",store: "", total: ""},
-        {code: "2" , name: "لابتوب" , unit: "قطع" ,income:"1000" ,outcome: "500" ,avlqty:"40",soldqty: "22",store: "", total: ""},
-        {code: "3" , name: "لابتوب" , unit: "قطع" ,income:"500" ,outcome: "500" ,avlqty:"92",soldqty: "20",store: "", total: ""},
-        {code: "4" , name: "لابتوب" , unit: "قطع" ,income:"4000" ,outcome: "500" ,avlqty:"55",soldqty: "40",store: "", total: ""},
-        {code: "5" , name: "لابتوب" , unit: "قطع" ,income:"8000" ,outcome: "500" ,avlqty:"78",soldqty: "60",store: "", total: ""},
-        {code: "6" , name: "لابتوب" , unit: "قطع" ,income:"7000" ,outcome: "500" ,avlqty:"60",soldqty: "0",store: "", total: ""},
-        {code: "7" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"25",soldqty: "7",store: "", total: ""},
-        {code: "8" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"79",soldqty: "50",store: "", total: ""},
-        {code: "9" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"90",soldqty: "40",store: "", total: ""},
-        {code: "10" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"300",soldqty: "200",store: "", total: ""},
-        {code: "11" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"240",soldqty: "100",store: "", total: ""},
-        {code: "12" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"100",soldqty: "20",store: "", total: ""},
-        {code: "13" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"190",soldqty: "20",store: "", total: ""},
-        {code: "14" , name: "لابتوب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"250",soldqty: "20",store: "", total: ""},
+    const [stores , setStores] = useState([
+        {code: "1" , name: "لابتوب" , unit: "قطع" ,income:"2000" ,outcome: "5000" ,avlqty:"60",soldqty: "11",store: "", total: ""},
+        {code: "2" , name: "موبايل" , unit: "قطع" ,income:"1000" ,outcome: "5000" ,avlqty:"40",soldqty: "22",store: "", total: ""},
+        {code: "3" , name: "تابلت" , unit: "قطع" ,income:"500" ,outcome: "500" ,avlqty:"92",soldqty: "20",store: "", total: ""},
+        {code: "4" , name: "ايفون" , unit: "قطع" ,income:"4000" ,outcome: "5500" ,avlqty:"55",soldqty: "40",store: "", total: ""},
+        {code: "5" , name: "شامبو" , unit: "قطع" ,income:"8000" ,outcome: "9500" ,avlqty:"78",soldqty: "60",store: "", total: ""},
+        {code: "6" , name: "بلسم" , unit: "قطع" ,income:"400" ,outcome: "500",avlqty:"60",soldqty: "0",store: "", total: ""},
+        {code: "7" , name: "هيدفون" , unit: "قطع" ,income:"200" ,outcome: "500",avlqty:"25",soldqty: "7",store: "", total: ""},
+        {code: "8" , name: "صن بلوك" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"79",soldqty: "50",store: "", total: ""},
+        {code: "9" , name: "زيت" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"90",soldqty: "40",store: "", total: ""},
+        {code: "10" , name: "حمام كريم" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"300",soldqty: "200",store: "", total: ""},
+        {code: "11" , name: "غسول" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"240",soldqty: "100",store: "", total: ""},
+        {code: "12" , name: "مرطب" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"100",soldqty: "20",store: "", total: ""},
+        {code: "13" , name: "جل صبار" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"190",soldqty: "20",store: "", total: ""},
+        {code: "14" , name: "سيروم" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"250",soldqty: "20",store: "", total: ""},
+    ])
+    const [inwardBills , setInwardBills] = useState([
+        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 12 , itemName: 'بلسم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 15 , itemName: 'حمام كريم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '31/4/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 5 , itemName: 'زيت', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '31/4/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 10 , itemName: 'مرطب', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 7 , itemName: 'صن بلوك', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 11 , itemName: 'فاونديشن', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 15 , itemName: 'صبغة', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 17 , itemName: 'شادو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '30/4/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '30/4/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+    ])
+    const [outwardBills , setOutwardBills] = useState([
+        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 12 , itemName: 'بلسم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 15 , itemName: 'حمام كريم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '31/4/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 5 , itemName: 'زيت', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '31/4/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 10 , itemName: 'مرطب', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 7 , itemName: 'صن بلوك', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 11 , itemName: 'فاونديشن', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 15 , itemName: 'صبغة', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 17 , itemName: 'شادو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '30/4/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '30/4/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
     ])
 
     const addItem = (code ,name, unit, income, outcome) => {
         setItems([{code,name,unit,income,outcome} , ...items])
     }
-
+    const addInwardBills = (invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining) => {
+        setInwardBills((oldvalues) => [{invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining}, ...oldvalues])
+    }
+    const addOutwardBills = (invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining) => {
+        setOutwardBills((oldvalues) => [{invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining}, ...oldvalues])
+    }
     const addSupplier = (code, name , phone) => {
         setSuppliers([{code, name , phone} , ...suppliers])
     }
@@ -109,11 +141,11 @@ export const StateProvider = (props) => {
     const addClient = (code, name , phone , address) => {
         setClients([{code, name , phone , address} , ...clients])
     }
-    const addPurchases = (purchas ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price) => {
-        setPurchases([{purchas ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price} , ...purchases])
+    const addPurchases = (invoice ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price,total) => {
+        setPurchases([{invoice ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price,total} , ...purchases])
     }
-    const addSales = (purchas ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price) => {
-        setSales([{purchas ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price} , ...sales])
+    const addSales = (invoice ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price ,total) => {
+        setSales([{invoice ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price ,total} , ...sales])
     }
     
     const deleteItem = (code) => {
@@ -147,17 +179,21 @@ export const StateProvider = (props) => {
     const editSales = (code,editedSales) => {
         setSales(sales.map(e => e.itemCode === code ? editedSales : e))
     }
-
-    const addToStore = (arr) => {
-       setStore(store.map(e => e.code === arr.itemCode? {...e , avlqty: parseInt(e.avlqty) + parseInt(arr.qty)} : e))
+    const addToStore = (code , name , unit ,income ,outcome,avlqty,soldqty,store, total) => {
+         setStores((oldvalues) => [{code , name , unit ,income ,outcome,avlqty,soldqty,store, total} , ...oldvalues])
     }
+
+    const editStores = (arr) => {
+        setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? { ...e, avlqty: parseInt(e.avlqty) + parseInt(arr.qty) } : e))
+      };
+
     const deleteFromStore = (arr) => {
-       setStore(store.map(e => e.code === arr.itemCode? {...e , soldqty: parseInt(e.soldqty) + parseInt(arr.qty)} : e))
+        setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? {...e , soldqty: parseInt(e.soldqty) + parseInt(arr.qty)} : e))
     }
 
     return (
         <StateContext.Provider value={
-            {items,addItem,deleteItem, editItem , suppliers , addSupplier , deleteSupplier ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,addPurchases,deletePurchases,editPurchases,sales,store ,addToStore,deleteFromStore,addSales,deleteSales,editSales}
+            {items,addItem,deleteItem, editItem , suppliers,outwardBills,addOutwardBills, addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
          }>
             {props.children}
         </StateContext.Provider>

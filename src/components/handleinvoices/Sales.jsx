@@ -8,13 +8,13 @@ import { useNavigate } from 'react-router-dom';
 
 const Sales = () => {
 
-    const {sales , addSales , deleteSales , clients , store , deleteFromStore ,editSales} = useStateValue()
+    const {sales , addSales , deleteSales , clients , stores ,setSales,outwardBills,addOutwardBills , items, deleteFromStore ,editSales ,purchases} = useStateValue()
 
     const currentDate = new Date().toLocaleDateString();
   
     const [purchasesInfo , setPurchasesInfo] = useState(
       { 
-        purchas: '' ,
+        invoice: '' ,
         date: '',
         supplierName: '',
         supplierCode: '',
@@ -22,7 +22,8 @@ const Sales = () => {
         itemName: '',
         unit: '' ,
         qty: '' ,
-        price: ''
+        price: '',
+        total: ''
       }
     )
     const navigate = useNavigate();
@@ -32,6 +33,7 @@ const Sales = () => {
     const [itemErr ,setItemErr] = useState(false)
     const [edit ,setEdit] = useState(false)
     const [qtyErr ,setQtyErr] = useState(false)
+    const [existing ,setExisting] = useState(false)
   
     function handleChange(event){
       if (!isNaN(event.target.value)) {
@@ -61,7 +63,7 @@ const Sales = () => {
     const handleEdit = (e) => {
       setEdit(true)
       setPurchasesInfo({
-            purchas: e?.purchas,
+            invoice: e?.invoice,
             date: e?.date,
             supplierCode: e?.supplierCode,
             supplierName: e?.supplierName,
@@ -69,27 +71,27 @@ const Sales = () => {
             itemName: e?.itemName,
             unit: e?.unit,
             qty: e?.qty,
-            price: e?.price
+            price: e?.price,
+            total: e.price * e.qty
       }
       )
     }
    
-    const {purchas ,date , supplierName , supplierCode ,itemCode , itemName , unit , qty , price} = purchasesInfo
+    const {invoice ,date , supplierName , supplierCode ,itemCode , itemName , unit , qty , price,total} = purchasesInfo
     
     const handleSubmit = (e) => {
         e.preventDefault()
         if(!edit){
-          if(!qtyErr){
-            addSales(purchas ,date , supplierName , supplierCode ,itemCode , itemName , unit , qty , price)
-            deleteFromStore(purchasesInfo)
+          if(!qtyErr && !itemErr && !clientErr){
+            addSales(invoice.toString() ,date , supplierName , supplierCode ,itemCode , itemName , unit , qty , price ,total)
             emptyForm()
+            setExisting(true)
           }
         }else{
           const editedSales = purchasesInfo
           editSales(record?.itemCode , editedSales)
-          deleteFromStore(purchasesInfo)
-          emptyForm()
           setEdit(false)
+          emptyForm()
         }
     }
  
@@ -98,13 +100,29 @@ const Sales = () => {
    } , 0)
 
     const [calcPurchas , setCalcPurchas] = useState(
-      {total: getTotal ,discount: '',totalwd: '' ,reduction: '',remaining: '',items:''}
+      {totalbill: getTotal ,discount: '',totalwd: '' ,reduction: '',remaining: '',items:''}
     )
   
     const emptyForm = () => {
       setEdit(false)
+      setItemErr(false)
+      setClientErr(false)
       setPurchasesInfo({
-         purchas: '' ,
+         itemCode: '',
+         itemName: '',
+         unit: '' ,
+         qty: '' ,
+         price: '',
+         total: ''})
+    }
+    
+    const emptyAllForms = () => {
+      setEdit(false)
+      setItemErr(false)
+      setClientErr(false)
+      setExisting(false)
+      setPurchasesInfo({
+         invoice: '' ,
          date: '',
          supplierCode: '',
          supplierName: '',
@@ -112,44 +130,75 @@ const Sales = () => {
          itemName: '',
          unit: '' ,
          qty: '' ,
-         price: ''})
+         price: '',
+         total: ''})
+      setCalcPurchas({
+      totalbill: '',
+      totalwd: '',
+      remaining: '',
+      reduction: '',
+      discount: '',
+      items:''
+      })
+      setSales([])
     }
 
     let filteredClients = purchasesInfo.supplierCode &&
          clients.filter(e => e.code === purchasesInfo.supplierCode)
   
     let filteredStors = purchasesInfo.itemCode &&
-        store.filter(e => e.code === purchasesInfo.itemCode)
+      items.filter(e => e.code === purchasesInfo.itemCode)
+
+    let avlQty = stores.find(store => store.code === filteredStors[0]?.code)
 
     useEffect(() => {
+
        const handleSupplierErrs = filteredClients?.length === 0 && purchasesInfo.supplierCode && !edit
                 ? setClientErr(true) : setClientErr(false)
        const handleItemErrs = filteredStors?.length === 0 && purchasesInfo.itemCode && !edit
                 ? setItemErr(true) : setItemErr(false)
-        const checkQty = purchasesInfo.qty && parseInt(filteredStors[0]?.avlqty) < parseInt(purchasesInfo.qty) 
-        ? setQtyErr(true) : setQtyErr(false)
-    } , [filteredClients , purchasesInfo ,filteredStors ,edit])
+        const checkQty = purchasesInfo.qty && parseInt(avlQty ? avlQty.avlqty : 0) < parseInt(purchasesInfo.qty) 
+              ? setQtyErr(true) : setQtyErr(false)
 
+      } , [filteredClients , purchasesInfo ,filteredStors ,edit , avlQty])
     
   useEffect(() => {
+    const invoiceNum = Array.from(new Set(outwardBills.map((inward) => inward.invoice)))
     const timeoutId = setTimeout(() => {
        if(!edit){
-        setPurchasesInfo(prevData => {
-          return {
-              ...prevData, 
-              itemName: filteredStors[0]?.name,
-              date: currentDate,
-              supplierName: filteredClients[0]?.name,
-              purchas: sales?.length,
-              unit: filteredStors[0]?.unit,
-              price: filteredStors[0]?.outcome,
-          }
-       })
+        if(!existing){
+          setPurchasesInfo(prevData => {
+            return {
+                ...prevData, 
+                itemName: filteredStors[0]?.name,
+                date: currentDate,
+                supplierName: filteredClients[0]?.name,
+                invoice: invoiceNum?.length + 1,
+                unit: filteredStors[0]?.unit,
+                price: filteredStors[0]?.income,
+                total: purchasesInfo.qty ? parseInt(purchasesInfo.qty) * purchasesInfo.price : ''
+            }
+         })
+        }else{
+          setPurchasesInfo(prevData => {
+            return {
+                ...prevData, 
+                itemName: filteredStors[0]?.name,
+                date: currentDate,
+                supplierName: sales[0]?.supplierName,
+                supplierCode: sales[0]?.supplierCode,
+                invoice: invoiceNum?.length + 1,
+                unit: filteredStors[0]?.unit,
+                price: filteredStors[0]?.income,
+                total: purchasesInfo.qty ? parseInt(purchasesInfo.qty) * purchasesInfo.price : ''
+            }
+         })
+        }
        }
        setCalcPurchas(prev => {
         return {
           ...prev,
-          total: getTotal,
+          totalbill: getTotal,
           totalwd: getTotal - ((getTotal * calcPurchas.discount) / 100),
           remaining: calcPurchas.totalwd - calcPurchas.reduction,
           items: sales.length,
@@ -160,6 +209,8 @@ const Sales = () => {
     return () => clearTimeout(timeoutId);
     
   },);
+
+  const {totalbill , discount, totalwd , reduction , remaining} = calcPurchas
   
     const handleDelete = (e) =>{
       deleteSales(e)
@@ -177,6 +228,21 @@ const Sales = () => {
       }
     };
 
+    const handleRegistration = (e) => {
+      e.preventDefault()
+        
+      const handleStores = sales.map((sale) => {
+          deleteFromStore(sale)
+       })
+
+       const handleOutward = sales.map((pur) => {
+        addOutwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount,totalwd,reduction,remaining)
+      })   
+  
+      emptyAllForms()
+  
+    }
+
   return (
     <div className='py-3 max-h-screen'>
         <FormInvoicesModel
@@ -188,18 +254,22 @@ const Sales = () => {
             unitVal={!edit ?!itemErr && purchasesInfo.itemCode ? purchasesInfo.unit : '' : purchasesInfo.unit}
             qtyVal={purchasesInfo.qty}
             priceVal={!edit ? !itemErr && purchasesInfo.itemCode ? purchasesInfo.price : '' : purchasesInfo.price}
-            purchasVal={!edit ? !clientErr && purchasesInfo.supplierCode ? purchasesInfo.purchas : '' : purchasesInfo.purchas}
+            purchasVal={!edit ? !clientErr && purchasesInfo.supplierCode ? purchasesInfo.invoice : '' : purchasesInfo.invoice}
             dateVal={!edit ? !clientErr && purchasesInfo.supplierCode ? purchasesInfo.date : '' : purchasesInfo.date}
             supplierCodeVal={purchasesInfo.supplierCode}
             supplierNameVal={!edit ? !clientErr && purchasesInfo.supplierCode ? purchasesInfo.supplierName : '' : purchasesInfo.supplierName} 
-            totalVal= {qty && qty * price} 
+            totalVal= {purchasesInfo.qty ? purchasesInfo.total : ''} 
             edit={edit}
             supplierErr={clientErr}
             itemErr={itemErr}
             qtyErr={qtyErr}
-            avlQty={filteredStors[0]?.avlqty}
+            avlQty={avlQty ? avlQty.avlqty : 0 }
+            existing={existing}
+            nameText='اسم العميل'
+            codeText='كود العميل'
+            errorText='الكود غير صحيح'
         />
-        <ModelBtns title={edit ? 'تعديل' : 'اضافة'} cancelTitle='تفريغ الحقول' handlecancel={emptyForm} btnStyle={'w-40 py-2'} margin={'mt-5'} />
+        <ModelBtns title={edit ? 'تعديل' : 'اضافة'} form='my-form' cancelTitle='تفريغ الحقول' handlecancel={emptyForm} btnStyle={'w-40 py-2'} margin={'mt-5'} />
         <TableInvoices
               purchases={sales} 
               getRecord={getRecord}
@@ -208,16 +278,16 @@ const Sales = () => {
               handleEdit={handleEdit}
         />
         <FormInvoiceModel 
-          totalVal={calcPurchas.total}
+          totalVal={calcPurchas.totalbill || ''}
           handleInputChange={handleKeyDown}
           handleChange={handleChange} 
-          discountVal={calcPurchas.discount} 
-          totalwdVal={calcPurchas.totalwd}
-          reductionVal={calcPurchas.reduction}
-          remainingVal={calcPurchas.remaining}
-          itemsVal={calcPurchas.items}
+          discountVal={calcPurchas.discount || ''} 
+          totalwdVal={calcPurchas.totalwd || ''}
+          reductionVal={calcPurchas.reduction || ''}
+          remainingVal={calcPurchas.remaining || ''}
+          itemsVal={calcPurchas.items || ''}
         />
-        <ModelBtns title='تسجيل' cancelTitle='الغاء' btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => navigate('/homepage')} />
+        <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => navigate('/homepage')} />
     </div>
   )
 }
