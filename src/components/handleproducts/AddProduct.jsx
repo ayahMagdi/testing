@@ -8,7 +8,7 @@ import ModelBtns from '../ModelBtns';
 
 const AddProduct = ({isAdded}) => {
   
-    const {addItem ,items} = useStateValue()
+    const {addItem} = useStateValue()
 
     const options = [
         {value: 'قطع' , label: 'قطع'},
@@ -52,7 +52,7 @@ const AddProduct = ({isAdded}) => {
             }
         }) 
     }
-    
+
     const {code , name , unit , income , outcome} = productInfo
 
     useEffect(() => {
@@ -86,7 +86,7 @@ const AddProduct = ({isAdded}) => {
           nameVal={productInfo.name}
           incomeVal={productInfo.income}
           outcomeVal={productInfo.outcome}
-          unitVal={productInfo.unit}
+          unitVal={productInfo.unit.label}
           invalidPrice={invalidPrice}
           options={options}
           handleSelectChange={handleSelectChange}

@@ -16,6 +16,11 @@ import StorePage from "./pages/StorePage";
 import SalesPage from "./pages/SalesPage";
 import InwardBills from "./pages/InwardBills";
 import OutwardBills from "./pages/OutwardBills";
+import SupplierBills from "./pages/SupplierBills";
+import ClientBills from "./pages/ClientBills";
+import InventoryIncome from "./pages/InventoryIncome";
+import InventoryOutcome from "./pages/InventoryOutcome";
+import SupplierBalance from "./pages/SupplierBalance";
 
 function App() {
 
@@ -85,6 +90,11 @@ function App() {
          <Route path="/store" element={<StorePage user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
          <Route path="/inwardbills" element={<InwardBills />} />
          <Route path="/outwardbills" element={<OutwardBills />} />
+         <Route path="/supplierbills" element={<SupplierBills user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
+         <Route path="/clientbills" element={<ClientBills user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
+         <Route path="/inventoryincome" element={<InventoryIncome />} />
+         <Route path="/inventoryoutcome" element={<InventoryOutcome />} />
+         <Route path="/supplierbalance" element={<SupplierBalance user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
       </Routes>
     </div>
   );

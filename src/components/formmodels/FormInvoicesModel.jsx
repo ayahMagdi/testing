@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 
 const FormInvoicesModel = (
-     {title,handleSubmit, edit,handleChange,supplierErr,itemErr,qtyErr,nameText,codeText,errorText,avlQty,purchasVal,existing,dateVal,supplierCodeVal,supplierNameVal,itemCodeVal,itemNameVal,unitVal,qtyVal,priceVal,totalVal}
+     {title,handleSubmit, edit,handleChange,supplierErr,itemErr,qtyErr,codeExist,nameText,codeText,errorText,avlQty,purchasVal,existing,dateVal,supplierCodeVal,supplierNameVal,itemCodeVal,itemNameVal,unitVal,qtyVal,priceVal,totalVal}
  ) => {
 
     const userRef = useRef()
@@ -14,7 +14,7 @@ const FormInvoicesModel = (
     <div className='mt-1'>
         <h2 className='text-center text-3xl font-bold text-main'>{title}</h2>
         <form className='mt-5' onSubmit={handleSubmit} id='my-form'>
-            <div className={`grid grid-cols-4 gap-6 ${supplierErr || itemErr || qtyErr ? 'mb-1' : 'mb-4'}`}>
+            <div className={`grid grid-cols-4 gap-6 ${supplierErr || itemErr || codeExist || qtyErr ? 'mb-1' : 'mb-4'}`}>
                 <div>
                     <label className='mb-2 block font-bold'>رقم الفاتورة</label>
                     <input
@@ -75,7 +75,7 @@ const FormInvoicesModel = (
                     <label className='mb-2 block font-bold'>كود المنتج</label>
                     <input
                         type='text'
-                        className={`w-full border p-2 rounded-lg focus:outline-none ${itemErr ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
+                        className={`w-full border p-2 rounded-lg focus:outline-none ${itemErr || codeExist ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
                         name='itemCode'
                         required
                         autoComplete="off"
@@ -87,6 +87,7 @@ const FormInvoicesModel = (
                         value={itemCodeVal}
                     />
                     {itemErr && <p className="text-sm text-red-500 m-0">كود المنتج غير صحيح</p>}
+                    {codeExist && <p className="text-sm text-red-500 m-0">المنتج موجود بالفعل</p>}
                 </div>
                 <div>
                     <label className='mb-2 block font-bold'>اسم المنتج</label>

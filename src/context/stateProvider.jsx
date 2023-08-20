@@ -1,12 +1,12 @@
 import { createContext , useContext, useState } from "react";
-import { faBalanceScaleLeft, faBold, faBusinessTime, faClipboardCheck, faClipboardList, faEdit, faMoneyCheckAlt, faPeopleGroup, faSackDollar, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faBalanceScaleLeft, faBusinessTime, faClipboardCheck, faClipboardList, faEdit, faFileInvoice, faFileInvoiceDollar, faMoneyBill1Wave, faMoneyBillTrendUp, faMoneyBillWave, faMoneyBillWaveAlt, faMoneyBillWheat, faMoneyCheckAlt, faMoneyCheckDollar, faPeopleGroup, faSackDollar, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 export const StateContext = createContext(null)
 
 export const StateProvider = (props) => {
 
     const [items , setItems] = useState([
-        {code: "1" , name: "لابتوب" , unit: "قطع" ,income:"2000" ,outcome: "5000"},
+        {code: "1" , name: "لابتوب" , unit: "كرتونه" ,income:"2000" ,outcome: "5000"},
         {code: "2" , name: "موبايل" , unit: "قطع" ,income:"1000" ,outcome: "5000"},
         {code: "3" , name: "تابلت" , unit: "قطع" ,income:"500" ,outcome: "500"},
         {code: "4" , name: "ايفون" , unit: "قطع" ,income:"4000" ,outcome: "5500"},
@@ -46,12 +46,13 @@ export const StateProvider = (props) => {
         {title: 'المخزن' , icon: faStore , url: '/store'},
         {title: 'فواتير الداخل' , icon: faClipboardList , url: '/inwardbills'},
         {title: 'فواتير الخارج' , icon: faClipboardCheck , url: '/outwardbills'},
+        {title: 'فواتير الموردين' , icon: faFileInvoice , url: '/supplierbills'},
+        {title: 'فواتير العملاء' , icon: faFileInvoiceDollar , url: '/clientbills'},
+        {title: 'جرد الداخل' , icon: faMoneyBill1Wave , url: '/inventoryincome'},
+        {title: 'جرد الخارج' , icon: faMoneyBillWave , url: '/inventoryoutcome'},
+        {title: 'رصيد الموردين' , icon: faMoneyCheckDollar , url: '/supplierbalance'},
         {title: 'الحسابات' , icon: faMoneyCheckAlt},
         {title: 'الواردات' , icon: faBusinessTime},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
@@ -93,36 +94,48 @@ export const StateProvider = (props) => {
         {code: "14" , name: "سيروم" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"250",soldqty: "20",store: "", total: ""},
     ])
     const [inwardBills , setInwardBills] = useState([
-        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 12 , itemName: 'بلسم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 15 , itemName: 'حمام كريم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '2' , date: '31/4/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 5 , itemName: 'زيت', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '2' , date: '31/4/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 10 , itemName: 'مرطب', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 7 , itemName: 'صن بلوك', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 11 , itemName: 'فاونديشن', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 15 , itemName: 'صبغة', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 17 , itemName: 'شادو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '5' , date: '30/4/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '5' , date: '30/4/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 12 , itemName: 'بلسم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 15 , itemName: 'حمام كريم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '25/04/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 5 , itemName: 'زيت', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '25/04/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '26/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 10 , itemName: 'مرطب', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '26/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 7 , itemName: 'صن بلوك', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '26/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 11 , itemName: 'فاونديشن', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '28/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 15 , itemName: 'صبغة', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '28/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 17 , itemName: 'شادو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '28/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '28/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '30/04/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '30/04/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
     ])
     const [outwardBills , setOutwardBills] = useState([
-        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 12 , itemName: 'بلسم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '1' , date: '30/4/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 15 , itemName: 'حمام كريم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '2' , date: '31/4/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 5 , itemName: 'زيت', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '2' , date: '31/4/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 10 , itemName: 'مرطب', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 7 , itemName: 'صن بلوك', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '32/4/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 11 , itemName: 'فاونديشن', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 15 , itemName: 'صبغة', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 17 , itemName: 'شادو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '32/4/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '5' , date: '30/4/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '5' , date: '30/4/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 12 , itemName: 'بلسم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 15 , itemName: 'حمام كريم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '21/04/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 5 , itemName: 'زيت', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '21/04/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '22/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 10 , itemName: 'مرطب', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '22/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 7 , itemName: 'صن بلوك', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '22/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 11 , itemName: 'فاونديشن', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '22/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 15 , itemName: 'صبغة', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '22/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 17 , itemName: 'شادو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '22/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '22/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '23/04/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '23/04/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+    ])
+    const [supplierBalance , setSupplierBalance] = useState([
+        {code: '1' , name: 'هند' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '2' , name: 'اسراء' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '3' , name: 'نيرفانا' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '4' , name: 'فاطمه' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '5' , name: 'ساره' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '6' , name: 'شروق' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '7' , name: 'رنا' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '8' , name: 'شيرين' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '9' , name: 'حسناء' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '10' ,name: 'ايه' ,total: 2000,reduction: 100,remaining: 3000},
     ])
 
     const addItem = (code ,name, unit, income, outcome) => {
@@ -182,10 +195,15 @@ export const StateProvider = (props) => {
     const addToStore = (code , name , unit ,income ,outcome,avlqty,soldqty,store, total) => {
          setStores((oldvalues) => [{code , name , unit ,income ,outcome,avlqty,soldqty,store, total} , ...oldvalues])
     }
-
     const editStores = (arr) => {
         setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? { ...e, avlqty: parseInt(e.avlqty) + parseInt(arr.qty) } : e))
-      };
+    };
+    const addSupplierBalance = (code,name,total,reduction,remaining) => {
+        setSupplierBalance((oldvalues) => [{code,name,total,reduction,remaining} , ...oldvalues])
+    }
+    const editSupplierBalance = (arr) => {
+        setSupplierBalance((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? { ...e, total: parseInt(e.total) + parseInt(arr.totalwd) , reduction: parseInt(e.reduction) + parseInt(arr.reduction) } : e))
+    };
 
     const deleteFromStore = (arr) => {
         setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? {...e , soldqty: parseInt(e.soldqty) + parseInt(arr.qty)} : e))
@@ -193,7 +211,7 @@ export const StateProvider = (props) => {
 
     return (
         <StateContext.Provider value={
-            {items,addItem,deleteItem, editItem , suppliers,outwardBills,addOutwardBills, addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
+            {items,addItem,deleteItem, editItem,supplierBalance,addSupplierBalance,editSupplierBalance , suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
          }>
             {props.children}
         </StateContext.Provider>

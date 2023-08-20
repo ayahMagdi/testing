@@ -31,6 +31,7 @@ const Sales = () => {
     const [record ,setRecord] = useState()
     const [clientErr ,setClientErr] = useState(false)
     const [itemErr ,setItemErr] = useState(false)
+    const [codeExist ,setCodeExist] = useState(false)
     const [edit ,setEdit] = useState(false)
     const [qtyErr ,setQtyErr] = useState(false)
     const [existing ,setExisting] = useState(false)
@@ -82,7 +83,7 @@ const Sales = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(!edit){
-          if(!qtyErr && !itemErr && !clientErr){
+          if(!qtyErr && !itemErr && !clientErr && !codeExist){
             addSales(invoice.toString() ,date , supplierName , supplierCode ,itemCode , itemName , unit , qty , price ,total)
             emptyForm()
             setExisting(true)
@@ -107,6 +108,7 @@ const Sales = () => {
       setEdit(false)
       setItemErr(false)
       setClientErr(false)
+      setCodeExist(false)
       setPurchasesInfo({
          itemCode: '',
          itemName: '',
@@ -121,6 +123,7 @@ const Sales = () => {
       setItemErr(false)
       setClientErr(false)
       setExisting(false)
+      setCodeExist(false)
       setPurchasesInfo({
          invoice: '' ,
          date: '',
@@ -159,8 +162,10 @@ const Sales = () => {
                 ? setItemErr(true) : setItemErr(false)
         const checkQty = purchasesInfo.qty && parseInt(avlQty ? avlQty.avlqty : 0) < parseInt(purchasesInfo.qty) 
               ? setQtyErr(true) : setQtyErr(false)
+        const handleCodeErrs = purchasesInfo.itemCode && sales?.find(e => e.itemCode === purchasesInfo.itemCode ? 
+          setCodeExist(true) : setCodeExist(false))
 
-      } , [filteredClients , purchasesInfo ,filteredStors ,edit , avlQty])
+      } , [filteredClients , purchasesInfo ,filteredStors ,edit , avlQty ,sales])
     
   useEffect(() => {
     const invoiceNum = Array.from(new Set(outwardBills.map((inward) => inward.invoice)))
@@ -268,6 +273,7 @@ const Sales = () => {
             nameText='اسم العميل'
             codeText='كود العميل'
             errorText='الكود غير صحيح'
+            codeExist={codeExist}
         />
         <ModelBtns title={edit ? 'تعديل' : 'اضافة'} form='my-form' cancelTitle='تفريغ الحقول' handlecancel={emptyForm} btnStyle={'w-40 py-2'} margin={'mt-5'} />
         <TableInvoices

@@ -30,6 +30,7 @@ const Purchases = () => {
   
   const [targetCode ,setTargetCode] = useState(null)
   const [supplierErr ,setSupplierErr] = useState(false)
+  const [codeExist ,setCodeExist] = useState(false)
   const [itemErr ,setItemErr] = useState(false)
   const [edit ,setEdit] = useState(false)
   const [existing ,setExisting] = useState(false)
@@ -81,7 +82,7 @@ const Purchases = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(!edit){
-      if(!itemErr && !supplierErr){
+      if(!itemErr && !supplierErr && !codeExist){
         addPurchases(invoice.toString() ,date , supplierName , supplierCode ,itemCode , itemName , unit , qty , price ,total)
         emptyForm()
         setExisting(true)
@@ -98,6 +99,7 @@ const Purchases = () => {
     setEdit(false)
     setItemErr(false)
     setSupplierErr(false)
+    setCodeExist(false)
     setPurchasesInfo({
        itemCode: '',
        itemName: '',
@@ -112,6 +114,7 @@ const Purchases = () => {
     setItemErr(false)
     setSupplierErr(false)
     setExisting(false)
+    setCodeExist(false)
     setPurchasesInfo({
       invoice: '' ,
        date: '',
@@ -145,7 +148,9 @@ const Purchases = () => {
               ? setSupplierErr(true) : setSupplierErr(false)
      const handleItemErrs = filteredStors?.length === 0 && purchasesInfo?.itemCode && !edit 
               ? setItemErr(true) : setItemErr(false)
-  } , [filteredSuppliers , purchasesInfo ,filteredStors ,edit])
+     const handleCodeErrs = purchasesInfo.itemCode && purchases?.find(e => e.itemCode === purchasesInfo.itemCode ? 
+      setCodeExist(true) : setCodeExist(false))
+  } , [filteredSuppliers , purchasesInfo ,filteredStors ,edit , purchases])
 
   const getTotal = purchases.reduce((acc , cur) => {
     return parseInt(acc) + (parseInt(cur.price) * parseInt(cur.qty))
@@ -268,6 +273,7 @@ const Purchases = () => {
             nameText='اسم المورد'
             codeText='كود المورد'
             errorText='الكود غير صحيح'
+            codeExist={codeExist}
         />
         <ModelBtns title={edit ? 'تعديل' : 'اضافة'} form='my-form' cancelTitle='تفريغ الحقول' handlecancel={emptyForm} btnStyle={'w-40 py-2'} margin={'mt-5'} />
         <TableInvoices 

@@ -1,4 +1,4 @@
-import { useState ,useMemo } from 'react'
+import { useState } from 'react'
 import TableInwardbills from '../components/tablemodels/TableInwardbills'
 import FilterInvoices from '../components/handleinvoices/FilterInvoices'
 import { useStateValue } from '../context/stateProvider'
@@ -36,64 +36,51 @@ const OutwardBills = () => {
     let iteratoritems = mapitems.values();
     let getitems = [...iteratoritems];
   
-    const [filterinvoices , setFilterInvoices] = useState([])
-  const [filterDates , setFilterDates] = useState([])
-  const [filterSuppliers , setFilterSuppliers] = useState([])
-  const [filterItems , setFilterItems] = useState([])
-  
-  
-  const handleChangeInvoices = (selectedOption) => {setFilterInvoices(selectedOption)}
-  const handleChangeDates = (selectedOption) => {setFilterDates(selectedOption)}
-  const handleChangeSuppliers = (selectedOption) => {setFilterSuppliers(selectedOption)}
-  const handleChangeItems = (selectedOption) => {setFilterItems(selectedOption)}
-  
-  const searchInvoices = filterinvoices?.map((e => outwardBills?.filter(inward => inward.invoice === e.value)))
-  const searchDates = filterDates?.map((e => outwardBills?.filter(inward => inward.date === e.value)))
-  const searchSuppliers = filterSuppliers?.map((e => outwardBills?.filter(inward => inward.supplierName === e.value)))
-  const searchItems = filterItems?.map((e => outwardBills?.filter(inward => inward.itemName === e.value)))
-  
-  let searchResults = []
-  
-   const handleSearch = searchInvoices?.map((e) => searchResults.push(...e)) &&
-                        searchDates?.map((e) => searchResults.push(...e)) &&
-                        searchSuppliers?.map((e) => searchResults.push(...e)) &&
-                        searchItems?.map((e) => searchResults.push(...e)) 
-  
-   const [filter , setFilter] = useState(false)
-  
-    const uniqueDataSearch = useMemo(() => {
-      const unique = [];
-  
-      searchResults.forEach(item => {
-        let exists = false;
-        
-        unique.forEach(u => {
-          if(isEqual(u, item)) {
-            exists = true;
-          }
-        });
-  
-        if(!exists) {
-          unique.push(item);
-        }
+    const [selectedValues , setSelectedValues] = useState(
+      {
+        filterinvoices: [],
+        filterdates: [],
+        filtersuppliers: [],
+        filteritems: []
+      }
+    )
+    
+    const handleSelectChange = (value, name) => {
+      setSelectedValues((prevValues) => ({
+        ...prevValues,
+        [name]: value
+      }));
+    };
+    
+    const [filtrationArry , setFiltrationArry] = useState()
+    
+    const filterData = () => {
+      const filteredArray = outwardBills.filter((item) => {
+        return (
+          (selectedValues.filterinvoices.length === 0 || selectedValues.filterinvoices.some((value) => isEqual(value.value, item.invoice))) &&
+          (selectedValues.filterdates.length === 0 || selectedValues.filterdates.some((value) => isEqual(value.value, item.date))) &&
+          (selectedValues.filtersuppliers.length === 0 || selectedValues.filtersuppliers.some((value) => isEqual(value.value, item.supplierName))) &&
+          (selectedValues.filteritems.length === 0 || selectedValues.filteritems.some((value) => isEqual(value.value, item.itemName)))
+        );
       });
+      // console.log(filteredArray);
+      setFiltrationArry(filteredArray)
+    }
   
-      return unique;
-    }, [searchResults]);
-  
+    const [filter , setFilter] = useState(false)
+
     const newDataSets = [];
-    if(!filter || searchResults.length === 0){
+    if(!filter){
     outwardBills?.forEach((data) => {
       newDataSets.push({...data, invoice: {title: data.invoice, rowSpan: 0}})
     })
     }else{
-      uniqueDataSearch?.forEach((data) => {
+      filtrationArry?.forEach((data) => {
         newDataSets.push({...data, invoice: {title: data.invoice, rowSpan: 0}})
       })
     }
   
-    const countCategories = !filter || searchResults.length === 0 ? outwardBills?.reduce( (acc, o) => (acc[o.invoice] = (acc[o.invoice] || 0)+1, acc), {} )
-                         : uniqueDataSearch?.reduce( (acc, o) => (acc[o.invoice] = (acc[o.invoice] || 0)+1, acc), {} );
+    const countCategories = !filter ? outwardBills?.reduce( (acc, o) => (acc[o.invoice] = (acc[o.invoice] || 0)+1, acc), {} ) : filtrationArry?.reduce( (acc, o) => (acc[o.invoice] = (acc[o.invoice] || 0)+1, acc), {} );
   
   const distinctCategories = [];
   
@@ -101,43 +88,44 @@ const OutwardBills = () => {
       distinctCategories?.push({title: newDataSets[newDataSets.findIndex(x => x.invoice?.title === data)].invoice?.title});
       (newDataSets[newDataSets.findIndex(x => x.invoice.title === data)]).invoice.rowSpan = countCategories[data]
   })
-  const [emptyForm , setEmptyForm] = useState([
-    {invoiceval: filterinvoices,dateval: filterDates,suppliername: filterSuppliers,itemname: filterItems}
-  ])
-  
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      if(searchResults.length > 0){
-        setFilter(true)
-      }
-    }
-    
-    const handlecancel = () => {
-      searchResults= []
-      setFilter(false)
-      setEmptyForm({invoiceval: null , dateval: null ,suppliername: null , itemname: null})
-    }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setFilter(true)
+    filterData()
+  }
+
+const handlecancel = () => {
+  setFilter(false)
+  setSelectedValues({
+    filterinvoices:[],
+    filterdates:[],
+    filtersuppliers: [],
+    filteritems: []
+  })
+}
 
   return (
     <div className='container mx-auto px-4'>
         <FilterInvoices title='فواتير الخارج' 
             handlecancel={handlecancel} 
             getinvoices={getinvoices}
-            handleChangeInvoices={handleChangeInvoices}
-            handleChangeDates={handleChangeDates}
-            handleChangeSuppliers={handleChangeSuppliers}
-            handleChangeItems={handleChangeItems}
+            handleChangeInvoices={(value) => handleSelectChange(value, 'filterinvoices')}
+            handleChangeDates={(value) => handleSelectChange(value, 'filterdates')}
+            handleChangeSuppliers={(value) => handleSelectChange(value, 'filtersuppliers')}
+            handleChangeItems={(value) => handleSelectChange(value, 'filteritems')}
             getdates={getdates}
             getsuppliers={getsuppliers}
             getitems={getitems}
             handleSubmit={handleSubmit}
-            invoiceval={emptyForm.invoiceval}
-            dateval={emptyForm.dateval}
-            suppliername={emptyForm.suppliername}
-            itemname={emptyForm.itemname}
+            invoiceval={selectedValues.filterinvoices}
+            dateval={selectedValues.filterdates}
+            suppliername={selectedValues.filtersuppliers}
+            itemname={selectedValues.filteritems}
             name='اسم العميل'
         />
-        <TableInwardbills invoicesList={newDataSets} />
+        <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[27rem]' />
     </div>
   )
 }

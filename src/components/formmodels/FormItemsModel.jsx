@@ -46,10 +46,13 @@ const FormItemsModel = ({handleSubmit ,title,options,handleChange,handleSelectCh
                     </div> 
                     <div>
                         <label className='mb-4 block'>الوحدة</label>
-                        <Select name="unit" value={unitVal} onChange={handleSelectChange}
+                        <Select 
+                            name="unit" 
+                            value={unitVal} 
+                            onChange={handleSelectChange}
                             options={options}
                             getOptionValue={(option) => option.value}
-                            placeholder='قطعة'
+                            placeholder='قطع'
                             className='w-full rounded-2xl shadow-md'
                             styles={{
                                 control: (baseStyles, state) => ({
