@@ -10,7 +10,7 @@ const AddClient = ({isAdded}) => {
 
     const {addClient , clients} = useStateValue()
     const [clientInfo , setClientInfo] = useState(
-        {code: parseInt(clients.length) + 1,name: '',phone: '' ,address: ''}
+        {code: parseInt(clients[clients.length - 1].code) + 1,name: '',phone: '' ,address: ''}
      )
 
  const [show ,setShow] = useState(false)
@@ -32,7 +32,7 @@ const AddClient = ({isAdded}) => {
       setClientInfo(prevData => {
           return {
               ...prevData,
-              code: parseInt(clients.length) + 1,
+              code: parseInt(clients[clients.length - 1].code) + 1,
               [event.target.name] : event.target.value
           }
       })

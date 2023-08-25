@@ -9,7 +9,7 @@ const AddSupplier = ({isAdded}) => {
  
   const {addSupplier ,suppliers} = useStateValue()
   const [supplierInfo , setSupplierInfo] = useState(
-        {code: parseInt(suppliers.length) + 1,name: '',phone: ''}
+        {code: parseInt(suppliers[suppliers.length - 1].code) + 1,name: '',phone: ''}
   )
 
  const [show ,setShow] = useState(false)
@@ -32,7 +32,7 @@ const AddSupplier = ({isAdded}) => {
       setSupplierInfo(prevData => {
           return {
               ...prevData,
-              code: parseInt(suppliers.length) + 1,
+              code: parseInt(suppliers[suppliers.length - 1].code) + 1,
               [event.target.name] : event.target.value
           }
       })
