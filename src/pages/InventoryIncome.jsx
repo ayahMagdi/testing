@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useStateValue } from '../context/stateProvider';
 import TableInwardbills from '../components/tablemodels/TableInwardbills';
 import FormInventory from '../components/formmodels/FormInventory';
@@ -18,13 +18,49 @@ const InventoryIncome = () => {
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [filter , setFilter] = useState(false)
+    const [filtrationArry , setFiltrationArry] = useState()
+
+    let getItemsTotal = []
+
+    function getDates(startDate, endDate) {
+      const dateArray = [];
+      let currentDate = moment(startDate, 'M/DD/YYYY').startOf('day');
+      const formattedEndDate = moment(endDate, 'M/DD/YYYY').startOf('day');
+    
+      while (currentDate <= formattedEndDate) {
+        dateArray.push(moment(currentDate).format('M/DD/YYYY'));
+        currentDate = moment(currentDate).add(1, 'days');
+      }
+    
+      return dateArray;
+    }
+  
+    const datesBetween = getDates(startDate?.value, endDate?.value);
+
+    const getTotal = inwardBills?.filter(inward => {
+      const filtered = datesBetween?.filter(date => inward.date === date);
+      if (filtered && filtered.length > 0) {
+        return true;
+      }
+      return false;
+    });
+    
+    getItemsTotal = getTotal || [];
 
     const newDataSets = [];
-    inwardBills?.forEach((data) => {
+    if(!filter){
+      inwardBills?.forEach((data) => {
         newDataSets.push({...data, invoice: {title: data.invoice, rowSpan: 0}})
-    })
+      })
+    }else{
+      console.log(getItemsTotal)
+      getItemsTotal?.forEach((data) => {
+        newDataSets.push({...data, invoice: {title: data.invoice, rowSpan: 0}})
+      })
+    }
   
-    const countCategories = inwardBills?.reduce( (acc, o) => (acc[o.invoice] = (acc[o.invoice] || 0)+1, acc), {} )
+    const countCategories = !filter ? inwardBills?.reduce( (acc, o) => (acc[o.invoice] = (acc[o.invoice] || 0)+1, acc), {} ) : getItemsTotal?.reduce( (acc, o) => (acc[o.invoice] = (acc[o.invoice] || 0)+1, acc), {} )
    
     const distinctCategories = [];
   
@@ -33,24 +69,7 @@ const InventoryIncome = () => {
       (newDataSets[newDataSets.findIndex(x => x.invoice.title === data)]).invoice.rowSpan = countCategories[data]
   })
 
-  function getDates(startDate, endDate) {
-    const dateArray = [];
-    let currentDate = moment(startDate, 'M/DD/YYYY').startOf('day');
-    const formattedEndDate = moment(endDate, 'M/DD/YYYY').startOf('day');
-  
-    while (currentDate <= formattedEndDate) {
-      dateArray.push(moment(currentDate).format('M/DD/YYYY'));
-      currentDate = moment(currentDate).add(1, 'days');
-    }
-  
-    return dateArray;
-  }
-
-  const datesBetween = getDates(startDate?.value, endDate?.value);
-
-  const getItemsTotal = []
-
-  const getTotal = inwardBills?.filter((inward => datesBetween?.map(date => inward.date == date && getItemsTotal.push(inward))))
+  // const getTotal = inwardBills?.filter((inward => datesBetween?.map(date => inward.date == date && getItemsTotal.push(inward))))
   
   const uniqueDataInvoice = useMemo(() => {
     const unique = [];
@@ -71,9 +90,16 @@ const InventoryIncome = () => {
 
   return unique;
   }, [getItemsTotal]);
+
+  useEffect(() => {
+
+    const handleFilter = startDate !== null && endDate !== null && getItemsTotal?.length > 0 ?
+                setFilter(true) : setFilter(false)
+
+  } , [startDate , endDate , getItemsTotal])
+
   
   const inventory =  uniqueDataInvoice.map((e) => parseInt(e.totalwd)).reduce((a, b)=> a+b, 0);
-
 
   return (
     <div className='container mx-auto px-4 my-5'>

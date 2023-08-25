@@ -124,6 +124,7 @@ const handlecancel = () => {
             suppliername={selectedValues.filtersuppliers}
             itemname={selectedValues.filteritems}
             name='اسم العميل'
+            nameplaceholder='اختر اسم العميل'
         />
         <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[27rem]' />
     </div>

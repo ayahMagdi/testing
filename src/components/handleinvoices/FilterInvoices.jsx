@@ -1,7 +1,7 @@
 import ModelBtns from "../ModelBtns"
 import FormFilter from "../formmodels/FormFilter"
 
-const FilterInvoices = ({title,handlecancel,invoiceval,dateval,name,suppliername,itemname,getinvoices,handleChangeInvoices,handleChangeDates,handleChangeSuppliers,handleChangeItems,getdates,getsuppliers,getitems,handleSubmit}) => {
+const FilterInvoices = ({title,handlecancel,invoiceval,dateval,name,nameplaceholder,suppliername,itemname,getinvoices,handleChangeInvoices,handleChangeDates,handleChangeSuppliers,handleChangeItems,getdates,getsuppliers,getitems,handleSubmit}) => {
 
 //     const {inwardBills} = useStateValue()
 
@@ -83,6 +83,7 @@ const FilterInvoices = ({title,handlecancel,invoiceval,dateval,name,suppliername
                suppliername={suppliername}
                itemname={itemname}
                name={name} 
+               nameplaceholder={nameplaceholder}
             />
             <ModelBtns title='بحث' form='my-form' cancelTitle='الغاء' handlecancel={handlecancel} btnStyle={'w-40 py-2'} margin={'mt-5'} />
         </div>

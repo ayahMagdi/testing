@@ -123,6 +123,7 @@ Object.keys(countCategories).forEach((data) => {
           suppliername={selectedValues.filtersuppliers}
           itemname={selectedValues.filteritems}
           name='اسم المورد'
+          nameplaceholder='اختر اسم المورد'
         />
         <TableInwardbills invoicesList={newDataSets} code='كود المورد' name='اسم المورد' height='max-h-[27rem]' />
     </div>

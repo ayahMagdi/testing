@@ -1,7 +1,7 @@
 import Select from 'react-select'
 
 const FormFilter = (
-    {title,invoicesoptions,dateoptions,handleChangeInvoices,name,handleChangeDates,handleChangeSuppliers,handleChangeItems,supplieroptions,itemoptions,handleSubmit, itemname,suppliername,invoiceval,dateval}
+    {title,invoicesoptions,dateoptions,handleChangeInvoices,name,nameplaceholder,handleChangeDates,handleChangeSuppliers,handleChangeItems,supplieroptions,itemoptions,handleSubmit, itemname,suppliername,invoiceval,dateval}
 ) => {
 
   return (
@@ -18,7 +18,7 @@ const FormFilter = (
                       name='invoice'
                       value={invoiceval}
                       onChange={handleChangeInvoices}
-                      placeholder=''
+                      placeholder='اختر رقم الفاتورة'
                       styles={{
                           control: (baseStyles, state) => ({
                             ...baseStyles,
@@ -38,7 +38,7 @@ const FormFilter = (
                       name='date'
                       value={dateval}
                       onChange={handleChangeDates}
-                      placeholder=''
+                      placeholder='اختر التاريخ'
                       styles={{
                           control: (baseStyles, state) => ({
                             ...baseStyles,
@@ -58,7 +58,7 @@ const FormFilter = (
                       name='suppliername'
                       value={suppliername}
                       onChange={handleChangeSuppliers}
-                      placeholder=''
+                      placeholder={nameplaceholder}
                       styles={{
                           control: (baseStyles, state) => ({
                             ...baseStyles,
@@ -78,7 +78,7 @@ const FormFilter = (
                       name='itemname'
                       value={itemname}
                       onChange={handleChangeItems}
-                      placeholder=''
+                      placeholder='اختر اسم المنتج'
                       styles={{
                           control: (baseStyles, state) => ({
                             ...baseStyles,

@@ -14,7 +14,7 @@ const FormInventory = ({title,handleSubmit ,dateoptions ,startDateval,endDateval
                         name='startDate'
                         value={startDateval}
                         onChange={handleChangeStartDate}
-                        placeholder=''
+                        placeholder='اختر تاريخ البداية'
                         styles={{
                             control: (baseStyles, state) => ({
                             ...baseStyles,
@@ -33,7 +33,7 @@ const FormInventory = ({title,handleSubmit ,dateoptions ,startDateval,endDateval
                         name='endDate'
                         value={endDateval}
                         onChange={handleChangeEndDate}
-                        placeholder=''
+                        placeholder='اختر تاريخ النهاية'
                         styles={{
                             control: (baseStyles, state) => ({
                             ...baseStyles,
