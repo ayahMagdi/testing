@@ -7,7 +7,7 @@ import FormItemsModel from '../formmodels/FormItemsModel';
 
 const EditProduct = ({record , isEdited}) => {
 
-    const {editItem} = useStateValue()
+    const {editItem , items} = useStateValue()
     const options = [
         {value: 'قطع' , label: 'قطع'},
         {value: 'علبة' , label: 'علبه'},
@@ -15,6 +15,7 @@ const EditProduct = ({record , isEdited}) => {
      ]
     const [show ,setShow] = useState(false)
     const [invalidPrice ,setInvalidPrice] = useState(false)
+    const [nameExist ,setNameExist] = useState(false)
 
     const getUnit = options.filter(e => e.value === record.unit)
 
@@ -22,12 +23,10 @@ const EditProduct = ({record , isEdited}) => {
         {
             code: record.code,
             name: record.name,
-            unit: getUnit[0],
+            unit: getUnit[0].label,
             income: record.income,
             outcome: record.outcome
         })
-        console.log(getUnit[0])
-        console.log(newArr.unit)
     
     const navigate = useNavigate();
 
@@ -35,45 +34,44 @@ const EditProduct = ({record , isEdited}) => {
 
     const editedItems = newArr
 
-    function handleChange(event){
+    function handleChange(event) {
         if (event.target.name === 'income' || event.target.name === 'outcome') {
-          if(!isNaN(event.target.value)){
-                setNewArr(prevData => {
-                    return {
-                        ...prevData,
-                        [event.target.name] : event.target.value
-                    }
-                })
+          if (!isNaN(event.target.value)) {
+            setNewArr(prevData => ({
+              ...prevData,
+              [event.target.name]: event.target.value
+            }));
           }
-       }else{
-        setNewArr(prevData => {
-            return {
-                ...prevData,
-                [event.target.name] : event.target.value
-            }
-        })
-       }
-    }
-
-    function handleSelectChange(selectedOption){
-        setNewArr(prevData => {
-            return {
-                ...prevData,
-                unit: selectedOption.value
-            }
-        }) 
-    }
-
+        } else {
+          setNewArr(prevData => ({
+            ...prevData,
+            [event.target.name]: event.target.value
+          }));
+        }
+      }
+      
+      // function handleSelectChange(selectedOption) {
+      //   setNewArr(prevData => ({
+      //     ...prevData,
+      //     unit: selectedOption.value
+      //   }));
+      // }
+    
     useEffect(() => {
 
         const checkPrice = newArr.outcome && parseInt(newArr.income) > parseInt(newArr.outcome) ? 
                  setInvalidPrice(true) : setInvalidPrice(false)
+
+        const findSameName = items.find(e => e.name === newArr.name && e.code !== newArr.code)
+        
+        const checkName = newArr.name && findSameName ? 
+               setNameExist(true) : setNameExist(false)
  
-     } , [newArr.income , newArr.outcome])
+     } , [newArr , items])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(invalidPrice === false){
+        if(!invalidPrice && !nameExist){
             setInvalidPrice(false)
             editItem(record.code , editedItems)
             isEdited(true)
@@ -95,12 +93,15 @@ const EditProduct = ({record , isEdited}) => {
                 codeVal={newArr.code}
                 barcodeVal={newArr.barcode}
                 nameVal={newArr.name}
-                unitVal={newArr.unit.label}
+                defaultVal={getUnit[0]?.label}
+                unitVal={newArr.unit[0]?.value}
                 incomeVal={newArr.income}
                 outcomeVal={newArr.outcome}
                 invalidPrice={invalidPrice}
+                nameExist={nameExist}
                 options={options}
-                handleSelectChange={handleSelectChange}
+                isDisabled={true}
+                // handleSelectChange={handleSelectChange}
         />
         <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تعديل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
         {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={cancelEdit} cancel={() => setShow(false)} />}

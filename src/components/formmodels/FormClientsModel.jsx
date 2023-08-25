@@ -1,4 +1,4 @@
-const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal ,nameVal ,phoneVal ,addressVal}) => {
+const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal,nameExist ,nameVal ,phoneVal ,addressVal}) => {
   return (
     <div>
         <div className='mt-8'>
@@ -21,16 +21,19 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal
                     <label className='mb-4 block'>اسم المورد</label>
                     <input
                         type='text'
-                        className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
+                        className={`w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200 ${nameExist && 'border-red-500'}`}
                         name='name'
                         required
-                        autoComplete='off'
+                        autoComplete='new-password'
+                        minLength='3'
+                        maxLength='20'
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                         onInput={F => F.target.setCustomValidity('')}
                         onChange={handleChange}
                         placeholder='مثال (اسم المنتج)'
                         value={nameVal}
                     />
+                    {nameExist && <p className='text-red-500 mt-3'>هذا العميل موجود بالفعل</p>}
                 </div> 
                 <div>
                     <label className='mb-4 block'>رقم الهاتف</label>
@@ -38,9 +41,10 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal
                         type='tel'
                         minLength="11" 
                         maxLength="11"
-                        className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
+                        pattern="^01\d{9}$"
+                        className={`w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200 ${checkPhone && 'border-red-500'}`}
                         name='phone'
-                        autoComplete='off'
+                        autoComplete='new-password'
                         placeholder='01123456789'
                         onChange={handleChange}
                         value={phoneVal}
@@ -56,7 +60,7 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal
                         minLength='3'
                         maxLength='30'
                         required
-                        autoComplete='off'
+                        autoComplete='new-password'
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                         onInput={F => F.target.setCustomValidity('')}
                         placeholder='مصر محافظة الشرقية'

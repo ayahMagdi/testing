@@ -4,7 +4,7 @@ const TableInwardbills = ({invoicesList,code,name,height}) => {
   return (
     <div className={`my-6 mx-auto w-full border shadow h-auto overflow-y-auto ${height}`}>
         <table className="table-auto w-full text-center" style={{borderCollapse: 'collapse'}}>
-            <thead className="sticky top-0 bg-tablerow border-b">
+            <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>
                     <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>رقم الفاتورة</th>
                     <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>التاريخ</th>

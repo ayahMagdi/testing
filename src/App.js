@@ -1,7 +1,7 @@
 import Login from "./pages/Login";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddPage from "./pages/AddPage";
 import AllproductsPage from "./pages/AllproductsPage";
 import EditPage from "./pages/EditPage";
@@ -21,6 +21,9 @@ import ClientBills from "./pages/ClientBills";
 import InventoryIncome from "./pages/InventoryIncome";
 import InventoryOutcome from "./pages/InventoryOutcome";
 import SupplierBalance from "./pages/SupplierBalance";
+import ClientBalance from "./pages/ClientBalance";
+import SupplierReduction from "./pages/SupplierReduction";
+import ClientReduction from "./pages/ClientReduction";
 
 function App() {
 
@@ -35,6 +38,8 @@ function App() {
   const [editSupplierMsg , setEditSupplierMsg] = useState(false)
   const [addClientMsg , setAddClientMsg] = useState(false)
   const [editClientMsg , setEditClientMsg] = useState(false)
+  const [recordReduction , setRecordReduction] = useState('')
+  const [recordReductionClient , setRecordReductionClient] = useState('')
 
   let getUser = (name) => {
      setUser(name)
@@ -71,6 +76,24 @@ function App() {
     setEditClientMsg(edited)
   }
 
+  const getRecordReduction = (recordReduction) => {
+    setRecordReduction(recordReduction)
+  }
+  const getRecordReductionClient = (recordReductionClient) => {
+    setRecordReductionClient(recordReductionClient)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      addSupplierMsg && setAddSupplierMsg(false)
+      editSupplierMsg && setEditSupplierMsg(false)
+      addClientMsg && setAddClientMsg(false)
+      editClientMsg && setEditClientMsg(false)
+      addItemMsg && setAddItemMsg(false)
+      editItemMsg && setEditItemMsg(false)
+    } , 3000)
+  })
+
   return (
     <div className="App">
       <Routes>
@@ -94,7 +117,10 @@ function App() {
          <Route path="/clientbills" element={<ClientBills user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
          <Route path="/inventoryincome" element={<InventoryIncome />} />
          <Route path="/inventoryoutcome" element={<InventoryOutcome />} />
-         <Route path="/supplierbalance" element={<SupplierBalance user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
+         <Route path="/supplierbalance" element={<SupplierBalance user={localStorage.getItem("username")} searchItem={searchItem} search={search} getRecordReduction={getRecordReduction} />} />
+         <Route path="/clientbalance" element={<ClientBalance user={localStorage.getItem("username")} searchItem={searchItem} search={search} getRecordReduction={getRecordReductionClient} />} />
+         <Route path="/supplierreduction" element={<SupplierReduction recordReduction={recordReduction} />} />
+         <Route path="/clientreduction" element={<ClientReduction recordReduction={recordReductionClient} />} />
       </Routes>
     </div>
   );

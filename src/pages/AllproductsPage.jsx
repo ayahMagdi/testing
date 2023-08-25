@@ -9,8 +9,8 @@ const AllproductsPage = ({user , editedProduct , getRecord , searchItem , search
 
   const {items} = useStateValue()
   const [deletedMsg , setDeletedMsg] = useState(false)
-  const [addedMsg , setAddedMsg] = useState(addMsg)
-  const [editedMsg , setEditedMsg] = useState(editMsg)
+  // const [addedMsg , setAddedMsg] = useState(addMsg)
+  // const [editedMsg , setEditedMsg] = useState(editMsg)
 
   const handleSearch = items.filter(item => 
      item.code.includes(search)
@@ -19,23 +19,23 @@ const AllproductsPage = ({user , editedProduct , getRecord , searchItem , search
   const isDeleted = (deletedMsg) => {
     setDeletedMsg(deletedMsg)
   }
-  const isEdited = (editedMsg) => {
-    setEditedMsg(editedMsg)
-  }
+  // const isEdited = (editedMsg) => {
+  //   setEditedMsg(editedMsg)
+  // }
 
   useEffect(() => {
     setTimeout(() => {
-      addedMsg && setAddedMsg(false)
+      // addedMsg && setAddedMsg(false)
       deletedMsg && setDeletedMsg(false)
-      editedMsg && setEditedMsg(false)
+      // editedMsg && setEditedMsg(false)
     } , 3000)
   })
 
   return (
     <div className="container mx-auto px-4">
-        {addedMsg ? <SuccessMsg title='تمت اضافة المنتج' /> 
+        {addMsg ? <SuccessMsg title='تمت اضافة المنتج' /> 
           : deletedMsg ? <SuccessMsg title='تم حذف المنتج' /> 
-          : editedMsg ? <SuccessMsg title='تم تعديل المنتج' /> 
+          : editMsg ? <SuccessMsg title='تم تعديل المنتج' /> 
           : ''
         }
         <Navbar user={user} handleSearch={() => handleSearch} searchItem={searchItem} />

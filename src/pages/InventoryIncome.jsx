@@ -35,11 +35,11 @@ const InventoryIncome = () => {
 
   function getDates(startDate, endDate) {
     const dateArray = [];
-    let currentDate = moment(startDate, 'DD/MM/YYYY').startOf('day');
-    const formattedEndDate = moment(endDate, 'DD/MM/YYYY').startOf('day');
+    let currentDate = moment(startDate, 'M/DD/YYYY').startOf('day');
+    const formattedEndDate = moment(endDate, 'M/DD/YYYY').startOf('day');
   
     while (currentDate <= formattedEndDate) {
-      dateArray.push(moment(currentDate).format('DD/MM/YYYY'));
+      dateArray.push(moment(currentDate).format('M/DD/YYYY'));
       currentDate = moment(currentDate).add(1, 'days');
     }
   
@@ -72,7 +72,7 @@ const InventoryIncome = () => {
   return unique;
   }, [getItemsTotal]);
   
-  const inventory =  uniqueDataInvoice.map((e) => e.totalwd).reduce((a, b)=> a+b, 0);
+  const inventory =  uniqueDataInvoice.map((e) => parseInt(e.totalwd)).reduce((a, b)=> a+b, 0);
 
 
   return (

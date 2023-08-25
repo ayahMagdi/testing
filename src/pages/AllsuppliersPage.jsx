@@ -13,29 +13,22 @@ const AllsuppliersPage = ({user, editedSuppliers , getSupplier , searchItem , se
      item.name.includes(search)
   )
   const [deletedMsg , setDeletedMsg] = useState(false)
-  const [addedMsg , setAddedMsg] = useState(addMsg)
-  const [editedMsg , setEditedMsg] = useState(editMsg)
 
   const isDeleted = (deletedMsg) => {
     setDeletedMsg(deletedMsg)
   }
-  const isEdited = (editedMsg) => {
-    setEditedMsg(editedMsg)
-  }
 
   useEffect(() => {
     setTimeout(() => {
-      addedMsg && setAddedMsg(false)
       deletedMsg && setDeletedMsg(false)
-      editedMsg && setEditedMsg(false)
-    } , 3000)
+    } , 2000)
   })
 
   return (
     <div className="container mx-auto px-4">
-       {addedMsg ? <SuccessMsg title='تمت اضافة المورد' /> 
+       {addMsg ? <SuccessMsg title='تمت اضافة المورد' /> 
           : deletedMsg ? <SuccessMsg title='تم حذف المورد' /> 
-          : editedMsg ? <SuccessMsg title='تم تعديل المورد' /> 
+          : editMsg ? <SuccessMsg title='تم تعديل المورد' /> 
           : ''
         }
         <Navbar user={user} handleSearch={() => handleSearch} searchItem={searchItem} />

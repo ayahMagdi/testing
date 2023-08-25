@@ -14,6 +14,7 @@ const AddClient = ({isAdded}) => {
      )
 
  const [show ,setShow] = useState(false)
+ const [nameExist ,setNameExist] = useState(false)
  const [checkPhone ,setCheckPhone] = useState(false)
  const navigate = useNavigate();
 
@@ -43,13 +44,16 @@ const AddClient = ({isAdded}) => {
     const checkPrice = clientInfo.phone && !clientInfo.phone.startsWith('01') ? 
           setCheckPhone(true) : setCheckPhone(false)
 
- } , [clientInfo.phone])
+    const checkName = clientInfo.name && clients.find(e => e.name === clientInfo.name) ? 
+          setNameExist(true) : setNameExist(false)
+
+ } , [clientInfo , clients])
 
  const {code , name , phone , address} = clientInfo
 
  const handleSubmit = (e) => {
     e.preventDefault()
-    if(checkPhone === false){
+    if(!checkPhone && !nameExist){
         addClient(code , name , phone ,address)
         isAdded(true)
         navigate('/allclients')
@@ -73,6 +77,7 @@ const AddClient = ({isAdded}) => {
           phoneVal={clientInfo.phone}
           addressVal={clientInfo.address}
           checkPhone={checkPhone}
+          nameExist={nameExist}
         />
        <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
        {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}

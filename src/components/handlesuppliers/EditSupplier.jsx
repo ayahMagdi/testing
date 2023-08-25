@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useStateValue } from '../../context/stateProvider';
 import { useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
@@ -7,8 +7,9 @@ import FormSuppliersModel from '../formmodels/FormSuppliersModel'
 
 const EditSupplier = ({supplier,isEdited}) => {
 
-    const {editSupplier} = useStateValue()
-    const [success ,setSuccess] = useState(false)
+    const {editSupplier,suppliers} = useStateValue()
+    const [nameExist ,setNameExist] = useState(false)
+    const [checkPhone ,setCheckPhone] = useState(false)
     const [show ,setShow] = useState(false)
     const [newArr ,setNewArr] = useState(
         {
@@ -23,25 +24,49 @@ const EditSupplier = ({supplier,isEdited}) => {
     const editedSuppliers = newArr
 
     function handleChange(event){
-        setNewArr(prevData => {
-            return {
-                ...prevData, 
-                [event.target.name] : event.target.value
+        if (event.target.name === 'phone') {
+            if(!isNaN(event.target.value)){
+                  setNewArr(prevData => {
+                      return {
+                          ...prevData,
+                          [event.target.name] : event.target.value
+                      }
+                  })
             }
-        })
-    }
+         }else{
+          setNewArr(prevData => {
+              return {
+                  ...prevData,
+                  [event.target.name] : event.target.value
+              }
+          })
+         }
+     }
+
+    useEffect(() => {
+
+        const checkPrice = newArr.phone && !newArr.phone.startsWith('01') ? 
+              setCheckPhone(true) : setCheckPhone(false)
+    
+        const findSameName = suppliers.find(e => e.name === newArr.name && e.code !== newArr.code)
+        
+        const checkName = newArr.name && findSameName ? 
+                     setNameExist(true) : setNameExist(false)
+    
+     } , [newArr , suppliers])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setSuccess(true)
-        editSupplier(supplier.code , editedSuppliers)
-        isEdited(true)
-        navigate('/allSuppliers')
+        if(!checkPhone && !nameExist){
+            editSupplier(supplier.code , editedSuppliers)
+            isEdited(true)
+            navigate('/allsuppliers')
+        }
     }
 
     const cancelEdit = () => {
         isEdited(false)
-        navigate('/allSuppliers')
+        navigate('/allsuppliers')
     }
 
   return (
@@ -53,6 +78,8 @@ const EditSupplier = ({supplier,isEdited}) => {
             codeVal={newArr.code}
             nameVal={newArr.name}
             phoneVal={newArr.phone}
+            nameExist={nameExist}
+            checkPhone={checkPhone}
     />
     <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تعديل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
     {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={cancelEdit} cancel={() => setShow(false)} />}

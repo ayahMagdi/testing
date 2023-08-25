@@ -1,7 +1,7 @@
-import React from 'react'
 
-const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal ,phoneVal ,checkPhone}) => {
-  return (
+const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal ,phoneVal,nameExist ,checkPhone}) => {
+     
+    return (
     <div>
          <div className='mt-8'>
             <h2 className='text-center text-3xl font-bold text-main'>{title}</h2>
@@ -23,18 +23,19 @@ const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal
                         <label className='mb-4 block'>اسم المورد</label>
                         <input
                             type='text'
-                            className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
+                            className={`w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200 ${nameExist && 'border-red-500'}`}
                             name='name'
                             minLength='3'
                             maxLength='20'
                             required
-                            autoComplete='off'
+                            autoComplete='new-password'
                             onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                             onInput={F => F.target.setCustomValidity('')}
                             onChange={handleChange}
                             placeholder='مثال (اسم المنتج)'
                             value={nameVal}
                         />
+                        {nameExist && <p className='text-red-500 mt-3'>هذا المورد موجود بالفعل</p>}
                     </div> 
                     <div>
                         <label className='mb-4 block'>رقم الهاتف</label>
@@ -42,9 +43,10 @@ const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal
                             type='tel'
                             minLength="11" 
                             maxLength="11"
-                            className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
+                            pattern="^01\d{9}$"
+                            className={`w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200 ${nameExist && 'border-red-500'}`}
                             name='phone'
-                            autoComplete='off'
+                            autoComplete='new-password'
                             placeholder='01123456789'
                             onChange={handleChange}
                             value={phoneVal}

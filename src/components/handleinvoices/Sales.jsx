@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Sales = () => {
 
-    const {sales , addSales , deleteSales , clients , stores ,setSales,outwardBills,addOutwardBills , items, deleteFromStore ,editSales ,purchases} = useStateValue()
+    const {sales , addSales , deleteSales , clients , stores,clientBalance,addClientBalance,editClientBalance,setSales,outwardBills,addOutwardBills , items, deleteFromStore ,editSales ,purchases} = useStateValue()
 
     const currentDate = new Date().toLocaleDateString();
   
@@ -243,6 +243,16 @@ const Sales = () => {
        const handleOutward = sales.map((pur) => {
         addOutwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount,totalwd,reduction,remaining)
       })   
+
+      const handleSuppliers = sales.map((sale) => {
+        let clientcode = clientBalance.find(supplier => sale.supplierCode === supplier.code)
+        if(!clientcode) {
+          addClientBalance(sale.supplierCode,sale.supplierName,totalwd,reduction,remaining)
+        } 
+        if(clientcode){
+          editClientBalance(sale.supplierCode,calcPurchas, false)
+        }
+      })
   
       emptyAllForms()
   

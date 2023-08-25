@@ -1,5 +1,5 @@
 import { createContext , useContext, useState } from "react";
-import { faBalanceScaleLeft, faBusinessTime, faClipboardCheck, faClipboardList, faEdit, faFileInvoice, faFileInvoiceDollar, faMoneyBill1Wave, faMoneyBillTrendUp, faMoneyBillWave, faMoneyBillWaveAlt, faMoneyBillWheat, faMoneyCheckAlt, faMoneyCheckDollar, faPeopleGroup, faSackDollar, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faBalanceScaleLeft, faBusinessTime, faCalculator, faClipboardCheck, faClipboardList, faEdit, faFileInvoice, faFileInvoiceDollar, faMoneyBill1Wave, faMoneyBillTrendUp, faMoneyBillWave, faMoneyBillWaveAlt, faMoneyBillWheat, faMoneyCheckAlt, faMoneyCheckDollar, faPeopleGroup, faSackDollar, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 export const StateContext = createContext(null)
 
@@ -51,9 +51,9 @@ export const StateProvider = (props) => {
         {title: 'جرد الداخل' , icon: faMoneyBill1Wave , url: '/inventoryincome'},
         {title: 'جرد الخارج' , icon: faMoneyBillWave , url: '/inventoryoutcome'},
         {title: 'رصيد الموردين' , icon: faMoneyCheckDollar , url: '/supplierbalance'},
+        {title: 'رصيد العملاء' , icon: faCalculator , url: '/clientbalance'},
         {title: 'الحسابات' , icon: faMoneyCheckAlt},
         {title: 'الواردات' , icon: faBusinessTime},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
         {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
     ])
@@ -94,20 +94,20 @@ export const StateProvider = (props) => {
         {code: "14" , name: "سيروم" , unit: "قطع" ,income:"200" ,outcome: "500" ,avlqty:"250",soldqty: "20",store: "", total: ""},
     ])
     const [inwardBills , setInwardBills] = useState([
-        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 12 , itemName: 'بلسم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 15 , itemName: 'حمام كريم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '2' , date: '25/04/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 5 , itemName: 'زيت', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '2' , date: '25/04/2020' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '26/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 10 , itemName: 'مرطب', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '26/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 7 , itemName: 'صن بلوك', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '3' , date: '26/04/2020' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 11 , itemName: 'فاونديشن', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '28/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 15 , itemName: 'صبغة', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '28/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 17 , itemName: 'شادو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '28/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '28/04/2020' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '5' , date: '30/04/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '5' , date: '30/04/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '4/20/2023' , supplierCode: 1 , supplierName: 'هند' ,itemCode: '1' , itemName: 'شامبو', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '4/20/2023' , supplierCode: 1 , supplierName: 'هند' ,itemCode: '12' , itemName: 'بلسم', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '1' , date: '4/20/2023' , supplierCode: 1 , supplierName: 'هند' ,itemCode: '15' , itemName: 'حمام كريم', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '4/20/2023' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: '5' , itemName: 'زيت', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '2' , date: '4/20/2023' , supplierCode: 5 , supplierName: 'بسمه' ,itemCode: '9' , itemName: 'سيروم', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '4/26/2023' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: '10' , itemName: 'مرطب', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '4/26/2023' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: '7' , itemName: 'صن بلوك', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '3' , date: '4/26/2023' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: '11' , itemName: 'فاونديشن', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '15' , itemName: 'صبغة', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '17' , itemName: 'شادو', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '20' , itemName: 'ماسكرا', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '9' , itemName: 'سيروم', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '4/30/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: '9' , itemName: 'سيروم', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '4/30/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: '21' , itemName: 'مخمرية', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
     ])
     const [outwardBills , setOutwardBills] = useState([
         {invoice: '1' , date: '20/04/2020' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
@@ -126,17 +126,31 @@ export const StateProvider = (props) => {
         {invoice: '5' , date: '23/04/2020' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
     ])
     const [supplierBalance , setSupplierBalance] = useState([
-        {code: '1' , name: 'هند' ,total: 2000,reduction: 100,remaining: 3000},
-        {code: '2' , name: 'اسراء' ,total: 2000,reduction: 100,remaining: 3000},
-        {code: '3' , name: 'نيرفانا' ,total: 2000,reduction: 100,remaining: 3000},
-        {code: '4' , name: 'فاطمه' ,total: 2000,reduction: 100,remaining: 3000},
-        {code: '5' , name: 'ساره' ,total: 2000,reduction: 100,remaining: 3000},
-        {code: '6' , name: 'شروق' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: "1" , name: "هند مجدي" ,total: 3000,reduction: 1000,remaining: 2000},
+        {code: "2" , name: "بسمة مجدي" ,total: 2000,reduction: 100,remaining: 3000},
+        {code: "3" , name: "هبة مجدي" ,total: 2000,reduction: 100,remaining: 3000},
+        {code: "4" , name: "رنا عبدالعزيز" , total: 2000,reduction: 100,remaining: 3000},
+        {code: "5" , name: "ميار خالد" ,total: 2000,reduction: 100,remaining: 3000},
+        {code: "6" , name: "ايه مجدي" ,total: 2000,reduction: 100,remaining: 3000},
         {code: '7' , name: 'رنا' ,total: 2000,reduction: 100,remaining: 3000},
         {code: '8' , name: 'شيرين' ,total: 2000,reduction: 100,remaining: 3000},
         {code: '9' , name: 'حسناء' ,total: 2000,reduction: 100,remaining: 3000},
         {code: '10' ,name: 'ايه' ,total: 2000,reduction: 100,remaining: 3000},
     ])
+    const [clientBalance , setClientBalance] = useState([
+        {code: "1" , name: "هند مجدي" ,total: 3000,reduction: 1000,remaining: 2000},
+        {code: "2" , name: "بسمة مجدي" ,total: 2000,reduction: 100,remaining: 3000},
+        {code: "3" , name: "هبة مجدي" ,total: 2000,reduction: 100,remaining: 3000},
+        {code: "4" , name: "رنا عبدالعزيز" , total: 2000,reduction: 100,remaining: 3000},
+        {code: "5" , name: "ميار خالد" ,total: 2000,reduction: 100,remaining: 3000},
+        {code: "6" , name: "ايه مجدي" ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '7' , name: 'رنا' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '8' , name: 'شيرين' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '9' , name: 'حسناء' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '10' ,name: 'ايه' ,total: 2000,reduction: 100,remaining: 3000},
+    ])
+    const [totalReduction , setTotalReduction] = useState([])
+    const [totalReductionClient , setTotalReductionClient] = useState([])
 
     const addItem = (code ,name, unit, income, outcome) => {
         setItems([{code,name,unit,income,outcome} , ...items])
@@ -201,17 +215,66 @@ export const StateProvider = (props) => {
     const addSupplierBalance = (code,name,total,reduction,remaining) => {
         setSupplierBalance((oldvalues) => [{code,name,total,reduction,remaining} , ...oldvalues])
     }
-    const editSupplierBalance = (arr) => {
-        setSupplierBalance((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? { ...e, total: parseInt(e.total) + parseInt(arr.totalwd) , reduction: parseInt(e.reduction) + parseInt(arr.reduction) } : e))
+    const editSupplierBalance = (arr , calcTotal , editReduction ,newArr) => {
+       if(!editReduction){
+         setSupplierBalance((oldvalues) => oldvalues.map(e => e.code === arr ?
+            {   
+              ...e, 
+              total: parseInt(e.total) + parseInt(calcTotal.totalwd),
+              reduction: parseInt(e.reduction) + parseInt(calcTotal.reduction), 
+              remaining: parseInt(e.remaining) + parseInt(calcTotal.remaining), 
+            } 
+            : e))
+       }
+       if(editReduction){
+         setSupplierBalance((oldvalues) => oldvalues.map(e => e.code === arr ?
+            {   
+              ...e, 
+              reduction: parseInt(e.reduction) + parseInt(newArr), 
+              remaining: parseInt(e.total) - (parseInt(e.reduction) + parseInt(newArr)), 
+            } 
+            : e))
+       }
     };
+    const addClientBalance = (code,name,total,reduction,remaining) => {
+        setClientBalance((oldvalues) => [{code,name,total,reduction,remaining} , ...oldvalues])
+    }
+    const editClientBalance = (arr , calcTotal , editReduction ,newArr) => {
+        if(!editReduction){
+          setClientBalance((oldvalues) => oldvalues.map(e => e.code === arr ?
+             {   
+               ...e, 
+               total: parseInt(e.total) + parseInt(calcTotal.totalwd),
+               reduction: parseInt(e.reduction) + parseInt(calcTotal.reduction), 
+               remaining: parseInt(e.remaining) + parseInt(calcTotal.remaining), 
+             } 
+             : e))
+        }
+        if(editReduction){
+          setClientBalance((oldvalues) => oldvalues.map(e => e.code === arr ?
+             {   
+               ...e, 
+               reduction: parseInt(e.reduction) + parseInt(newArr), 
+               remaining: parseInt(e.total) - (parseInt(e.reduction) + parseInt(newArr)), 
+             } 
+             : e))
+        }
+     };
 
     const deleteFromStore = (arr) => {
         setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? {...e , soldqty: parseInt(e.soldqty) + parseInt(arr.qty)} : e))
     }
 
+    const addTotalReduction = (code,name,date,reduction) => {
+        setTotalReduction((oldvalues) => [{code,name,date,reduction} , ...oldvalues])
+    }
+    const addTotalReductionClient = (code,name,date,reduction) => {
+        setTotalReductionClient((oldvalues) => [{code,name,date,reduction} , ...oldvalues])
+    }
+
     return (
         <StateContext.Provider value={
-            {items,addItem,deleteItem, editItem,supplierBalance,addSupplierBalance,editSupplierBalance , suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
+            {items,addItem,deleteItem,totalReduction,addTotalReduction,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
          }>
             {props.children}
         </StateContext.Provider>

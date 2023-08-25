@@ -14,7 +14,7 @@ module.exports = {
         succuss: "#28a745",
         tablerow: "#e9ecf5",
       },
-      backgroundColor: ['odd'],
+      backgroundColor: ['even'],
   },
   plugins: [],
 }

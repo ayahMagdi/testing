@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Purchases = () => {
 
-  const {purchases , addPurchases , deletePurchases , suppliers , stores ,items ,inwardBills ,setPurchases,addToStore,editStores , editPurchases ,addInwardBills} = useStateValue()
+  const {purchases , addPurchases , deletePurchases , suppliers ,supplierBalance,addSupplierBalance,editSupplierBalance, stores ,items ,inwardBills ,setPurchases,addToStore,editStores , editPurchases ,addInwardBills} = useStateValue()
 
   const currentDate = new Date().toLocaleDateString();
   const navigate = useNavigate();
@@ -138,7 +138,7 @@ const Purchases = () => {
   }
 
   const filteredSuppliers = purchasesInfo.supplierCode &&
-    suppliers.filter(e => e.code === purchasesInfo.supplierCode)
+    suppliers.filter(e => e.code.toString() === purchasesInfo.supplierCode.toString())
 
   const filteredStors = purchasesInfo.itemCode &&
     items.filter(e => e.code === purchasesInfo.itemCode)
@@ -245,6 +245,16 @@ const Purchases = () => {
    const handleInward = purchases.map((pur) => {
     addInwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount,totalwd,reduction,remaining)
   })     
+
+  const handleSuppliers = purchases.map((pur) => {
+    let suppliercode = supplierBalance.find(supplier => pur.supplierCode === supplier.code)
+    if(!suppliercode) {
+      addSupplierBalance(pur.supplierCode,pur.supplierName,totalwd,reduction,remaining)
+    } 
+    if(suppliercode){
+      editSupplierBalance(pur.supplierCode,calcPurchas , false)
+    }
+  })
 
     emptyAllForms()
 

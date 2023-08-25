@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStateValue } from '../../context/stateProvider';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import ConfirmDelete from '../ConfirmDelete';
 
 const TableSuppliersContent = ({getSupplier, filteredItems ,isSearched ,isDeleted}) => {
 
@@ -39,7 +40,7 @@ const TableSuppliersContent = ({getSupplier, filteredItems ,isSearched ,isDelete
   return (
     <div className={`my-10 mx-auto w-11/12 h-auto max-h-96 border shadow overflow-y-auto ${noItems ? 'hidden' : 'visible' }`}>
         <table className="table-auto w-full text-center" style={{borderCollapse: 'collapse'}}>
-            <thead className="sticky top-0 bg-white border-b">
+            <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>
                     <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>كود المورد</th>
                     <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>اسم المورد</th>
@@ -50,7 +51,7 @@ const TableSuppliersContent = ({getSupplier, filteredItems ,isSearched ,isDelete
             </thead>
             <tbody>
                 {isSearched ? filteredItems?.map(e => (
-                    <tr className='border-b border-slate-300 odd:bg-tablerow' key={e.code}>
+                    <tr className='border-b border-slate-300 even:bg-tablerow' key={e.code}>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.code}</td>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.name}</td>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.phone}</td>
@@ -63,7 +64,7 @@ const TableSuppliersContent = ({getSupplier, filteredItems ,isSearched ,isDelete
                     </tr>
                 )) :
                 suppliers?.map(e => (
-                    <tr className='border-b border-slate-300 odd:bg-tablerow' key={e.code}>
+                    <tr className='border-b border-slate-300 even:bg-tablerow' key={e.code}>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.code}</td>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.name}</td>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.phone}</td>
@@ -78,34 +79,12 @@ const TableSuppliersContent = ({getSupplier, filteredItems ,isSearched ,isDelete
                 }
             </tbody>
         </table>
-        {show && <div className='bg-popup fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center'>
-            <div className='bg-white p-6 rounded-lg'>
-                <h3 className='text-lg'>ادخل كود المورد ليتم حذفه</h3>
-                <div className='pt-6 items-center'>
-                    <input 
-                        type='text' 
-                        name='code' 
-                        placeholder='كود المورد' 
-                        className={`border border-main rounded-md p-3 focus:outline-none ${err && 'border-red-500'}`} 
-                        onChange={(e) => setInput(e.target.value)}
-                    />
-                    {err && <h4 className='text-red-500 text-sm mt-2 text-right'>الكود غلط</h4>}
-                    <div className='flex justify-center items-center mt-2 gap-4'>
-                        <button 
-                            className='bg-main rounded-md text-white py-3 px-6 w-2/4'
-                            onClick={code === input ? () => handleDelete(code) : () => setErr(true)}>
-                            تأكيد
-                        </button>
-                        <button 
-                            className='rounded-md text-red-500 border w-2/4 border-red-500 py-3 px-6'
-                            onClick={() => setShow(false)}
-                        >
-                            الغاء
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>}
+        {show && <ConfirmDelete  
+           err={err}
+           handleChange={(e) => setInput(e.target.value)}
+           checkDelete={parseInt(input) === parseInt(100100) ? () => handleDelete(code) : () => setErr(true)}
+           cancelDelete={() => setShow(false)}
+         />}
     </div>
   )
 }

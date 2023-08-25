@@ -8,7 +8,7 @@ import ModelBtns from '../ModelBtns';
 
 const AddProduct = ({isAdded}) => {
   
-    const {addItem} = useStateValue()
+    const {addItem ,items} = useStateValue()
 
     const options = [
         {value: 'قطع' , label: 'قطع'},
@@ -22,6 +22,8 @@ const AddProduct = ({isAdded}) => {
 
     const [show ,setShow] = useState(false)
     const [invalidPrice ,setInvalidPrice] = useState(false)
+    const [codeExist ,setCodeExist] = useState(false)
+    const [nameExist ,setNameExist] = useState(false)
     const navigate = useNavigate();
 
     function handleChange(event){
@@ -60,11 +62,17 @@ const AddProduct = ({isAdded}) => {
        const checkPrice = productInfo.outcome && parseInt(productInfo.income) > parseInt(productInfo.outcome) ? 
                 setInvalidPrice(true) : setInvalidPrice(false)
 
-    } , [productInfo.income , productInfo.outcome])
+       const checkCode = productInfo.code && items.find(e => e.code === productInfo.code) ?
+              setCodeExist(true) : setCodeExist(false)
+        
+       const checkName = productInfo.name && items.find(e => e.name === productInfo.name) ? 
+              setNameExist(true) : setNameExist(false)
+
+    } , [productInfo,items])
 
     const handleSubmit = (e) => {
        e.preventDefault()
-       if(invalidPrice === false){
+       if(!invalidPrice && !codeExist && !nameExist){
             setInvalidPrice(false)
             addItem(code , name , unit , income , outcome)
             isAdded(true)
@@ -88,7 +96,11 @@ const AddProduct = ({isAdded}) => {
           outcomeVal={productInfo.outcome}
           unitVal={productInfo.unit.label}
           invalidPrice={invalidPrice}
+          defaultVal={options[0]?.label}
           options={options}
+          codeExist={codeExist}
+          nameExist={nameExist}
+          isDisabled={false}
           handleSelectChange={handleSelectChange}
         />
         <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />

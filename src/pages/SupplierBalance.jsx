@@ -1,15 +1,16 @@
-import React from 'react'
 import Navbar from '../components/Navbar'
 import TableBalance from '../components/tablemodels/TableBalance'
 import { useStateValue } from '../context/stateProvider'
 
-const SupplierBalance = ({user ,search , searchItem}) => {
+const SupplierBalance = ({user ,search , searchItem ,getRecordReduction}) => {
 
     const {supplierBalance} = useStateValue()
 
     const handleSearch = supplierBalance?.filter(item =>
         item.code.includes(search) 
      )
+
+     const totalbalance = supplierBalance.map((e) => parseInt(e.remaining)).reduce((a, b)=> a+b, 0);
 
   return (
     <div className='container mx-auto px-4 max-h-screen'>
@@ -21,6 +22,9 @@ const SupplierBalance = ({user ,search , searchItem}) => {
         supplierList={supplierBalance} 
         isSearched={handleSearch.length && search.length} 
         filteredItems={handleSearch} 
+        totalbalance={totalbalance}
+        url='/supplierreduction'
+        getRecordReduction={getRecordReduction}
      />
     </div>
   )

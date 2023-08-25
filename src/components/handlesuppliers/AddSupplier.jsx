@@ -13,6 +13,7 @@ const AddSupplier = ({isAdded}) => {
   )
 
  const [show ,setShow] = useState(false)
+ const [nameExist ,setNameExist] = useState(false)
  const [checkPhone ,setCheckPhone] = useState(false)
  const navigate = useNavigate();
 
@@ -43,13 +44,16 @@ const AddSupplier = ({isAdded}) => {
     const checkPrice = supplierInfo.phone && !supplierInfo.phone.startsWith('01') ? 
           setCheckPhone(true) : setCheckPhone(false)
 
- } , [supplierInfo.phone])
+    const checkName = supplierInfo.name && suppliers.find(e => e.name === supplierInfo.name) ? 
+          setNameExist(true) : setNameExist(false)
+
+ } , [supplierInfo , suppliers])
 
  const {code , name , phone} = supplierInfo
 
  const handleSubmit = (e) => {
     e.preventDefault()
-    if(checkPhone === false){
+    if(!checkPhone && !nameExist){
         addSupplier(code , name , phone)
         isAdded(true)
         navigate('/allsuppliers')
@@ -71,6 +75,7 @@ const AddSupplier = ({isAdded}) => {
            nameVal={supplierInfo.name}
            phoneVal={supplierInfo.phone}
            checkPhone={checkPhone}
+           nameExist={nameExist}
        />
        <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
        {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}
