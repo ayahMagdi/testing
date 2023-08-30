@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar'
 import TableBalance from '../components/tablemodels/TableBalance'
 import { useStateValue } from '../context/stateProvider'
 
-const SupplierBalance = ({user ,search , searchItem ,getRecordReduction}) => {
+const SupplierBalance = ({search , searchItem ,getRecordReduction}) => {
 
     const {supplierBalance} = useStateValue()
 
@@ -14,7 +14,7 @@ const SupplierBalance = ({user ,search , searchItem ,getRecordReduction}) => {
 
   return (
     <div className='container mx-auto px-4 max-h-screen'>
-      <Navbar user={user} handleSearch={() => handleSearch} searchItem={searchItem} />
+      <Navbar handleSearch={() => handleSearch} searchItem={searchItem} />
       <TableBalance 
         title='رصيد الموردين'
         nameText='اسم المورد'

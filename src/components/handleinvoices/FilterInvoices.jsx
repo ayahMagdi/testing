@@ -85,7 +85,7 @@ const FilterInvoices = ({title,handlecancel,invoiceval,dateval,name,nameplacehol
                name={name} 
                nameplaceholder={nameplaceholder}
             />
-            <ModelBtns title='بحث' form='my-form' cancelTitle='الغاء' handlecancel={handlecancel} btnStyle={'w-40 py-2'} margin={'mt-5'} />
+            <ModelBtns title='بحث' form='my-form' cancelTitle='تفريغ الحقول' handlecancel={handlecancel} btnStyle={'w-40 py-2'} margin={'mt-5'} />
         </div>
     </div>
   )

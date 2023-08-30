@@ -60,13 +60,13 @@ const EditSupplier = ({supplier,isEdited}) => {
         if(!checkPhone && !nameExist){
             editSupplier(supplier.code , editedSuppliers)
             isEdited(true)
-            navigate('/allsuppliers')
+            navigate(-1)
         }
     }
 
     const cancelEdit = () => {
         isEdited(false)
-        navigate('/allsuppliers')
+        navigate(-1)
     }
 
   return (

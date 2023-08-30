@@ -5,7 +5,7 @@ import TableSuppliersContent from '../components/tablemodels/TableSuppliersConte
 import { useStateValue } from '../context/stateProvider'
 import SuccessMsg from '../components/SuccessMsg'
 
-const AllsuppliersPage = ({user, editedSuppliers , getSupplier , searchItem , search , addMsg ,editMsg}) => {
+const AllsuppliersPage = ({editedSuppliers , getSupplier , searchItem , search , addMsg ,editMsg}) => {
 
   const {suppliers} = useStateValue()
 
@@ -31,11 +31,10 @@ const AllsuppliersPage = ({user, editedSuppliers , getSupplier , searchItem , se
           : editMsg ? <SuccessMsg title='تم تعديل المورد' /> 
           : ''
         }
-        <Navbar user={user} handleSearch={() => handleSearch} searchItem={searchItem} />
+        <Navbar handleSearch={() => handleSearch} searchItem={searchItem} />
         <Buttons 
              title='اضافة مورد جديد' 
-             urlBack={'/homepage'} 
-             urlAdd={'/addSupplier'} />
+             urlAdd={'/homepage/suppliers/allsuppliers/addSupplier'} />
         <TableSuppliersContent isSearched={handleSearch.length && search.length} filteredItems={handleSearch} editedSuppliers={editedSuppliers} getSupplier={getSupplier} isDeleted={isDeleted} />
     </div>
   )

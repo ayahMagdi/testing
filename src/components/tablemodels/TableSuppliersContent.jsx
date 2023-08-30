@@ -28,7 +28,7 @@ const TableSuppliersContent = ({getSupplier, filteredItems ,isSearched ,isDelete
     }
     const handleEdit = (e) => {
         getSupplier(e)
-        navigate('/editSupplier')
+        navigate('/homepage/suppliers/allsuppliers/editSupplier')
     }
 
     useEffect(() => {

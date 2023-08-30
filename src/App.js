@@ -24,10 +24,12 @@ import SupplierBalance from "./pages/SupplierBalance";
 import ClientBalance from "./pages/ClientBalance";
 import SupplierReduction from "./pages/SupplierReduction";
 import ClientReduction from "./pages/ClientReduction";
+import Suppliers from "./pages/Suppliers";
+import Clients from "./pages/Clients";
+import Store from "./pages/Store";
 
 function App() {
 
-  const [user , setUser] = useState('')
   const [record , setRecord] = useState('')
   const [supplier , setSupplier] = useState('')
   const [client , setClient] = useState('')
@@ -40,10 +42,6 @@ function App() {
   const [editClientMsg , setEditClientMsg] = useState(false)
   const [recordReduction , setRecordReduction] = useState('')
   const [recordReductionClient , setRecordReductionClient] = useState('')
-
-  let getUser = (name) => {
-     setUser(name)
-  }
 
   const getRecord = (record) => {
     setRecord(record)
@@ -97,28 +95,31 @@ function App() {
   return (
     <div className="App">
       <Routes>
-         <Route exact path="/" element={<Login getUser={getUser} />} />
-         <Route path="/homepage" element={<Homepage user={localStorage.getItem("username")} searchItem={searchItem} search={search}  />} />
-         <Route path="/allproducts" element={<AllproductsPage user={localStorage.getItem("username")} getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
-         <Route path="/allsuppliers" element={<AllsuppliersPage user={localStorage.getItem("username")} getSupplier={getSupplier} searchItem={searchItem} search={search} addMsg={addSupplierMsg} editMsg={editSupplierMsg} />} />
-         <Route path="/allclients" element={<AllClientsPage user={localStorage.getItem("username")} getClient={getClient} searchItem={searchItem} search={search} addMsg={addClientMsg} editMsg={editClientMsg} />} />
-         <Route path="/addproduct" element={<AddPage user={localStorage.getItem("username")} isAdded={isAddedItem} />} />
-         <Route path="/addSupplier" element={<AddSupplierPage user={localStorage.getItem("username")} isAdded={isAddedSupplier} />} />
-         <Route path="/addClient" element={<AddClientPage user={localStorage.getItem("username")} isAdded={isAddedClient} />} />
-         <Route path="/editproduct" element={<EditPage user={localStorage.getItem("username")} record={record} isEdited={isEditedItem} />} />
-         <Route path="/editSupplier" element={<EditSupplierPage user={localStorage.getItem("username")} supplier={supplier} isEdited={isEditedSupplier} />} />
-         <Route path="/editClient" element={<EditClientPage user={localStorage.getItem("username")} client={client} isEdited={isEditedClient} />} />
-         <Route path="/purchases" element={<PurchasesPage user={localStorage.getItem("username")} searchItem={searchItem} />} />
-         <Route path="/sales" element={<SalesPage user={localStorage.getItem("username")} searchItem={searchItem} />} />
-         <Route path="/store" element={<StorePage user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
+         <Route exact path="/" element={<Login />} />
+         <Route path="/homepage" element={<Homepage searchItem={searchItem} search={search}  />} />
+         <Route path="/homepage/storepage/allproducts" element={<AllproductsPage getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
+         <Route path="/homepage/suppliers" element={<Suppliers getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
+         <Route path="/homepage/clients" element={<Clients getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
+         <Route path="/homepage/storepage" element={<Store getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
+         <Route path="/homepage/suppliers/allsuppliers" element={<AllsuppliersPage getSupplier={getSupplier} searchItem={searchItem} search={search} addMsg={addSupplierMsg} editMsg={editSupplierMsg} />} />
+         <Route path="/homepage/clients/allclients" element={<AllClientsPage getClient={getClient} searchItem={searchItem} search={search} addMsg={addClientMsg} editMsg={editClientMsg} />} />
+         <Route path="/homepage/storepage/allproducts/addproduct" element={<AddPage isAdded={isAddedItem} />} />
+         <Route path="/homepage/suppliers/allsuppliers/addSupplier" element={<AddSupplierPage isAdded={isAddedSupplier} />} />
+         <Route path="/homepage/clients/allclients/addClient" element={<AddClientPage isAdded={isAddedClient} />} />
+         <Route path="/homepage/storepage/allproducts/editproduct" element={<EditPage record={record} isEdited={isEditedItem} />} />
+         <Route path="/homepage/suppliers/allsuppliers/editSupplier" element={<EditSupplierPage supplier={supplier} isEdited={isEditedSupplier} />} />
+         <Route path="/homepage/clients/allclients/editClient" element={<EditClientPage client={client} isEdited={isEditedClient} />} />
+         <Route path="/purchases" element={<PurchasesPage searchItem={searchItem} />} />
+         <Route path="/sales" element={<SalesPage searchItem={searchItem} />} />
+         <Route path="/homepage/storepage/store" element={<StorePage searchItem={searchItem} search={search} />} />
          <Route path="/inwardbills" element={<InwardBills />} />
          <Route path="/outwardbills" element={<OutwardBills />} />
-         <Route path="/supplierbills" element={<SupplierBills user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
-         <Route path="/clientbills" element={<ClientBills user={localStorage.getItem("username")} searchItem={searchItem} search={search} />} />
+         <Route path="/supplierbills" element={<SupplierBills searchItem={searchItem} search={search} />} />
+         <Route path="/clientbills" element={<ClientBills searchItem={searchItem} search={search} />} />
          <Route path="/inventoryincome" element={<InventoryIncome />} />
          <Route path="/inventoryoutcome" element={<InventoryOutcome />} />
-         <Route path="/supplierbalance" element={<SupplierBalance user={localStorage.getItem("username")} searchItem={searchItem} search={search} getRecordReduction={getRecordReduction} />} />
-         <Route path="/clientbalance" element={<ClientBalance user={localStorage.getItem("username")} searchItem={searchItem} search={search} getRecordReduction={getRecordReductionClient} />} />
+         <Route path="/supplierbalance" element={<SupplierBalance searchItem={searchItem} search={search} getRecordReduction={getRecordReduction} />} />
+         <Route path="/clientbalance" element={<ClientBalance searchItem={searchItem} search={search} getRecordReduction={getRecordReductionClient} />} />
          <Route path="/supplierreduction" element={<SupplierReduction recordReduction={recordReduction} />} />
          <Route path="/clientreduction" element={<ClientReduction recordReduction={recordReductionClient} />} />
       </Routes>

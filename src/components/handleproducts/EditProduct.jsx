@@ -75,13 +75,13 @@ const EditProduct = ({record , isEdited}) => {
             setInvalidPrice(false)
             editItem(record.code , editedItems)
             isEdited(true)
-            navigate('/AllProducts')
+            navigate(-1)
         }
     }
 
     const cancelEdit = () => {
         isEdited(false)
-        navigate('/AllProducts')
+        navigate(-1)
     }
 
   return (

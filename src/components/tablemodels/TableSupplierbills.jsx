@@ -1,14 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState , useRef } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClose, faEye, faPrint } from "@fortawesome/free-solid-svg-icons"
 import { useStateValue } from "../../context/stateProvider"
+import { useReactToPrint } from 'react-to-print';
+import PrintInvoice from "../handleinvoices/PrintInvoice";
 
-const TableSupplierbills = ({filteredItems , isSearched , bills ,title ,name}) => {
+const TableSupplierbills = ({filteredItems , isSearched , bills ,title ,name,checkInvoice}) => {
 
     const [noItems ,setNoItems] = useState(false)
     const [show ,setShow] = useState(false)
+    const [showPrint ,setShowPrint] = useState(false)
     const [bill ,setBill] = useState(null)
+    const [billPrint ,setBillPrint] = useState(null)
     const {inwardBills} = useStateValue()
+
+    const printableRef = useRef();
+    const handlePrintt = useReactToPrint({
+      content: () => printableRef.current,
+    });
 
     useEffect(() => {
 
@@ -19,6 +28,10 @@ const TableSupplierbills = ({filteredItems , isSearched , bills ,title ,name}) =
      const handleShow = (e) => {
           setBill(inwardBills.filter(inward => parseInt(inward.invoice) === parseInt(e)))
           setShow(true)
+      }
+     const handlePrint = (e) => {
+          setBillPrint(inwardBills.filter(inward => parseInt(inward.invoice) === parseInt(e)))
+          setShowPrint(true)
       }
 
   return (
@@ -50,7 +63,7 @@ const TableSupplierbills = ({filteredItems , isSearched , bills ,title ,name}) =
                   <td className="px-6 py-3 cursor-pointer" style={{border: '1px solid #00000024'}} onClick={() => handleShow(e.invoice)}>
                      <FontAwesomeIcon icon={faEye} />
                   </td>
-                  <td className="px-6 py-3 cursor-pointer" style={{border: '1px solid #00000024'}}>
+                  <td className="px-6 py-3 cursor-pointer" style={{border: '1px solid #00000024'}} onClick={() => handlePrint(e.invoice)}>
                      <FontAwesomeIcon icon={faPrint} />
                   </td>
                </tr>
@@ -66,7 +79,7 @@ const TableSupplierbills = ({filteredItems , isSearched , bills ,title ,name}) =
                   <td className="px-6 py-3 cursor-pointer" style={{border: '1px solid #00000024'}} onClick={() => handleShow(e.invoice)}>
                      <FontAwesomeIcon icon={faEye} />
                   </td>
-                  <td className="px-6 py-3 cursor-pointer" style={{border: '1px solid #00000024'}}>
+                  <td className="px-6 py-3 cursor-pointer" style={{border: '1px solid #00000024'}} onClick={() => handlePrint(e.invoice)}>
                      <FontAwesomeIcon icon={faPrint} />
                   </td>
                </tr>
@@ -100,9 +113,24 @@ const TableSupplierbills = ({filteredItems , isSearched , bills ,title ,name}) =
                      </tr>
                      ))}
                </tbody>
-          </table>
+            </table>
         </div>
       </div>}
+      {showPrint && <PrintInvoice 
+         handleClose={() => setShowPrint(false)}
+         printableRef={printableRef}
+         handlePrintt={handlePrintt}
+         billPrint={billPrint}
+         invoice={billPrint[0]?.invoice}
+         date={billPrint[0]?.date}
+         name={billPrint[0]?.supplierName}
+         totalbill={billPrint[0]?.totalbill}
+         discount={billPrint[0]?.discount}
+         totalwd={billPrint[0]?.totalwd}
+         reduction={billPrint[0]?.reduction}
+         remaining={billPrint[0]?.remaining}
+         show={checkInvoice}
+      />}
    </div>
   )
 }

@@ -19,7 +19,6 @@ const InventoryIncome = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [filter , setFilter] = useState(false)
-    const [filtrationArry , setFiltrationArry] = useState()
 
     let getItemsTotal = []
 

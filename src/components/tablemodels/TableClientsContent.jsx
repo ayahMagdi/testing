@@ -26,7 +26,7 @@ const TableClientsContent = ({getClient , filteredItems , isSearched , isDeleted
     }
     const handleEdit = (e) => {
         getClient(e)
-        navigate('/editClient')
+        navigate('/homepage/clients/allclients/editClient')
     }
 
     useEffect(() => {

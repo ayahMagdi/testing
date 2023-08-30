@@ -28,7 +28,7 @@ const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
     }
     const handleEdit = (e) => {
         getRecord(e)
-        navigate('/editproduct')
+        navigate('/homepage/storepage/allproducts/editproduct')
     }
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const TableContent = ({getRecord , filteredItems ,isSearched , isDeleted}) => {
     }, [filteredItems])
 
   return (
-    <div className={`my-10 h-auto max-h-96 border shadow overflow-y-scroll ${noItems ? 'hidden' : 'visible' }`}>
+    <div className={`my-10 h-auto max-h-96 border shadow overflow-y-auto ${noItems ? 'hidden' : 'visible' }`}>
         <table className="table-auto w-full text-center border h-fit" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>

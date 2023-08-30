@@ -147,12 +147,12 @@ const Sales = () => {
     }
 
     let filteredClients = purchasesInfo.supplierCode &&
-         clients.filter(e => e.code === purchasesInfo.supplierCode)
+         clients.filter(e => e.code.toString() === purchasesInfo.supplierCode.toString())
   
     let filteredStors = purchasesInfo.itemCode &&
-      items.filter(e => e.code === purchasesInfo.itemCode)
+      items.filter(e => parseInt(e.code) === parseInt(purchasesInfo.itemCode))
 
-    let avlQty = stores.find(store => store.code === filteredStors[0]?.code)
+    let avlQty = stores.find(store => parseInt(store.code) === parseInt(filteredStors[0]?.code))
 
     useEffect(() => {
 
@@ -162,7 +162,7 @@ const Sales = () => {
                 ? setItemErr(true) : setItemErr(false)
         const checkQty = purchasesInfo.qty && parseInt(avlQty ? avlQty.avlqty : 0) < parseInt(purchasesInfo.qty) 
               ? setQtyErr(true) : setQtyErr(false)
-        const handleCodeErrs = purchasesInfo.itemCode && sales?.find(e => e.itemCode === purchasesInfo.itemCode ? 
+        const handleCodeErrs = purchasesInfo.itemCode && sales?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode) ? 
           setCodeExist(true) : setCodeExist(false))
 
       } , [filteredClients , purchasesInfo ,filteredStors ,edit , avlQty ,sales])
@@ -205,7 +205,7 @@ const Sales = () => {
           ...prev,
           totalbill: getTotal,
           totalwd: getTotal - ((getTotal * calcPurchas.discount) / 100),
-          remaining: calcPurchas.totalwd - calcPurchas.reduction,
+          remaining: parseInt(calcPurchas.totalwd) === parseInt(calcPurchas.reduction) ? '0' : calcPurchas.totalwd - calcPurchas.reduction,
           items: sales.length,
         }
        })
@@ -255,7 +255,7 @@ const Sales = () => {
       })
   
       emptyAllForms()
-  
+      navigate('/clientbills')
     }
 
   return (

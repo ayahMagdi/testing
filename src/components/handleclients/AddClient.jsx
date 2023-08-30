@@ -10,7 +10,7 @@ const AddClient = ({isAdded}) => {
 
     const {addClient , clients} = useStateValue()
     const [clientInfo , setClientInfo] = useState(
-        {code: parseInt(clients[clients.length - 1].code) + 1,name: '',phone: '' ,address: ''}
+        {code: clients.length > 0 ? parseInt(clients[clients.length - 1]?.code) + 1 : 1,name: '',phone: '' ,address: ''}
      )
 
  const [show ,setShow] = useState(false)
@@ -32,7 +32,7 @@ const AddClient = ({isAdded}) => {
       setClientInfo(prevData => {
           return {
               ...prevData,
-              code: parseInt(clients[clients.length - 1].code) + 1,
+              code:clients.length > 0 ? parseInt(clients[clients.length - 1]?.code) + 1 : 1,
               [event.target.name] : event.target.value
           }
       })
@@ -56,13 +56,13 @@ const AddClient = ({isAdded}) => {
     if(!checkPhone && !nameExist){
         addClient(code , name , phone ,address)
         isAdded(true)
-        navigate('/allclients')
+        navigate(-1)
     }
  }
 
  const cancelAdd = () => {
     isAdded(false)
-    navigate('/allclients')
+    navigate(-1)
 }
 
 

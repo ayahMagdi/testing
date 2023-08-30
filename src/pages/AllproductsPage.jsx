@@ -5,12 +5,10 @@ import TableContent from "../components/tablemodels/TableContent"
 import { useStateValue } from "../context/stateProvider"
 import SuccessMsg from "../components/SuccessMsg"
 
-const AllproductsPage = ({user , editedProduct , getRecord , searchItem , search , addMsg ,editMsg}) => {
+const AllproductsPage = ({editedProduct , getRecord , searchItem , search , addMsg ,editMsg}) => {
 
   const {items} = useStateValue()
   const [deletedMsg , setDeletedMsg] = useState(false)
-  // const [addedMsg , setAddedMsg] = useState(addMsg)
-  // const [editedMsg , setEditedMsg] = useState(editMsg)
 
   const handleSearch = items.filter(item => 
      item.code.includes(search)
@@ -19,15 +17,10 @@ const AllproductsPage = ({user , editedProduct , getRecord , searchItem , search
   const isDeleted = (deletedMsg) => {
     setDeletedMsg(deletedMsg)
   }
-  // const isEdited = (editedMsg) => {
-  //   setEditedMsg(editedMsg)
-  // }
 
   useEffect(() => {
     setTimeout(() => {
-      // addedMsg && setAddedMsg(false)
       deletedMsg && setDeletedMsg(false)
-      // editedMsg && setEditedMsg(false)
     } , 3000)
   })
 
@@ -38,11 +31,10 @@ const AllproductsPage = ({user , editedProduct , getRecord , searchItem , search
           : editMsg ? <SuccessMsg title='تم تعديل المنتج' /> 
           : ''
         }
-        <Navbar user={user} handleSearch={() => handleSearch} searchItem={searchItem} />
+        <Navbar handleSearch={() => handleSearch} searchItem={searchItem} />
         <Buttons 
              title='اضافة منتج جديد' 
-             urlBack={'/homepage'} 
-             urlAdd={'/addProduct'} />
+             urlAdd={'/homepage/storepage/allproducts/addProduct'} />
         <TableContent isSearched={handleSearch.length && search.length} filteredItems={handleSearch} editedProduct={editedProduct} getRecord={getRecord} isDeleted={isDeleted} />
     </div>
   )

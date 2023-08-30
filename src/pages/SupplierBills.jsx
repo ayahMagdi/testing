@@ -4,7 +4,7 @@ import TableSupplierbills from "../components/tablemodels/TableSupplierbills"
 import { useStateValue } from "../context/stateProvider"
 import isEqual from 'lodash/isEqual';
 
-const SupplierBills = ({user , searchItem , search}) => {
+const SupplierBills = ({searchItem , search}) => {
 
   const {inwardBills} = useStateValue()
 
@@ -35,13 +35,14 @@ const SupplierBills = ({user , searchItem , search}) => {
 
   return (
     <div className='container mx-auto px-4'>
-        <Navbar user={user} handleSearch={() => handleSearch} searchItem={searchItem} />
+        <Navbar handleSearch={() => handleSearch} searchItem={searchItem} />
         <TableSupplierbills 
              isSearched={handleSearch.length && search.length} 
              filteredItems={handleSearch} 
              bills={uniqueDataInvoice}
              title='فواتير الموردين' 
              name='اسم المورد'
+             checkInvoice={false}
         />
     </div>
   )

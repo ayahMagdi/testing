@@ -51,7 +51,9 @@ const FormItemsModel = ({handleSubmit,defaultVal,title,options,isDisabled,handle
                         <label className='mb-4 block'>الوحدة</label>
                         <Select 
                             name="unit" 
+                            closeMenuOnSelect={true}
                             value={unitVal} 
+                            isClearable={true}
                             isDisabled={isDisabled}
                             // defaultInputValue={defaultVal}
                             onChange={handleSelectChange}

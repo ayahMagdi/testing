@@ -89,7 +89,7 @@ const Purchases = () => {
       }
     }else{
       const editedPurchases = purchasesInfo
-      editPurchases(record.itemCode , editedPurchases)
+      editPurchases(record?.itemCode , editedPurchases)
       setEdit(false)
       emptyForm()
     }
@@ -141,14 +141,14 @@ const Purchases = () => {
     suppliers.filter(e => e.code.toString() === purchasesInfo.supplierCode.toString())
 
   const filteredStors = purchasesInfo.itemCode &&
-    items.filter(e => e.code === purchasesInfo.itemCode)
+    items.filter(e => parseInt(e.code) === parseInt(purchasesInfo.itemCode))
 
   useEffect(() => {
      const handleSupplierErrs = filteredSuppliers?.length === 0 && purchasesInfo?.supplierCode && !edit
               ? setSupplierErr(true) : setSupplierErr(false)
      const handleItemErrs = filteredStors?.length === 0 && purchasesInfo?.itemCode && !edit 
               ? setItemErr(true) : setItemErr(false)
-     const handleCodeErrs = purchasesInfo.itemCode && purchases?.find(e => e.itemCode === purchasesInfo.itemCode ? 
+     const handleCodeErrs = purchasesInfo.itemCode && purchases?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode) ? 
       setCodeExist(true) : setCodeExist(false))
   } , [filteredSuppliers , purchasesInfo ,filteredStors ,edit , purchases])
 
@@ -198,7 +198,7 @@ const Purchases = () => {
           ...prev,
           totalbill: getTotal,
           totalwd: getTotal - ((getTotal * calcPurchas.discount) / 100),
-          remaining: calcPurchas.totalwd - calcPurchas.reduction,
+          remaining: parseInt(calcPurchas.totalwd) === parseInt(calcPurchas.reduction) ? '0' : calcPurchas.totalwd - calcPurchas.reduction,
           items: purchases.length,
         }
        })
@@ -257,7 +257,7 @@ const Purchases = () => {
   })
 
     emptyAllForms()
-
+    navigate('/supplierbills')
   }
 
   return (

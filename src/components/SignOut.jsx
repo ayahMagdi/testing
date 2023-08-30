@@ -4,20 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import ConfirmationButton from './ConfirmationButton';
 
-const SignOut = ({user}) => {
+const SignOut = () => {
     
   const [show , setShow] = useState(false)
   const navigate = useNavigate();
   const logOut = () => {setShow(() => !show)}
   const handleConfirm = () => {
-            localStorage.clear()
             navigate('/')
         }
   const handleCancel = () => {setShow(() => false)}
 
   return (
     <div className='flex justify-center items-center gap-2'>
-        <h2>مرحبا {user} ,</h2>
+        <h2>تسجيل الخروج </h2>
         <FontAwesomeIcon 
             icon={faSignOut} 
             className='rotate-180 text-main text-xl font-light cursor-pointer' 

@@ -9,7 +9,8 @@ const FormInventory = ({title,handleSubmit ,dateoptions ,startDateval,endDateval
                 <div>
                     <label className='mb-2 block font-bold'>تاريخ البداية</label>
                     <Select
-                        closeMenuOnSelect={false}
+                        closeMenuOnSelect={true}
+                        isClearable={true}
                         options={dateoptions}
                         name='startDate'
                         value={startDateval}
@@ -28,8 +29,9 @@ const FormInventory = ({title,handleSubmit ,dateoptions ,startDateval,endDateval
                 <div>
                     <label className='mb-2 block font-bold'>تاريخ النهاية</label>
                     <Select
-                        closeMenuOnSelect={false}
+                        closeMenuOnSelect={true}
                         options={dateoptions}
+                        isClearable={true}
                         name='endDate'
                         value={endDateval}
                         onChange={handleChangeEndDate}

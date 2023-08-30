@@ -1,12 +1,12 @@
 import logoImg from '../assets/logo.jpg'
 import Form from '../components/Form'
 
-const Login = ({getUser}) => {
+const Login = () => {
 
   return (
     <div className='flex justify-between h-screen overflow-hidden'>
         <div className="flex justify-center items-center text-center w-7/12">
-            <Form getUser={getUser} />
+            <Form />
         </div>
         <div className='hidden lg:flex bg-white justify-center items-center relative w-5/12'>
           <div className='absolute w-full h-full bg-main rounded-full scale-x-[1.7] scale-y-[1.4] rotate-90 z-1 -left-36'></div>

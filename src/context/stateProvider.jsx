@@ -38,24 +38,20 @@ export const StateProvider = (props) => {
         {code: "6" , name: "اسراء فكري" , phone:"01020202020",address: "مصر محافظة الشرقية"},
     ])
     const [categorys , setCategorys] = useState([
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'الموردين' , icon: faUsers , url: '/allsuppliers'},
-        {title: 'العملاء' , icon: faPeopleGroup , url: '/allclients'},
+        {title: 'المخزن' , icon: faStore , url: '/homepage/storepage'},
+        {title: 'الموردين' , icon: faUsers , url: '/homepage/suppliers'},
+        {title: 'العملاء' , icon: faPeopleGroup , url: '/homepage/clients'},
         {title: 'المشتريات' , icon: faSackDollar , url: '/purchases'},
         {title: 'المبيعات' , icon: faBalanceScaleLeft , url: '/sales'},
-        {title: 'المخزن' , icon: faStore , url: '/store'},
+        // {title: 'المخزن' , icon: faStore , url: '/store'},
         {title: 'فواتير الداخل' , icon: faClipboardList , url: '/inwardbills'},
         {title: 'فواتير الخارج' , icon: faClipboardCheck , url: '/outwardbills'},
-        {title: 'فواتير الموردين' , icon: faFileInvoice , url: '/supplierbills'},
-        {title: 'فواتير العملاء' , icon: faFileInvoiceDollar , url: '/clientbills'},
+        // {title: 'فواتير الموردين' , icon: faFileInvoice , url: '/supplierbills'},
+        // {title: 'فواتير العملاء' , icon: faFileInvoiceDollar , url: '/clientbills'},
         {title: 'جرد الداخل' , icon: faMoneyBill1Wave , url: '/inventoryincome'},
         {title: 'جرد الخارج' , icon: faMoneyBillWave , url: '/inventoryoutcome'},
-        {title: 'رصيد الموردين' , icon: faMoneyCheckDollar , url: '/supplierbalance'},
-        {title: 'رصيد العملاء' , icon: faCalculator , url: '/clientbalance'},
-        {title: 'الحسابات' , icon: faMoneyCheckAlt},
-        {title: 'الواردات' , icon: faBusinessTime},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
-        {title: 'المنتجات' , icon: faEdit , url: '/allproducts'},
+        // {title: 'رصيد الموردين' , icon: faMoneyCheckDollar , url: '/supplierbalance'},
+        // {title: 'رصيد العملاء' , icon: faCalculator , url: '/clientbalance'},
     ])
     const [sales , setSales] = useState([
         // {invoice: '1',date: '20/7/2020', supplierName: 'محمد', supplierCode: '12' ,itemCode: "11111110" , itemName: "لابتوب" ,unit:"قطعه" , qty: "50",price: "500" ,total: '2000'},
@@ -162,11 +158,11 @@ export const StateProvider = (props) => {
         setOutwardBills((oldvalues) => [{invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining}, ...oldvalues])
     }
     const addSupplier = (code, name , phone) => {
-        setSuppliers([{code, name , phone} , ...suppliers])
+        setSuppliers([...suppliers ,{code, name , phone}])
     }
 
     const addClient = (code, name , phone , address) => {
-        setClients([{code, name , phone , address} , ...clients])
+        setClients([...clients , {code, name , phone , address}])
     }
     const addPurchases = (invoice ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price,total) => {
         setPurchases([{invoice ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price,total} , ...purchases])
@@ -213,7 +209,7 @@ export const StateProvider = (props) => {
         setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? { ...e, avlqty: parseInt(e.avlqty) + parseInt(arr.qty) } : e))
     };
     const addSupplierBalance = (code,name,total,reduction,remaining) => {
-        setSupplierBalance((oldvalues) => [{code,name,total,reduction,remaining} , ...oldvalues])
+        setSupplierBalance([{code,name,total,reduction,remaining} , ...supplierBalance])
     }
     const editSupplierBalance = (arr , calcTotal , editReduction ,newArr) => {
        if(!editReduction){
@@ -237,7 +233,7 @@ export const StateProvider = (props) => {
        }
     };
     const addClientBalance = (code,name,total,reduction,remaining) => {
-        setClientBalance((oldvalues) => [{code,name,total,reduction,remaining} , ...oldvalues])
+        setClientBalance([{code,name,total,reduction,remaining} , ...clientBalance])
     }
     const editClientBalance = (arr , calcTotal , editReduction ,newArr) => {
         if(!editReduction){

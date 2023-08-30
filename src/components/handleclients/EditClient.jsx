@@ -61,13 +61,13 @@ const EditClient = ({client,isEdited}) => {
         if(!checkPhone && !nameExist){
             editClient(client.code , editedClients)
             isEdited(true)
-            navigate('/allclients')
+            navigate(-1)
         }
     }
 
     const cancelEdit = () => {
         isEdited(false)
-        navigate('/allclients')
+        navigate(-1)
     }
 
   return (
@@ -85,7 +85,7 @@ const EditClient = ({client,isEdited}) => {
     />
     <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تعديل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
     {show && <ConfirmationButton title='هل تريد الغاء التعديل؟' confirm={cancelEdit} cancel={() => setShow(false)} />}
-</div>
+    </div>
   )
 }
 

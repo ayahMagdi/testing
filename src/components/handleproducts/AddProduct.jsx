@@ -76,13 +76,13 @@ const AddProduct = ({isAdded}) => {
             setInvalidPrice(false)
             addItem(code , name , unit , income , outcome)
             isAdded(true)
-            navigate('/AllProducts')
+            navigate(-1)
         }
     }
 
     const cancelAdd = () => {
         isAdded(false)
-        navigate('/AllProducts')
+        navigate(-1)
     }
 
   return (

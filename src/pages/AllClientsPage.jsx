@@ -5,7 +5,7 @@ import { useStateValue } from '../context/stateProvider'
 import { useEffect, useState } from 'react'
 import SuccessMsg from '../components/SuccessMsg'
 
-const AllClientsPage = ({user , getClient , editedClients , searchItem , search , addMsg ,editMsg}) => {
+const AllClientsPage = ({getClient , editedClients , searchItem , search , addMsg ,editMsg}) => {
 
   const {clients} = useStateValue()
 
@@ -38,11 +38,10 @@ const AllClientsPage = ({user , getClient , editedClients , searchItem , search 
           : editMsg ? <SuccessMsg title='تم تعديل العميل' /> 
           : ''
         }
-        <Navbar user={user} handleSearch={() => handleSearch} searchItem={searchItem} />
+        <Navbar handleSearch={() => handleSearch} searchItem={searchItem} />
         <Buttons
              title='اضافة عميل جديد' 
-             urlBack={'/homepage'} 
-             urlAdd={'/addClient'} />
+             urlAdd={'/homepage/clients/allclients/addClient'} />
         <TableClientsContent isSearched={handleSearch.length && search.length} filteredItems={handleSearch} editedClients={editedClients} getClient={getClient} isDeleted={isDeleted} />
     </div>
   )

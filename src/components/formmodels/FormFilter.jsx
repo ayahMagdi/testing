@@ -12,7 +12,7 @@ const FormFilter = (
               <div>
                   <label className='mb-2 block font-bold'>رقم الفاتورة</label>
                   <Select
-                      closeMenuOnSelect={false}
+                      closeMenuOnSelect={true}
                       isMulti
                       options={invoicesoptions}
                       name='invoice'
@@ -32,7 +32,7 @@ const FormFilter = (
               <div>
                   <label className='mb-2 block font-bold'>التاريخ</label>
                   <Select
-                      closeMenuOnSelect={false}
+                      closeMenuOnSelect={true}
                       isMulti
                       options={dateoptions}
                       name='date'
@@ -52,7 +52,7 @@ const FormFilter = (
               <div>
                   <label className='mb-2 block font-bold'>{name}</label>
                   <Select
-                      closeMenuOnSelect={false}
+                      closeMenuOnSelect={true}
                       isMulti
                       options={supplieroptions}
                       name='suppliername'
@@ -72,7 +72,7 @@ const FormFilter = (
               <div>
                   <label className='mb-2 block font-bold'>اسم المنتج</label>
                   <Select
-                      closeMenuOnSelect={false}
+                      closeMenuOnSelect={true}
                       isMulti
                       options={itemoptions}
                       name='itemname'

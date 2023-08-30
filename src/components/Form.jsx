@@ -3,7 +3,7 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Form = ({getUser}) => {
+const Form = () => {
 
     const userRef = useRef()
     const navigate = useNavigate();
@@ -32,7 +32,6 @@ const Form = ({getUser}) => {
               [event.target.name] : event.target.value
           }
       })
-      getUser(formInfo.username)
     }
 
   return (

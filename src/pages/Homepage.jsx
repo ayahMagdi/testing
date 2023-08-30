@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar"
 import SuccessMsg from "../components/SuccessMsg"
 import { useStateValue } from "../context/stateProvider"
 
-const Homepage = ({user, searchItem , search}) => {
+const Homepage = ({searchItem , search}) => {
 
   const [show , setShow] = useState(true)
 
@@ -27,7 +27,7 @@ const Homepage = ({user, searchItem , search}) => {
   return (
     <div className="container mx-auto px-4">
         {showMsg && <SuccessMsg title='تم تسجيل الدخول بنجاح' />}
-        <Navbar user={user} handleSearch={() => handleSearch}  searchItem={searchItem} />
+        <Navbar handleSearch={() => handleSearch}  searchItem={searchItem} />
         <Content isSearched={handleSearch.length && search.length} filteredItems={handleSearch}  />
     </div>
   )
