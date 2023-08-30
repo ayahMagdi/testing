@@ -43,6 +43,7 @@ const SupplierBills = ({searchItem , search}) => {
              title='فواتير الموردين' 
              name='اسم المورد'
              checkInvoice={false}
+             allbills={inwardBills}
         />
     </div>
   )

@@ -162,8 +162,8 @@ const Sales = () => {
                 ? setItemErr(true) : setItemErr(false)
         const checkQty = purchasesInfo.qty && parseInt(avlQty ? avlQty.avlqty : 0) < parseInt(purchasesInfo.qty) 
               ? setQtyErr(true) : setQtyErr(false)
-        const handleCodeErrs = purchasesInfo.itemCode && sales?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode) ? 
-          setCodeExist(true) : setCodeExist(false))
+        const handleCodeErrs = purchasesInfo.itemCode && sales?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode)) ? 
+          setCodeExist(true) : setCodeExist(false)
 
       } , [filteredClients , purchasesInfo ,filteredStors ,edit , avlQty ,sales])
     

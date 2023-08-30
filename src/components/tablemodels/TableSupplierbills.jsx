@@ -5,14 +5,14 @@ import { useStateValue } from "../../context/stateProvider"
 import { useReactToPrint } from 'react-to-print';
 import PrintInvoice from "../handleinvoices/PrintInvoice";
 
-const TableSupplierbills = ({filteredItems , isSearched , bills ,title ,name,checkInvoice}) => {
+const TableSupplierbills = ({allbills,filteredItems , isSearched , bills ,title ,name,checkInvoice}) => {
 
     const [noItems ,setNoItems] = useState(false)
     const [show ,setShow] = useState(false)
     const [showPrint ,setShowPrint] = useState(false)
     const [bill ,setBill] = useState(null)
     const [billPrint ,setBillPrint] = useState(null)
-    const {inwardBills} = useStateValue()
+   //  const {inwardBills} = useStateValue()
 
     const printableRef = useRef();
     const handlePrintt = useReactToPrint({
@@ -26,13 +26,14 @@ const TableSupplierbills = ({filteredItems , isSearched , bills ,title ,name,che
      }, [filteredItems])
 
      const handleShow = (e) => {
-          setBill(inwardBills.filter(inward => parseInt(inward.invoice) === parseInt(e)))
+          setBill(allbills.filter(inward => parseInt(inward.invoice) === parseInt(e)))
           setShow(true)
       }
      const handlePrint = (e) => {
-          setBillPrint(inwardBills.filter(inward => parseInt(inward.invoice) === parseInt(e)))
+          setBillPrint(allbills.filter(inward => parseInt(inward.invoice) === parseInt(e)))
           setShowPrint(true)
       }
+
 
   return (
     <div className='my-5'>

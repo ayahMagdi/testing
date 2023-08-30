@@ -148,8 +148,9 @@ const Purchases = () => {
               ? setSupplierErr(true) : setSupplierErr(false)
      const handleItemErrs = filteredStors?.length === 0 && purchasesInfo?.itemCode && !edit 
               ? setItemErr(true) : setItemErr(false)
-     const handleCodeErrs = purchasesInfo.itemCode && purchases?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode) ? 
-      setCodeExist(true) : setCodeExist(false))
+     const handleCodeErrs = purchasesInfo.itemCode && purchases?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode)) ? 
+      setCodeExist(true) : setCodeExist(false)
+
   } , [filteredSuppliers , purchasesInfo ,filteredStors ,edit , purchases])
 
   const getTotal = purchases.reduce((acc , cur) => {

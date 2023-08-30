@@ -11,7 +11,7 @@ const PrintInvoice = ({handleClose ,printableRef ,handlePrintt ,billPrint,invoic
                <FontAwesomeIcon icon={faClose} />
              </div>
              <div ref={printableRef} className="p-6">
-                {show && <div className='mb-7 text-lg font-bold'>
+                {show && <div className='mb-3 text-lg font-bold'>
                     <h2 className='mb-1'>شركة البنا للاستيراد والتصدير</h2>
                     <h3 className='text-sm'>012345678911</h3>
                     <h3 className='text-sm'>012345678911</h3>

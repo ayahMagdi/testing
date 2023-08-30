@@ -43,6 +43,7 @@ const ClientBills = ({searchItem , search}) => {
           title='فواتير العملاء'
           name='اسم العميل'
           checkInvoice={true}
+          allbills={outwardBills}
        />
     </div>
   )
