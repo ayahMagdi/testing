@@ -85,7 +85,7 @@ const InventoryOutcome = () => {
         handleChangeStartDate={(selectedOption) => setStartDate(selectedOption)}
         handleChangeEndDate={(selectedOption) => setEndDate(selectedOption)}
     />
-    <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[31rem]' />
+    <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[28rem]' />
 </div>
   )
 }

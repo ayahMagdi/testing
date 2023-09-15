@@ -126,7 +126,7 @@ const handlecancel = () => {
             name='اسم العميل'
             nameplaceholder='اختر اسم العميل'
         />
-        <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[27rem]' />
+        <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[25rem]' />
     </div>
   )
 }

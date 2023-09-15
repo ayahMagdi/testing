@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 
 const FormInvoicesModel = (
-     {title,handleSubmit, edit,handleChange,supplierErr,itemErr,qtyErr,codeExist,nameText,codeText,errorText,avlQty,purchasVal,existing,dateVal,supplierCodeVal,supplierNameVal,itemCodeVal,itemNameVal,unitVal,qtyVal,priceVal,totalVal}
+     {title,handleSubmit, edit,handleChange,supplierErr,itemErr,qtyErr,codeExist,emptyCode,nameText,codeText,qtyZero,errorText,avlQty,purchasVal,existing,dateVal,supplierCodeVal,supplierNameVal,itemCodeVal,itemNameVal,unitVal,qtyVal,priceVal,totalVal}
  ) => {
 
     const userRef = useRef()
@@ -117,9 +117,10 @@ const FormInvoicesModel = (
                     <label className='mb-2 block font-bold'>الكمية</label>
                     <input
                         type='text'
-                        className={`w-full border p-2 rounded-lg focus:outline-none  ${edit && 'border-2 border-main'} ${qtyErr ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
+                        className={`w-full border p-2 rounded-lg focus:outline-none  ${edit && 'border-2 border-main'} ${qtyErr || qtyZero ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
                         name='qty'
                         required
+                        disabled={emptyCode}
                         autoComplete="off"
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                         onInput={F => F.target.setCustomValidity('')}
@@ -128,6 +129,7 @@ const FormInvoicesModel = (
                         value={qtyVal}
                     />
                     {qtyErr && <p className="text-sm text-red-500 m-0">{`الكمية التوفرة في المخزن ${avlQty}`}</p>}
+                    {qtyZero && <p className="text-sm text-red-500 m-0">ادخل كمية صحيحة</p>}
                 </div>
                 <div>
                     <label className='mb-2 block font-bold'>السعر</label>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormInvoiceModel = ({handleSubmit , handleChange ,handleInputChange , totalVal ,discountVal,totalwdVal , reductionVal , remainingVal , itemsVal}) => {
+const FormInvoiceModel = ({handleSubmit , handleChange ,handleInputChange,discountErr,totalDisabled,reductionErr , totalVal ,discountVal,totalwdVal , reductionVal , remainingVal , itemsVal}) => {
   return (
     <div>
         <form className='my-4' onSubmit={handleSubmit} id='my-form'>
@@ -21,9 +21,10 @@ const FormInvoiceModel = ({handleSubmit , handleChange ,handleInputChange , tota
                     <label className='mb-2 block font-bold'>نسبة الخصم</label>
                     <input
                         type='text'
-                        className='w-full border p-2 rounded-lg border-gray-500 focus:empty:border-main focus:outline-none focus:invalid:border-red-500'
+                        className={`w-full border p-2 rounded-lg focus:outline-none ${discountErr ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
                         name='discount'
                         required
+                        disabled={totalDisabled}
                         onKeyDown={handleInputChange}
                         onChange={handleChange}
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
@@ -31,6 +32,7 @@ const FormInvoiceModel = ({handleSubmit , handleChange ,handleInputChange , tota
                         placeholder='مثال (35%)'
                         value={discountVal}
                     />
+                    {discountErr && <p className='text-sm text-red-500 m-0'>ادخل نسبة خصم صحيحة</p>}
                 </div> 
                 <div>
                     <label className='mb-2 block font-bold'>الاجمالي بعد الخصم</label>
@@ -48,9 +50,10 @@ const FormInvoiceModel = ({handleSubmit , handleChange ,handleInputChange , tota
                     <label className='mb-2 block font-bold'>تنزيل</label>
                     <input
                         type='text'
-                        className='w-full border p-2 rounded-lg border-gray-500 focus:empty:border-main focus:outline-none focus:invalid:border-red-500'
+                        className={`w-full border p-2 rounded-lg focus:outline-none ${reductionErr ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
                         name='reduction'
                         required
+                        disabled={totalDisabled}
                         autoComplete='off'
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                         onInput={F => F.target.setCustomValidity('')}
@@ -59,6 +62,7 @@ const FormInvoiceModel = ({handleSubmit , handleChange ,handleInputChange , tota
                         onChange={handleChange}
                         value={reductionVal}
                     />
+                    {reductionErr && <p className='text-sm text-red-500 m-0'>لا يمكن ان تكون قيمة التنزيل اكبر من باقي الحساب</p>}
                 </div>
                 <div>
                     <label className='mb-2 block font-bold'>باقي الحساب</label>

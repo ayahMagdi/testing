@@ -25,6 +25,8 @@ const InventoryIncome = () => {
     function getDates(startDate, endDate) {
       const dateArray = [];
       let currentDate = moment(startDate, 'M/DD/YYYY').startOf('day');
+      // let currentDate = moment(startDate, moment().localeData().longDateFormat('L')).startOf('day');
+      // const formattedEndDate = moment(endDate, moment().localeData().longDateFormat('L')).startOf('day');
       const formattedEndDate = moment(endDate, 'M/DD/YYYY').startOf('day');
     
       while (currentDate <= formattedEndDate) {
@@ -111,7 +113,7 @@ const InventoryIncome = () => {
             handleChangeStartDate={(selectedOption) => setStartDate(selectedOption)}
             handleChangeEndDate={(selectedOption) => setEndDate(selectedOption)}
         />
-        <TableInwardbills invoicesList={newDataSets} code='كود المورد' name='اسم المورد' height='max-h-[31rem]' />
+        <TableInwardbills invoicesList={newDataSets} code='كود المورد' name='اسم المورد' height='max-h-[28rem]' />
     </div>
   )
 }

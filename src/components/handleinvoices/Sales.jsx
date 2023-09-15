@@ -35,6 +35,11 @@ const Sales = () => {
     const [edit ,setEdit] = useState(false)
     const [qtyErr ,setQtyErr] = useState(false)
     const [existing ,setExisting] = useState(false)
+    const [qtyZero ,setQtyZero] = useState(false)
+    const [discountErr ,setDiscountErr] = useState(false)
+    const [reductionErr ,setReductionErr] = useState(false)
+    const [emptyCode ,setEmptyCode] = useState(false)
+    const [totalDisabled ,setTotalDisabled] = useState(false)
   
     function handleChange(event){
       if (!isNaN(event.target.value)) {
@@ -83,7 +88,7 @@ const Sales = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(!edit){
-          if(!qtyErr && !itemErr && !clientErr && !codeExist){
+          if(!qtyErr && !itemErr && !clientErr && !codeExist && !qtyZero){
             addSales(invoice.toString() ,date , supplierName , supplierCode ,itemCode , itemName , unit , qty , price ,total)
             emptyForm()
             setExisting(true)
@@ -110,12 +115,10 @@ const Sales = () => {
       setClientErr(false)
       setCodeExist(false)
       setPurchasesInfo({
-         itemCode: '',
-         itemName: '',
-         unit: '' ,
-         qty: '' ,
-         price: '',
-         total: ''})
+        itemCode: '',
+        supplierCode: '',
+        qty: '' ,
+      })
     }
     
     const emptyAllForms = () => {
@@ -147,10 +150,10 @@ const Sales = () => {
     }
 
     let filteredClients = purchasesInfo.supplierCode &&
-         clients.filter(e => e.code.toString() === purchasesInfo.supplierCode.toString())
+         clients?.filter(e => e.code.toString() === purchasesInfo.supplierCode.toString())
   
     let filteredStors = purchasesInfo.itemCode &&
-      items.filter(e => parseInt(e.code) === parseInt(purchasesInfo.itemCode))
+      items?.filter(e => parseInt(e.code) === parseInt(purchasesInfo.itemCode))
 
     let avlQty = stores.find(store => parseInt(store.code) === parseInt(filteredStors[0]?.code))
 
@@ -164,14 +167,25 @@ const Sales = () => {
               ? setQtyErr(true) : setQtyErr(false)
         const handleCodeErrs = purchasesInfo.itemCode && sales?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode)) ? 
           setCodeExist(true) : setCodeExist(false)
+        const handleQtyZero = purchasesInfo.qty && parseInt(purchasesInfo.qty) === 0 ? 
+           setQtyZero(true) : setQtyZero(false)
+        const handleDiscountErr = calcPurchas.discount && parseInt(calcPurchas.discount) > 100 ?
+           setDiscountErr(true) : setDiscountErr(false)
+        const handleReductionErr = calcPurchas.reduction && parseInt(calcPurchas.reduction) > parseInt(calcPurchas.totalwd) ?
+           setReductionErr(true) : setReductionErr(false)
+           
+       const handleTotalDisabled = !calcPurchas.totalbill ? setTotalDisabled(true) : setTotalDisabled(false)
 
-      } , [filteredClients , purchasesInfo ,filteredStors ,edit , avlQty ,sales])
+        const handleDisabledQty = !purchasesInfo.itemCode || itemErr ? setEmptyCode(true) : setEmptyCode(false)
+  
+
+      } , [filteredClients , purchasesInfo ,filteredStors ,edit , avlQty ,sales ,calcPurchas ,itemErr])
     
   useEffect(() => {
     const invoiceNum = Array.from(new Set(outwardBills.map((inward) => inward.invoice)))
     const timeoutId = setTimeout(() => {
        if(!edit){
-        if(!existing){
+        if(!existing && purchasesInfo.supplierCode){
           setPurchasesInfo(prevData => {
             return {
                 ...prevData, 
@@ -204,8 +218,8 @@ const Sales = () => {
         return {
           ...prev,
           totalbill: getTotal,
-          totalwd: getTotal - ((getTotal * calcPurchas.discount) / 100),
-          remaining: parseInt(calcPurchas.totalwd) === parseInt(calcPurchas.reduction) ? '0' : calcPurchas.totalwd - calcPurchas.reduction,
+          totalwd: discountErr ? getTotal - ((getTotal * calcPurchas.discount) / 100) : '' ,
+          remaining:  !discountErr && !reductionErr ? parseInt(calcPurchas.totalwd) === parseInt(calcPurchas.reduction) ? '0' : calcPurchas.totalwd - calcPurchas.reduction : '',
           items: sales.length,
         }
        })
@@ -235,8 +249,9 @@ const Sales = () => {
 
     const handleRegistration = (e) => {
       e.preventDefault()
-        
-      const handleStores = sales.map((sale) => {
+    
+      if(!discountErr && !reductionErr){
+        const handleStores = sales.map((sale) => {
           deleteFromStore(sale)
        })
 
@@ -256,6 +271,8 @@ const Sales = () => {
   
       emptyAllForms()
       navigate('/clientbills')
+      }
+    
     }
 
   return (
@@ -284,6 +301,8 @@ const Sales = () => {
             codeText='كود العميل'
             errorText='الكود غير صحيح'
             codeExist={codeExist}
+            qtyZero={qtyZero}
+            emptyCode={emptyCode}
         />
         <ModelBtns title={edit ? 'تعديل' : 'اضافة'} form='my-form' cancelTitle='تفريغ الحقول' handlecancel={emptyForm} btnStyle={'w-40 py-2'} margin={'mt-5'} />
         <TableInvoices
@@ -302,6 +321,9 @@ const Sales = () => {
           reductionVal={calcPurchas.reduction || ''}
           remainingVal={calcPurchas.remaining || ''}
           itemsVal={calcPurchas.items || ''}
+          discountErr={discountErr}
+          reductionErr={reductionErr}
+          totalDisabled={totalDisabled}
         />
         <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => navigate('/homepage')} />
     </div>

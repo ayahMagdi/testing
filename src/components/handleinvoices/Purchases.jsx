@@ -34,6 +34,11 @@ const Purchases = () => {
   const [itemErr ,setItemErr] = useState(false)
   const [edit ,setEdit] = useState(false)
   const [existing ,setExisting] = useState(false)
+  const [qtyZero ,setQtyZero] = useState(false)
+  const [discountErr ,setDiscountErr] = useState(false)
+  const [reductionErr ,setReductionErr] = useState(false)
+  const [emptyCode ,setEmptyCode] = useState(false)
+  const [totalDisabled ,setTotalDisabled] = useState(false)
   const [record ,setRecord] = useState(null)
 
   function handleChange(event){
@@ -82,7 +87,7 @@ const Purchases = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(!edit){
-      if(!itemErr && !supplierErr && !codeExist){
+      if(!itemErr && !supplierErr && !codeExist && !qtyZero){
         addPurchases(invoice.toString() ,date , supplierName , supplierCode ,itemCode , itemName , unit , qty , price ,total)
         emptyForm()
         setExisting(true)
@@ -102,11 +107,9 @@ const Purchases = () => {
     setCodeExist(false)
     setPurchasesInfo({
        itemCode: '',
-       itemName: '',
-       unit: '' ,
+       supplierCode: '',
        qty: '' ,
-       price: '',
-       total: ''})
+    })
   }
   
   const emptyAllForms = () => {
@@ -138,10 +141,18 @@ const Purchases = () => {
   }
 
   const filteredSuppliers = purchasesInfo.supplierCode &&
-    suppliers.filter(e => e.code.toString() === purchasesInfo.supplierCode.toString())
+    suppliers?.filter(e => e.code.toString() === purchasesInfo.supplierCode.toString())
 
   const filteredStors = purchasesInfo.itemCode &&
-    items.filter(e => parseInt(e.code) === parseInt(purchasesInfo.itemCode))
+    items?.filter(e => parseInt(e.code) === parseInt(purchasesInfo.itemCode))
+
+  const getTotal = purchases.reduce((acc , cur) => {
+      return parseInt(acc) + (parseInt(cur.price) * parseInt(cur.qty))
+  } , 0)
+
+  const [calcPurchas , setCalcPurchas] = useState(
+      {totalbill: getTotal ,discount: '',totalwd: '' ,reduction: '',remaining: '',items:''}
+    ) 
 
   useEffect(() => {
      const handleSupplierErrs = filteredSuppliers?.length === 0 && purchasesInfo?.supplierCode && !edit
@@ -150,22 +161,26 @@ const Purchases = () => {
               ? setItemErr(true) : setItemErr(false)
      const handleCodeErrs = purchasesInfo.itemCode && purchases?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode)) ? 
       setCodeExist(true) : setCodeExist(false)
+     const handleQtyZero = purchasesInfo.qty && parseInt(purchasesInfo.qty) === 0 ? 
+         setQtyZero(true) : setQtyZero(false)
 
-  } , [filteredSuppliers , purchasesInfo ,filteredStors ,edit , purchases])
+    const handleDiscountErr = calcPurchas.discount && parseInt(calcPurchas.discount) > 100 ?
+         setDiscountErr(true) : setDiscountErr(false)
+    const handleReductionErr = calcPurchas.reduction && parseInt(calcPurchas.reduction) > parseInt(calcPurchas.totalwd) ?
+        setReductionErr(true) : setReductionErr(false)
 
-  const getTotal = purchases.reduce((acc , cur) => {
-    return parseInt(acc) + (parseInt(cur.price) * parseInt(cur.qty))
-  } , 0)
+    const handleDisabledQty = !purchasesInfo.itemCode || itemErr ? setEmptyCode(true) : setEmptyCode(false)
 
-  const [calcPurchas , setCalcPurchas] = useState(
-    {totalbill: getTotal ,discount: '',totalwd: '' ,reduction: '',remaining: '',items:''}
-  ) 
+    const handleTotalDisabled = !calcPurchas.totalbill ? setTotalDisabled(true) : setTotalDisabled(false)
+
+  } , [filteredSuppliers , purchasesInfo ,filteredStors ,edit , purchases , calcPurchas ,itemErr])
+
 
   useEffect(() => {
     const invoiceNum = Array.from(new Set(inwardBills.map((inward) => inward.invoice)))
     const timeoutId = setTimeout(() => {
        if(!edit){
-        if(!existing){
+        if(!existing && purchasesInfo.supplierCode){
           setPurchasesInfo(prevData => {
             return {
                 ...prevData, 
@@ -198,8 +213,8 @@ const Purchases = () => {
         return {
           ...prev,
           totalbill: getTotal,
-          totalwd: getTotal - ((getTotal * calcPurchas.discount) / 100),
-          remaining: parseInt(calcPurchas.totalwd) === parseInt(calcPurchas.reduction) ? '0' : calcPurchas.totalwd - calcPurchas.reduction,
+          totalwd: !discountErr ? getTotal - ((getTotal * calcPurchas.discount) / 100) : '' ,
+          remaining: !discountErr && !reductionErr ? parseInt(calcPurchas.totalwd) === parseInt(calcPurchas.reduction) ? '0' : calcPurchas.totalwd - calcPurchas.reduction : '',
           items: purchases.length,
         }
        })
@@ -230,35 +245,38 @@ const Purchases = () => {
   const handleRegistration = (e) => {
     e.preventDefault()
 
-    const handleStores = purchases.map((pur) => {
-      let storeCode = stores.find(store => pur.itemCode === store.code)
-      if(!storeCode) {
-        items.map(item => item.code === pur.itemCode && 
-        addToStore(pur.itemCode,pur.itemName,pur.unit,pur.price,item.outcome,pur.qty,0,pur.qty,pur.total)
-        )
+    if(!discountErr && !reductionErr){
+     const handleStores = purchases.map((pur) => {
+        let storeCode = stores.find(store => pur.itemCode === store.code)
+        if(!storeCode) {
+          items.map(item => item.code === pur.itemCode && 
+          addToStore(pur.itemCode,pur.itemName,pur.unit,pur.price,item.outcome,pur.qty,0,pur.qty,pur.total)
+          )
+        } 
+        if(storeCode){
+          editStores(pur)
+        }
+       }
+     )
+  
+     const handleInward = purchases.map((pur) => {
+      addInwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount,totalwd,reduction,remaining)
+    })     
+  
+    const handleSuppliers = purchases.map((pur) => {
+      let suppliercode = supplierBalance.find(supplier => pur.supplierCode === supplier.code)
+      if(!suppliercode) {
+        addSupplierBalance(pur.supplierCode,pur.supplierName,totalwd,reduction,remaining)
       } 
-      if(storeCode){
-        editStores(pur)
+      if(suppliercode){
+        editSupplierBalance(pur.supplierCode,calcPurchas , false)
       }
-     }
-   )
-
-   const handleInward = purchases.map((pur) => {
-    addInwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount,totalwd,reduction,remaining)
-  })     
-
-  const handleSuppliers = purchases.map((pur) => {
-    let suppliercode = supplierBalance.find(supplier => pur.supplierCode === supplier.code)
-    if(!suppliercode) {
-      addSupplierBalance(pur.supplierCode,pur.supplierName,totalwd,reduction,remaining)
-    } 
-    if(suppliercode){
-      editSupplierBalance(pur.supplierCode,calcPurchas , false)
+    })
+  
+      emptyAllForms()
+      navigate('/supplierbills')
     }
-  })
 
-    emptyAllForms()
-    navigate('/supplierbills')
   }
 
   return (
@@ -285,6 +303,8 @@ const Purchases = () => {
             codeText='كود المورد'
             errorText='الكود غير صحيح'
             codeExist={codeExist}
+            qtyZero={qtyZero}
+            emptyCode={emptyCode}
         />
         <ModelBtns title={edit ? 'تعديل' : 'اضافة'} form='my-form' cancelTitle='تفريغ الحقول' handlecancel={emptyForm} btnStyle={'w-40 py-2'} margin={'mt-5'} />
         <TableInvoices 
@@ -303,6 +323,9 @@ const Purchases = () => {
              reductionVal={calcPurchas.reduction || ''}
              remainingVal={calcPurchas.remaining || ''}
              itemsVal={calcPurchas.items || ''}
+             discountErr={discountErr}
+             reductionErr={reductionErr}
+             totalDisabled={totalDisabled}
         />
         <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => navigate('/homepage')} />
     </div>

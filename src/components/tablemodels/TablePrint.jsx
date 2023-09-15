@@ -1,7 +1,8 @@
 const TablePrint = ({billPrint}) => {
   return (
      <div>
-        <table className="table-auto w-full text-center border" style={{borderCollapse: 'collapse'}}>
+       <div className="h-auto max-h-36 border overflow-y-auto print:overflow-visible print:h-auto">
+        <table className="table-auto w-full text-center" style={{borderCollapse: 'collapse'}}>
                <thead className="sticky top-0 bg-black text-white border-b">
                      <tr className='border-b border-slate-300'>
                         <th scope="col" style={{border: '1px solid #00000024'}} className="px-5 py-2">كود المنتج</th>
@@ -14,7 +15,7 @@ const TablePrint = ({billPrint}) => {
                </thead>
                <tbody>
                      {billPrint?.map((e , i) => (
-                        <tr className='border-b border-slate-300 even:bg-neutral-100' key={i}>
+                     <tr className='border-b border-slate-300 even:bg-neutral-100' key={i}>
                         <td className="px-5 py-1" style={{border: '1px solid #00000024'}}>{e.itemCode}</td>
                         <td className="px-5 py-1" style={{border: '1px solid #00000024'}}>{e.itemName}</td>
                         <td className="px-5 py-1" style={{border: '1px solid #00000024'}}>{e.qty}</td>
@@ -25,6 +26,7 @@ const TablePrint = ({billPrint}) => {
                      ))}
                </tbody>
         </table>
+        </div>
       </div>
   )
 }

@@ -3,6 +3,7 @@ import Content from "../components/Content"
 import Navbar from "../components/Navbar"
 import SuccessMsg from "../components/SuccessMsg"
 import { useStateValue } from "../context/stateProvider"
+import axios from "axios"
 
 const Homepage = ({searchItem , search}) => {
 
@@ -23,6 +24,16 @@ const Homepage = ({searchItem , search}) => {
   const handleSearch = categorys.filter(category => 
     category.title.includes(search)
   )
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const res = await fetch("https://alpha-vantage.p.rapidapi.com/query")
+  //     const data = await res.json()
+  //     console.log(data.message)
+  //   }
+
+  //   getData();
+  // } , [])
 
   return (
     <div className="container mx-auto px-4">
