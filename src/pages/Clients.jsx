@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Category from '../components/Category'
 import { faFileInvoice, faMoneyCheckDollar, faUsers } from '@fortawesome/free-solid-svg-icons'
+import Goback from '../components/Goback'
 
 const Clients = ({searchItem , search}) => {
 
@@ -26,6 +27,7 @@ const Clients = ({searchItem , search}) => {
               <Category icon={e.icon} title={e.title} url={e.url} key={i} />
             ))}
        </div>
+       <Goback />
     </div>
   )
 }

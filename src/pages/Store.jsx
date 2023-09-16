@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Category from '../components/Category'
+import Goback from '../components/Goback'
 import { faEdit, faStore } from '@fortawesome/free-solid-svg-icons'
-// import { useStateValue } from '../context/stateProvider'
 
 const Store = ({searchItem , search}) => {
 
@@ -26,6 +26,7 @@ const Store = ({searchItem , search}) => {
               <Category icon={e.icon} title={e.title} url={e.url} key={i} />
             ))}
       </div>
+      <Goback />
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { faFileInvoice, faMoneyCheckDollar, faUsers } from "@fortawesome/free-so
 import Category from "../components/Category"
 import Navbar from "../components/Navbar"
 import { useState } from "react"
+import Goback from "../components/Goback"
 
 const Suppliers = ({searchItem , search}) => {
 
@@ -26,6 +27,7 @@ const Suppliers = ({searchItem , search}) => {
               <Category icon={e.icon} title={e.title} url={e.url} key={i} />
             ))}
         </div>
+        <Goback />
     </div>
   )
 }

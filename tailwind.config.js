@@ -12,7 +12,7 @@ module.exports = {
         popup: "rgba(0,0,0,.4)",
         danger: "#dc3545",
         succuss: "#28a745",
-        tablerow: "#e9ecf5",
+        tablerow: "#e9ecf5"
       },
       backgroundColor: ['even'],
   },

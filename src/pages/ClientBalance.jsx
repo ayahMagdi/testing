@@ -1,3 +1,4 @@
+import Goback from '../components/Goback'
 import Navbar from '../components/Navbar'
 import TableBalance from '../components/tablemodels/TableBalance'
 import { useStateValue } from '../context/stateProvider'
@@ -27,6 +28,7 @@ const ClientBalance = ({search , searchItem ,getRecordReduction}) => {
       url='/clientreduction'
       getRecordReduction={getRecordReduction}
    />
+   <Goback />
   </div>
   )
 }

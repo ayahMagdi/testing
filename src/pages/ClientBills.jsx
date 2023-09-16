@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import TableSupplierbills from "../components/tablemodels/TableSupplierbills"
 import { useStateValue } from "../context/stateProvider"
 import isEqual from 'lodash/isEqual';
+import Goback from "../components/Goback";
 
 const ClientBills = ({searchItem , search}) => {
  
@@ -45,6 +46,7 @@ const ClientBills = ({searchItem , search}) => {
           checkInvoice={true}
           allbills={outwardBills}
        />
+       <Goback />
     </div>
   )
 }
