@@ -25,12 +25,10 @@ const InventoryIncome = () => {
     function getDates(startDate, endDate) {
       const dateArray = [];
       let currentDate = moment(startDate, 'M/DD/YYYY').startOf('day');
-      // let currentDate = moment(startDate, moment().localeData().longDateFormat('L')).startOf('day');
-      // const formattedEndDate = moment(endDate, moment().localeData().longDateFormat('L')).startOf('day');
       const formattedEndDate = moment(endDate, 'M/DD/YYYY').startOf('day');
-    
+
       while (currentDate <= formattedEndDate) {
-        dateArray.push(moment(currentDate).format('M/DD/YYYY'));
+        dateArray.push(new Date(currentDate).toLocaleDateString());
         currentDate = moment(currentDate).add(1, 'days');
       }
     

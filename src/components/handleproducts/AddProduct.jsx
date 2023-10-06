@@ -8,7 +8,7 @@ import ModelBtns from '../ModelBtns';
 
 const AddProduct = ({isAdded}) => {
   
-    const {addItem ,items} = useStateValue()
+    const {addItem ,items ,addToStore} = useStateValue()
 
     const options = [
         {value: 'قطع' , label: 'قطع'},
@@ -75,6 +75,7 @@ const AddProduct = ({isAdded}) => {
        if(!invalidPrice && !codeExist && !nameExist){
             setInvalidPrice(false)
             addItem(code , name , unit , income , outcome)
+            addToStore(code,name,unit,income,outcome, 0,0,0,0)
             isAdded(true)
             navigate(-1)
         }

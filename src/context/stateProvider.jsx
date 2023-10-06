@@ -205,8 +205,19 @@ export const StateProvider = (props) => {
     const addToStore = (code , name , unit ,income ,outcome,avlqty,soldqty,store, total) => {
          setStores((oldvalues) => [{code , name , unit ,income ,outcome,avlqty,soldqty,store, total} , ...oldvalues])
     }
-    const editStores = (arr) => {
-        setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? { ...e, avlqty: parseInt(e.avlqty) + parseInt(arr.qty) } : e))
+    const editStoresInfo = (code,editedItems) => {
+        setStores(stores.map(e => e.code === code ? editedItems : e))
+    }
+    const editStores = (arr , getStore) => {
+        setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? 
+            { 
+                ...e, 
+                avlqty: parseInt(e.avlqty) + parseInt(arr.qty),
+                store: (parseInt(e.avlqty) + parseInt(arr.qty)) - parseInt(e.soldqty),
+                total: ((parseInt(e.avlqty) + parseInt(arr.qty)) - parseInt(e.soldqty)) * parseInt(e.income)
+            } 
+            : e
+        ))
     };
     const addSupplierBalance = (code,name,total,reduction,remaining) => {
         setSupplierBalance([{code,name,total,reduction,remaining} , ...supplierBalance])
@@ -257,8 +268,15 @@ export const StateProvider = (props) => {
         }
      };
 
-    const deleteFromStore = (arr) => {
-        setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? {...e , soldqty: parseInt(e.soldqty) + parseInt(arr.qty)} : e))
+    const deleteFromStore = (arr , getStore) => {
+        setStores((oldvalues) => oldvalues.map(e => e.code === arr.itemCode ? 
+            {
+                ...e , 
+                soldqty: parseInt(e.soldqty) + parseInt(arr.qty),
+                store: parseInt(getStore.avlqty) - (parseInt(e.soldqty) + parseInt(arr.qty)),
+                total: (parseInt(getStore.avlqty) - (parseInt(e.soldqty) + parseInt(arr.qty))) * parseInt(e.income)
+            } 
+            : e))
     }
 
     const addTotalReduction = (code,name,date,reduction) => {
@@ -270,7 +288,7 @@ export const StateProvider = (props) => {
 
     return (
         <StateContext.Provider value={
-            {items,addItem,deleteItem,totalReduction,addTotalReduction,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
+            {items,addItem,deleteItem,totalReduction,addTotalReduction,editStoresInfo,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
          }>
             {props.children}
         </StateContext.Provider>

@@ -5,6 +5,7 @@ import ModelBtns from '../ModelBtns';
 import TableInvoices from '../tablemodels/TableInvoices';
 import FormInvoiceModel from '../formmodels/FormInvoiceModel';
 import { useNavigate } from 'react-router-dom';
+import ConfirmationButton from '../ConfirmationButton';
 
 const Sales = () => {
 
@@ -40,6 +41,7 @@ const Sales = () => {
     const [reductionErr ,setReductionErr] = useState(false)
     const [emptyCode ,setEmptyCode] = useState(false)
     const [totalDisabled ,setTotalDisabled] = useState(false)
+    const [show ,setShow] = useState(false)
   
     function handleChange(event){
       if (!isNaN(event.target.value)) {
@@ -94,10 +96,12 @@ const Sales = () => {
             setExisting(true)
           }
         }else{
-          const editedSales = purchasesInfo
-          editSales(record?.itemCode , editedSales)
-          setEdit(false)
-          emptyForm()
+          if(!qtyErr && !codeExist && !qtyZero){
+            const editedSales = purchasesInfo
+            editSales(record?.itemCode , editedSales)
+            setEdit(false)
+            emptyForm()
+          }
         }
     }
  
@@ -157,15 +161,17 @@ const Sales = () => {
 
     let avlQty = stores.find(store => parseInt(store.code) === parseInt(filteredStors[0]?.code))
 
+    // console.log(avlQty)
+
     useEffect(() => {
 
        const handleSupplierErrs = filteredClients?.length === 0 && purchasesInfo.supplierCode && !edit
                 ? setClientErr(true) : setClientErr(false)
        const handleItemErrs = filteredStors?.length === 0 && purchasesInfo.itemCode && !edit
                 ? setItemErr(true) : setItemErr(false)
-        const checkQty = purchasesInfo.qty && parseInt(avlQty ? avlQty.avlqty : 0) < parseInt(purchasesInfo.qty) 
+        const checkQty = purchasesInfo.qty && parseInt(avlQty?.store) < parseInt(purchasesInfo.qty) 
               ? setQtyErr(true) : setQtyErr(false)
-        const handleCodeErrs = purchasesInfo.itemCode && sales?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode)) ? 
+        const handleCodeErrs = purchasesInfo.itemCode && !edit && sales?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode)) ? 
           setCodeExist(true) : setCodeExist(false)
         const handleQtyZero = purchasesInfo.qty && parseInt(purchasesInfo.qty) === 0 ? 
            setQtyZero(true) : setQtyZero(false)
@@ -194,7 +200,7 @@ const Sales = () => {
                 supplierName: filteredClients[0]?.name,
                 invoice: invoiceNum?.length + 1,
                 unit: filteredStors[0]?.unit,
-                price: filteredStors[0]?.income,
+                price: filteredStors[0]?.outcome,
                 total: purchasesInfo.qty ? parseInt(purchasesInfo.qty) * purchasesInfo.price : ''
             }
          })
@@ -208,7 +214,7 @@ const Sales = () => {
                 supplierCode: sales[0]?.supplierCode,
                 invoice: invoiceNum?.length + 1,
                 unit: filteredStors[0]?.unit,
-                price: filteredStors[0]?.income,
+                price: filteredStors[0]?.outcome,
                 total: purchasesInfo.qty ? parseInt(purchasesInfo.qty) * purchasesInfo.price : ''
             }
          })
@@ -218,7 +224,7 @@ const Sales = () => {
         return {
           ...prev,
           totalbill: getTotal,
-          totalwd: discountErr ? getTotal - ((getTotal * calcPurchas.discount) / 100) : '' ,
+          totalwd: !discountErr ? getTotal - ((getTotal * calcPurchas.discount) / 100) : '' ,
           remaining:  !discountErr && !reductionErr ? parseInt(calcPurchas.totalwd) === parseInt(calcPurchas.reduction) ? '0' : calcPurchas.totalwd - calcPurchas.reduction : '',
           items: sales.length,
         }
@@ -252,17 +258,18 @@ const Sales = () => {
     
       if(!discountErr && !reductionErr){
         const handleStores = sales.map((sale) => {
-          deleteFromStore(sale)
+          let storeCode = stores.find(store => sale.itemCode === store.code)
+          deleteFromStore(sale , storeCode)
        })
 
        const handleOutward = sales.map((pur) => {
-        addOutwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount,totalwd,reduction,remaining)
+        addOutwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount || 0,totalwd,reduction || 0,remaining)
       })   
 
       const handleSuppliers = sales.map((sale) => {
         let clientcode = clientBalance.find(supplier => sale.supplierCode === supplier.code)
         if(!clientcode) {
-          addClientBalance(sale.supplierCode,sale.supplierName,totalwd,reduction,remaining)
+          addClientBalance(sale.supplierCode,sale.supplierName,totalwd,reduction || 0,remaining)
         } 
         if(clientcode){
           editClientBalance(sale.supplierCode,calcPurchas, false)
@@ -273,6 +280,12 @@ const Sales = () => {
       navigate('/clientbills')
       }
     
+    }
+
+    const handleCancel = (e) => {
+      e.preventDefault()
+      emptyAllForms()
+      navigate('/homepage')
     }
 
   return (
@@ -295,7 +308,7 @@ const Sales = () => {
             supplierErr={clientErr}
             itemErr={itemErr}
             qtyErr={qtyErr}
-            avlQty={avlQty ? avlQty.avlqty : 0 }
+            avlQty={avlQty?.store}
             existing={existing}
             nameText='اسم العميل'
             codeText='كود العميل'
@@ -325,7 +338,8 @@ const Sales = () => {
           reductionErr={reductionErr}
           totalDisabled={totalDisabled}
         />
-        <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => navigate('/homepage')} />
+        <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => setShow(true)} />
+        {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={handleCancel} cancel={() => setShow(false)} />}
     </div>
   )
 }

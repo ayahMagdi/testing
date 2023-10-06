@@ -36,7 +36,7 @@ const TableClientsContent = ({getClient , filteredItems , isSearched , isDeleted
      }, [filteredItems])
 
   return (
-    <div className={`my-10 mx-auto w-11/12 h-auto max-h-96 border shadow overflow-y-auto ${noItems ? 'hidden' : 'visible' }`}>
+    <div className='my-10 mx-auto w-11/12 h-auto max-h-96 border shadow overflow-y-auto'>
         <table className="table-auto w-full text-center" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>
@@ -48,7 +48,7 @@ const TableClientsContent = ({getClient , filteredItems , isSearched , isDeleted
                     <th scope="col" className="px-6 py-3" style={{border: '1px solid #00000024'}}>حذف</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className={noItems ? 'hidden' : 'visible' }>
                 {isSearched ? filteredItems?.map(e => (
                     <tr className='border-b border-slate-300 even:bg-tablerow' key={e.code}>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.code}</td>

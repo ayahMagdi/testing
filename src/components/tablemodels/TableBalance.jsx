@@ -22,7 +22,7 @@ const TableBalance = ({supplierList ,title,codeText ,nameText ,filteredItems ,ur
   return (
     <div className='my-3'>
         <h2 className='text-center text-4xl font-bold mb-10 text-main'>{title}</h2>
-        <div className={`my-7 mx-auto w-full h-auto max-h-[22rem] border shadow overflow-y-auto ${noItems ? 'hidden' : 'visible' }`}>
+        <div className='my-7 mx-auto w-full h-auto max-h-[22rem] border shadow overflow-y-auto'>
             <table className="table-auto w-full text-center border" style={{borderCollapse: 'collapse'}}>
                 <thead className="sticky top-0 bg-main text-white border-b">
                     <tr className='border-b border-slate-300'>
@@ -34,7 +34,7 @@ const TableBalance = ({supplierList ,title,codeText ,nameText ,filteredItems ,ur
                         <th scope="col" style={{border: '1px solid #00000024'}} className="px-6 py-3">تنزيل الحساب</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={noItems ? 'hidden' : 'visible' }>
                     {isSearched ? filteredItems?.map(e => (
                     <tr className='border-b border-slate-300 even:bg-tablerow' key={e.code}>
                         <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.code}</td>

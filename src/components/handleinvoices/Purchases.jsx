@@ -5,6 +5,7 @@ import FormInvoicesModel from '../formmodels/FormInvoicesModel'
 import TableInvoices from '../tablemodels/TableInvoices'
 import FormInvoiceModel from '../formmodels/FormInvoiceModel'
 import { useNavigate } from 'react-router-dom';
+import ConfirmationButton from '../ConfirmationButton'
 
 const Purchases = () => {
 
@@ -40,6 +41,7 @@ const Purchases = () => {
   const [emptyCode ,setEmptyCode] = useState(false)
   const [totalDisabled ,setTotalDisabled] = useState(false)
   const [record ,setRecord] = useState(null)
+  const [show ,setShow] = useState(false)
 
   function handleChange(event){
     if (!isNaN(event.target.value)) {
@@ -93,10 +95,12 @@ const Purchases = () => {
         setExisting(true)
       }
     }else{
-      const editedPurchases = purchasesInfo
-      editPurchases(record?.itemCode , editedPurchases)
-      setEdit(false)
-      emptyForm()
+      if(!qtyZero){
+        const editedPurchases = purchasesInfo
+        editPurchases(record?.itemCode , editedPurchases)
+        setEdit(false)
+        emptyForm()
+      }
     }
   }
 
@@ -159,7 +163,7 @@ const Purchases = () => {
               ? setSupplierErr(true) : setSupplierErr(false)
      const handleItemErrs = filteredStors?.length === 0 && purchasesInfo?.itemCode && !edit 
               ? setItemErr(true) : setItemErr(false)
-     const handleCodeErrs = purchasesInfo.itemCode && purchases?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode)) ? 
+     const handleCodeErrs = purchasesInfo.itemCode && !edit && purchases?.find(e => parseInt(e.itemCode) === parseInt(purchasesInfo.itemCode)) ? 
       setCodeExist(true) : setCodeExist(false)
      const handleQtyZero = purchasesInfo.qty && parseInt(purchasesInfo.qty) === 0 ? 
          setQtyZero(true) : setQtyZero(false)
@@ -260,13 +264,13 @@ const Purchases = () => {
      )
   
      const handleInward = purchases.map((pur) => {
-      addInwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount,totalwd,reduction,remaining)
+      addInwardBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount || 0,totalwd,reduction || 0,remaining)
     })     
   
     const handleSuppliers = purchases.map((pur) => {
       let suppliercode = supplierBalance.find(supplier => pur.supplierCode === supplier.code)
       if(!suppliercode) {
-        addSupplierBalance(pur.supplierCode,pur.supplierName,totalwd,reduction,remaining)
+        addSupplierBalance(pur.supplierCode,pur.supplierName,totalwd,reduction || 0,remaining)
       } 
       if(suppliercode){
         editSupplierBalance(pur.supplierCode,calcPurchas , false)
@@ -277,6 +281,12 @@ const Purchases = () => {
       navigate('/supplierbills')
     }
 
+  }
+
+  const handleCancel = (e) => {
+    e.preventDefault()
+    emptyAllForms()
+    navigate('/homepage')
   }
 
   return (
@@ -327,7 +337,8 @@ const Purchases = () => {
              reductionErr={reductionErr}
              totalDisabled={totalDisabled}
         />
-        <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => navigate('/homepage')} />
+        <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => setShow(true)} />
+        {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={handleCancel} cancel={() => setShow(false)} />}
     </div>
   )
 }

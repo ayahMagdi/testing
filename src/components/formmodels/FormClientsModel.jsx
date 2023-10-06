@@ -6,7 +6,7 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal
         <form className='mt-10' onSubmit={handleSubmit} id='my-form'>
             <div className='grid grid-cols-2 gap-6'>
                 <div>
-                    <label className='mb-4 block'>كود المورد</label>
+                    <label className='mb-4 block'>كود العميل</label>
                     <input
                         type='text'
                         className='w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200'
@@ -18,7 +18,7 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal
                     />
                 </div>
                 <div>
-                    <label className='mb-4 block'>اسم المورد</label>
+                    <label className='mb-4 block'>اسم العميل</label>
                     <input
                         type='text'
                         className={`w-full border px-4 h-14 rounded-2xl shadow-md focus:outline-none border-gray-200 ${nameExist && 'border-red-500'}`}
@@ -59,7 +59,6 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal
                         name='address'
                         minLength='3'
                         maxLength='30'
-                        required
                         autoComplete='new-password'
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                         onInput={F => F.target.setCustomValidity('')}

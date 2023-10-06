@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useMemo } from 'react'
 import { useStateValue } from '../../context/stateProvider';
 import { useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormItemsModel from '../formmodels/FormItemsModel';
+import isEqual from 'lodash/isEqual';
 
 const EditProduct = ({record , isEdited}) => {
 
-    const {editItem , items} = useStateValue()
+    const {editItem , items ,editStoresInfo ,stores} = useStateValue()
     const options = [
         {value: 'قطع' , label: 'قطع'},
         {value: 'علبة' , label: 'علبه'},
@@ -16,8 +17,32 @@ const EditProduct = ({record , isEdited}) => {
     const [show ,setShow] = useState(false)
     const [invalidPrice ,setInvalidPrice] = useState(false)
     const [nameExist ,setNameExist] = useState(false)
+    const [codeExist ,setCodeExist] = useState(false)
+    const [storeRecord , setStoreRecord] = useState({})
+
+  const uniqueDataInvoice = useMemo(() => {
+      const unique = [];
+  
+    items.forEach(item => {
+      let exists = false;
+      
+      
+       if(isEqual(record.code, item.code)) {
+          exists = true;
+        }
+  
+      if(!exists) {
+        unique.push(item);
+      }
+    });
+  
+    return unique;
+   }, [items]);
 
     const getUnit = options.filter(e => e.value === record.unit)
+    useEffect(()=> {
+      const getStore = stores.filter(e => e.code === record.code && setStoreRecord(e))
+    }, [])
 
     const [newArr ,setNewArr] = useState(
         {
@@ -25,12 +50,16 @@ const EditProduct = ({record , isEdited}) => {
             name: record.name,
             unit: getUnit[0].label,
             income: record.income,
-            outcome: record.outcome
-        })
+            outcome: record.outcome,
+            avlqty:storeRecord.avlqty,
+            soldqty:storeRecord.soldqty,
+            store:storeRecord.store,
+            total:storeRecord.total
+    })
     
     const navigate = useNavigate();
 
-    const  {code , name , unit , income , outcome} = newArr
+    const  {code , name , unit , income , outcome , avlqty , soldqty , store ,total} = newArr
 
     const editedItems = newArr
 
@@ -39,41 +68,45 @@ const EditProduct = ({record , isEdited}) => {
           if (!isNaN(event.target.value)) {
             setNewArr(prevData => ({
               ...prevData,
+              avlqty:storeRecord.avlqty,
+              soldqty:storeRecord.soldqty,
+              store:storeRecord.store,
+              total:storeRecord.total,
               [event.target.name]: event.target.value
             }));
           }
         } else {
           setNewArr(prevData => ({
             ...prevData,
+            avlqty:storeRecord.avlqty,
+            soldqty:storeRecord.soldqty,
+            store:storeRecord.store,
+            total:storeRecord.total,
             [event.target.name]: event.target.value
           }));
         }
       }
-      
-      // function handleSelectChange(selectedOption) {
-      //   setNewArr(prevData => ({
-      //     ...prevData,
-      //     unit: selectedOption.value
-      //   }));
-      // }
     
     useEffect(() => {
 
         const checkPrice = newArr.outcome && parseInt(newArr.income) > parseInt(newArr.outcome) ? 
                  setInvalidPrice(true) : setInvalidPrice(false)
 
-        const findSameName = items.find(e => e.name === newArr.name && e.code !== newArr.code)
+        const findSameName = uniqueDataInvoice.find(e => e.name === newArr.name && e.code !== newArr.code)
         
-        const checkName = newArr.name && findSameName ? 
-               setNameExist(true) : setNameExist(false)
+        const checkName = newArr.name && findSameName ? setNameExist(true) : setNameExist(false)
+
+        const checkCode = newArr.code && uniqueDataInvoice.find(e => e.code === newArr.code) ?
+              setCodeExist(true) : setCodeExist(false)
  
-     } , [newArr , items])
+     } , [newArr , items,uniqueDataInvoice])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(!invalidPrice && !nameExist){
+        if(!invalidPrice && !nameExist && !codeExist){
             setInvalidPrice(false)
             editItem(record.code , editedItems)
+            editStoresInfo(record.code,editedItems)
             isEdited(true)
             navigate(-1)
         }
@@ -99,6 +132,7 @@ const EditProduct = ({record , isEdited}) => {
                 outcomeVal={newArr.outcome}
                 invalidPrice={invalidPrice}
                 nameExist={nameExist}
+                codeExist={codeExist}
                 options={options}
                 isDisabled={true}
                 // handleSelectChange={handleSelectChange}

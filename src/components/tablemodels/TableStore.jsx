@@ -19,7 +19,7 @@ const TableStore = ({filteredItems , isSearched}) => {
   return (
     <div className='my-5'>
         <h2 className='text-center text-4xl font-bold mb-10 text-main'>قائمة الاصناف</h2>
-        <div className={`my-10 mx-auto w-full h-auto max-h-[27rem] border shadow overflow-y-scroll ${noItems ? 'hidden' : 'visible' }`}>
+        <div className='my-10 mx-auto w-full h-auto max-h-[27rem] border shadow overflow-y-auto'>
         <table className="table-auto w-full text-center border" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>
@@ -34,7 +34,7 @@ const TableStore = ({filteredItems , isSearched}) => {
                     <th scope="col" style={{border: '1px solid #00000024'}} className="px-6 py-3">الاجمالي</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className={noItems ? 'hidden' : 'visible'}>
                 {isSearched ? filteredItems?.map(e => (
                   <tr className='border-b border-slate-300 even:bg-tablerow' key={e.code}>
                      <td className="px-6 py-3" style={{border: '1px solid #00000024'}}>{e.code}</td>

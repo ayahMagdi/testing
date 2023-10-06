@@ -41,8 +41,8 @@ const TableInwardbills = ({invoicesList,code,name,height}) => {
                         <td className="p-2 text-sm" style={{border: '1px solid #00000024'}}>{e.itemCode}</td>
                         <td className="p-2 text-sm" style={{border: '1px solid #00000024'}}>{e.itemName}</td>
                         <td className="p-2 text-sm" style={{border: '1px solid #00000024'}}>{e.unit}</td>
-                        <td className="p-2 text-sm" style={{border: '1px solid #00000024'}}>{e.price}</td>
                         <td className="p-2 text-sm" style={{border: '1px solid #00000024'}}>{e.qty}</td>
+                        <td className="p-2 text-sm" style={{border: '1px solid #00000024'}}>{e.price}</td>
                         <td className="p-2 text-sm" style={{border: '1px solid #00000024'}}>{e.total}</td>
                         {e.invoice.rowSpan ? (
                             <td rowSpan={e.invoice.rowSpan} className="p-2 text-sm" style={{border: '1px solid #00000024'}}>{e.totalbill}</td>

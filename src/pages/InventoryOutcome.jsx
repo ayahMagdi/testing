@@ -35,11 +35,11 @@ const InventoryOutcome = () => {
 
   function getDates(startDate, endDate) {
     const dateArray = [];
-    let currentDate = moment(startDate, 'DD/MM/YYYY').startOf('day');
-    const formattedEndDate = moment(endDate, 'DD/MM/YYYY').startOf('day');
+    let currentDate = moment(startDate, 'M/DD/YYYY').startOf('day');
+    const formattedEndDate = moment(endDate, 'M/DD/YYYY').startOf('day');
   
     while (currentDate <= formattedEndDate) {
-      dateArray.push(moment(currentDate).format('DD/MM/YYYY'));
+      dateArray.push(new Date(currentDate).toLocaleDateString());
       currentDate = moment(currentDate).add(1, 'days');
     }
   

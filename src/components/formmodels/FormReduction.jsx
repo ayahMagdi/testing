@@ -44,6 +44,7 @@ const FormReduction = ({handleSubmit,codeText,codeval,nameval,nameText,dateval,h
                     name='reduction'
                     placeholder='1000'
                     required
+                    autoComplete='new-password'
                     value={reductionval}
                     onChange={handleChange}
                 />
