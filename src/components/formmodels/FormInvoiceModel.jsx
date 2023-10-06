@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormInvoiceModel = ({handleSubmit , handleChange ,handleInputChange,discountErr,totalDisabled,reductionErr , totalVal ,discountVal,totalwdVal , reductionVal , remainingVal , itemsVal}) => {
+const FormInvoiceModel = ({handleSubmit , handleChange,discountDisabled ,handleInputChange,discountErr,totalDisabled,reductionErr , totalVal ,discountVal,totalwdVal , reductionVal , remainingVal , itemsVal}) => {
   return (
     <div>
         <form className='my-4' onSubmit={handleSubmit} id='my-form'>
@@ -24,7 +24,7 @@ const FormInvoiceModel = ({handleSubmit , handleChange ,handleInputChange,discou
                         className={`w-full border p-2 rounded-lg focus:outline-none ${discountErr ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
                         name='discount'
                         required
-                        disabled={totalDisabled}
+                        disabled={discountDisabled}
                         onKeyDown={handleInputChange}
                         onChange={handleChange}
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 

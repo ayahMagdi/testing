@@ -40,6 +40,7 @@ const Purchases = () => {
   const [reductionErr ,setReductionErr] = useState(false)
   const [emptyCode ,setEmptyCode] = useState(false)
   const [totalDisabled ,setTotalDisabled] = useState(false)
+  const [discountDisabled ,setDiscountDisabled] = useState(false)
   const [record ,setRecord] = useState(null)
   const [show ,setShow] = useState(false)
 
@@ -175,7 +176,8 @@ const Purchases = () => {
 
     const handleDisabledQty = !purchasesInfo.itemCode || itemErr ? setEmptyCode(true) : setEmptyCode(false)
 
-    const handleTotalDisabled = !calcPurchas.totalbill ? setTotalDisabled(true) : setTotalDisabled(false)
+    const handleTotalDisabled = !calcPurchas.totalbill || parseInt(calcPurchas?.discount) === 100 ? setTotalDisabled(true) : setTotalDisabled(false)
+    const handleDiscountDisabled = !calcPurchas.totalbill ? setDiscountDisabled(true) : setDiscountDisabled(false)
 
   } , [filteredSuppliers , purchasesInfo ,filteredStors ,edit , purchases , calcPurchas ,itemErr])
 
@@ -329,13 +331,14 @@ const Purchases = () => {
              handleInputChange={handleKeyDown}
              handleChange={handleChange} 
              discountVal={calcPurchas.discount || ''} 
-             totalwdVal={calcPurchas.totalwd || ''}
+             totalwdVal={getTotal ? calcPurchas.totalwd : ''}
              reductionVal={calcPurchas.reduction || ''}
-             remainingVal={calcPurchas.remaining || ''}
+             remainingVal={getTotal ? calcPurchas.remaining : ''}
              itemsVal={calcPurchas.items || ''}
              discountErr={discountErr}
              reductionErr={reductionErr}
              totalDisabled={totalDisabled}
+             discountDisabled={discountDisabled}
         />
         <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => setShow(true)} />
         {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={handleCancel} cancel={() => setShow(false)} />}

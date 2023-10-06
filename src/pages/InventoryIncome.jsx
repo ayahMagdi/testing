@@ -67,8 +67,6 @@ const InventoryIncome = () => {
       distinctCategories?.push({title: newDataSets[newDataSets.findIndex(x => x.invoice?.title === data)].invoice?.title});
       (newDataSets[newDataSets.findIndex(x => x.invoice.title === data)]).invoice.rowSpan = countCategories[data]
   })
-
-  // const getTotal = inwardBills?.filter((inward => datesBetween?.map(date => inward.date == date && getItemsTotal.push(inward))))
   
   const uniqueDataInvoice = useMemo(() => {
     const unique = [];

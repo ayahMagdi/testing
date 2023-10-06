@@ -41,6 +41,7 @@ const Sales = () => {
     const [reductionErr ,setReductionErr] = useState(false)
     const [emptyCode ,setEmptyCode] = useState(false)
     const [totalDisabled ,setTotalDisabled] = useState(false)
+    const [discountDisabled ,setDiscountDisabled] = useState(false)
     const [show ,setShow] = useState(false)
   
     function handleChange(event){
@@ -161,8 +162,6 @@ const Sales = () => {
 
     let avlQty = stores.find(store => parseInt(store.code) === parseInt(filteredStors[0]?.code))
 
-    // console.log(avlQty)
-
     useEffect(() => {
 
        const handleSupplierErrs = filteredClients?.length === 0 && purchasesInfo.supplierCode && !edit
@@ -180,10 +179,10 @@ const Sales = () => {
         const handleReductionErr = calcPurchas.reduction && parseInt(calcPurchas.reduction) > parseInt(calcPurchas.totalwd) ?
            setReductionErr(true) : setReductionErr(false)
            
-       const handleTotalDisabled = !calcPurchas.totalbill ? setTotalDisabled(true) : setTotalDisabled(false)
+       const handleTotalDisabled = !calcPurchas.totalbill || parseInt(calcPurchas?.discount) === 100 ? setTotalDisabled(true) : setTotalDisabled(false)
+       const handleDiscountDisabled = !calcPurchas.totalbill ? setDiscountDisabled(true) : setDiscountDisabled(false)
 
         const handleDisabledQty = !purchasesInfo.itemCode || itemErr ? setEmptyCode(true) : setEmptyCode(false)
-  
 
       } , [filteredClients , purchasesInfo ,filteredStors ,edit , avlQty ,sales ,calcPurchas ,itemErr])
     
@@ -330,13 +329,14 @@ const Sales = () => {
           handleInputChange={handleKeyDown}
           handleChange={handleChange} 
           discountVal={calcPurchas.discount || ''} 
-          totalwdVal={calcPurchas.totalwd || ''}
+          totalwdVal={getTotal ? calcPurchas.totalwd : ''}
           reductionVal={calcPurchas.reduction || ''}
-          remainingVal={calcPurchas.remaining || ''}
+          remainingVal={getTotal ? calcPurchas.remaining : ''}
           itemsVal={calcPurchas.items || ''}
           discountErr={discountErr}
           reductionErr={reductionErr}
           totalDisabled={totalDisabled}
+          discountDisabled={discountDisabled}
         />
         <ModelBtns title='تسجيل' cancelTitle='الغاء' handleRegistration={handleRegistration} btnStyle={'w-40 py-2'} margin={'mt-5'} handlecancel={() => setShow(true)} />
         {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={handleCancel} cancel={() => setShow(false)} />}
