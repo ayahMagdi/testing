@@ -27,6 +27,8 @@ import ClientReduction from "./pages/ClientReduction";
 import Suppliers from "./pages/Suppliers";
 import Clients from "./pages/Clients";
 import Store from "./pages/Store";
+import ExpensesPage from "./pages/ExpensesPage";
+import AddExpenses from "./pages/AddExpenses";
 
 function App() {
 
@@ -122,6 +124,8 @@ function App() {
          <Route path="/clientbalance" element={<ClientBalance searchItem={searchItem} search={search} getRecordReduction={getRecordReductionClient} />} />
          <Route path="/supplierreduction" element={<SupplierReduction recordReduction={recordReduction} />} />
          <Route path="/clientreduction" element={<ClientReduction recordReduction={recordReductionClient} />} />
+         <Route path="/expensespage" element={<ExpensesPage />} />
+         <Route path="/homepage/expensespage/addexpenses" element={<AddExpenses />} />
       </Routes>
     </div>
   );

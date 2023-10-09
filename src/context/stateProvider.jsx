@@ -50,6 +50,7 @@ export const StateProvider = (props) => {
         // {title: 'فواتير العملاء' , icon: faFileInvoiceDollar , url: '/clientbills'},
         {title: 'جرد الداخل' , icon: faMoneyBill1Wave , url: '/inventoryincome'},
         {title: 'جرد الخارج' , icon: faMoneyBillWave , url: '/inventoryoutcome'},
+        {title: 'المصاريف' , icon: faMoneyCheckAlt , url: '/expensespage'},
         // {title: 'رصيد الموردين' , icon: faMoneyCheckDollar , url: '/supplierbalance'},
         // {title: 'رصيد العملاء' , icon: faCalculator , url: '/clientbalance'},
     ])
@@ -147,6 +148,7 @@ export const StateProvider = (props) => {
     ])
     const [totalReduction , setTotalReduction] = useState([])
     const [totalReductionClient , setTotalReductionClient] = useState([])
+    const [expenses , setExpenses] = useState([])
 
     const addItem = (code ,name, unit, income, outcome) => {
         setItems([{code,name,unit,income,outcome} , ...items])
@@ -159,6 +161,9 @@ export const StateProvider = (props) => {
     }
     const addSupplier = (code, name , phone) => {
         setSuppliers([...suppliers ,{code, name , phone}])
+    }
+    const addExpenses = (date, total , reason) => {
+        setExpenses([{date, total , reason} , ...expenses])
     }
 
     const addClient = (code, name , phone , address) => {
@@ -288,7 +293,7 @@ export const StateProvider = (props) => {
 
     return (
         <StateContext.Provider value={
-            {items,addItem,deleteItem,totalReduction,addTotalReduction,editStoresInfo,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
+            {items,addItem,deleteItem,totalReduction,expenses,addExpenses,addTotalReduction,editStoresInfo,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
          }>
             {props.children}
         </StateContext.Provider>
