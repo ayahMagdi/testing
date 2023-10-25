@@ -1,4 +1,3 @@
-// import logoImg from '../assets/logo.jpg'
 import logoImg from '../assets/Frame 48095522.png'
 import Form from '../components/Form'
 
@@ -10,11 +9,7 @@ const Login = () => {
             <Form />
         </div>
         <div className='hidden lg:flex justify-start items-center relative w-5/12'>
-          {/* <div className='absolute w-full h-full  rounded-full scale-x-[1.7] scale-y-[1.4] rotate-90 z-1 -left-36'></div> */}
-          {/* <div className='z-2 relative flex justify-center items-center flex-col'> */}
             <img src={logoImg} alt='logo' className='w-full' />
-            {/* <h2 className="text-6xl font-bold text-white text-center mt-4">Logo</h2> */}
-          {/* </div> */}
         </div>
     </div>
   )

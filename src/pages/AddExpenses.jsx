@@ -3,6 +3,7 @@ import FormExpenses from '../components/formmodels/FormExpenses'
 import { useNavigate } from 'react-router-dom';
 import { useStateValue } from '../context/stateProvider';
 import ModelBtns from '../components/ModelBtns';
+import Sidebar from '../components/Sidebar';
 
 const AddExpenses = () => {
 
@@ -48,8 +49,13 @@ const AddExpenses = () => {
      }
 
   return (
-    <div className='container mx-auto px-4'>
-        <FormExpenses
+    <div>
+    <div className="flex justify-start items-start w-full gap-10">
+      <div className="w-1/5">
+         <Sidebar />
+      </div>
+      <div className="w-4/5 pl-8">
+         <FormExpenses
            handleChange={handleChange}
            handleSubmit={handleSubmit}
            totalVal={expenses.total}
@@ -57,6 +63,8 @@ const AddExpenses = () => {
            reasonVal={expenses.reason}
          />
         <ModelBtns handlecancel={cancelAdd} form='my-form' title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
+      </div>
+    </div>
     </div>
   )
 }

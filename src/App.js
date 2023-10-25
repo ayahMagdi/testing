@@ -29,6 +29,7 @@ import Clients from "./pages/Clients";
 import Store from "./pages/Store";
 import ExpensesPage from "./pages/ExpensesPage";
 import AddExpenses from "./pages/AddExpenses";
+import Landing from "./pages/Landing";
 
 function App() {
 
@@ -99,15 +100,16 @@ function App() {
       <Routes>
          <Route exact path="/" element={<Login />} />
          <Route path="/homepage" element={<Homepage searchItem={searchItem} search={search}  />} />
+         <Route path="/landingpage" element={<Landing searchItem={searchItem} search={search}  />} />
          <Route path="/homepage/storepage/allproducts" element={<AllproductsPage getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
          <Route path="/homepage/suppliers" element={<Suppliers getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
          <Route path="/homepage/clients" element={<Clients getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
          <Route path="/homepage/storepage" element={<Store getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
          <Route path="/homepage/suppliers/allsuppliers" element={<AllsuppliersPage getSupplier={getSupplier} searchItem={searchItem} search={search} addMsg={addSupplierMsg} editMsg={editSupplierMsg} />} />
          <Route path="/homepage/clients/allclients" element={<AllClientsPage getClient={getClient} searchItem={searchItem} search={search} addMsg={addClientMsg} editMsg={editClientMsg} />} />
-         <Route path="/homepage/storepage/allproducts/addproduct" element={<AddPage isAdded={isAddedItem} />} />
+         <Route path="/homepage/storepage/allproducts/addproduct" element={<AddPage isAdded={isAddedItem} searchItem={searchItem} search={search}  />} />
          <Route path="/homepage/suppliers/allsuppliers/addSupplier" element={<AddSupplierPage isAdded={isAddedSupplier} />} />
-         <Route path="/homepage/clients/allclients/addClient" element={<AddClientPage isAdded={isAddedClient} />} />
+         <Route path="/homepage/clients/allclients/addClient" element={<AddClientPage isAdded={isAddedClient} searchItem={searchItem} search={search} />} />
          <Route path="/homepage/storepage/allproducts/editproduct" element={<EditPage record={record} isEdited={isEditedItem} />} />
          <Route path="/homepage/suppliers/allsuppliers/editSupplier" element={<EditSupplierPage supplier={supplier} isEdited={isEditedSupplier} />} />
          <Route path="/homepage/clients/allclients/editClient" element={<EditClientPage client={client} isEdited={isEditedClient} />} />
@@ -125,7 +127,7 @@ function App() {
          <Route path="/supplierreduction" element={<SupplierReduction recordReduction={recordReduction} />} />
          <Route path="/clientreduction" element={<ClientReduction recordReduction={recordReductionClient} />} />
          <Route path="/expensespage" element={<ExpensesPage />} />
-         <Route path="/homepage/expensespage/addexpenses" element={<AddExpenses />} />
+         <Route path="/homepage/expensespage/addexpenses" element={<AddExpenses searchItem={searchItem} search={search} />} />
       </Routes>
     </div>
   );

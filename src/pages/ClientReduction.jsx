@@ -5,6 +5,7 @@ import FormReduction from '../components/formmodels/FormReduction';
 import ModelBtns from '../components/ModelBtns';
 import TableReduction from '../components/tablemodels/TableReduction';
 import ConfirmationButton from '../components/ConfirmationButton';
+import Sidebar from '../components/Sidebar';
 
 const ClientReduction = ({recordReduction}) => {
 
@@ -74,22 +75,46 @@ const ClientReduction = ({recordReduction}) => {
      }
 
   return (
-    <div className='container mx-auto px-4 max-h-screen'>
-        <FormReduction
-            codeText='كود العميل'
-            nameText='اسم العميل'
-            codeval={reductionInfo.code}
-            nameval={reductionInfo.name}
-            dateval={reductionInfo.date}
-            reductionval={reductionInfo.reduction}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            checkTotal={checkTotal}
-            checkValue={checkValue}
-        />
-       <ModelBtns form='my-form' handlecancel={() => setShow(true)} title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-9'} />
-       <TableReduction listReduction={uniqueDataInvoice} />
-       {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}
+//     <div className='container mx-auto px-4 max-h-screen'>
+        // <FormReduction
+        //     codeText='كود العميل'
+        //     nameText='اسم العميل'
+        //     codeval={reductionInfo.code}
+        //     nameval={reductionInfo.name}
+        //     dateval={reductionInfo.date}
+        //     reductionval={reductionInfo.reduction}
+        //     handleChange={handleChange}
+        //     handleSubmit={handleSubmit}
+        //     checkTotal={checkTotal}
+        //     checkValue={checkValue}
+        // />
+//        <ModelBtns form='my-form' handlecancel={() => setShow(true)} title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-9'} />
+//        <TableReduction listReduction={uniqueDataInvoice} />
+//        {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}
+//    </div>
+  <div>
+    <div className="flex justify-start items-start w-full gap-10">
+        <div className="w-1/5">
+            <Sidebar />
+        </div>
+        <div className="w-4/5 pl-8">
+            <FormReduction
+                codeText='كود العميل'
+                nameText='اسم العميل'
+                codeval={reductionInfo.code}
+                nameval={reductionInfo.name}
+                dateval={reductionInfo.date}
+                reductionval={reductionInfo.reduction}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                checkTotal={checkTotal}
+                checkValue={checkValue}
+            />
+           <ModelBtns form='my-form' handlecancel={() => setShow(true)} title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-9'} />
+           <TableReduction listReduction={uniqueDataInvoice} />
+           {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}
+        </div>
+    </div>
    </div>
   )
 }

@@ -4,6 +4,7 @@ import Buttons from '../components/Buttons'
 import { useStateValue } from '../context/stateProvider'
 import moment from 'moment'
 import TableExpenses from '../components/tablemodels/TableExpenses'
+import Sidebar from '../components/Sidebar'
 
 const ExpensesPage = () => {
 
@@ -50,22 +51,45 @@ const ExpensesPage = () => {
   const calcExpenses = getItemsTotal.map((e) => parseInt(e.total)).reduce((a, b)=> a+b, 0);
 
   return (
-    <div className='container mx-auto px-4 my-5'>
-        <h2 className='text-center text-3xl font-bold text-main'>المصاريف</h2>
-        <Buttons
-             title='اضافة' 
-             urlAdd={'/homepage/expensespage/addexpenses'} 
-        />
-        <FormInventory 
-            dateoptions={getdates} 
-            startDateval={startDate}
-            endDateval={endDate}
-            totalVal={calcExpenses || ''}
-            handleChangeStartDate={(selectedOption) => setStartDate(selectedOption)}
-            handleChangeEndDate={(selectedOption) => setEndDate(selectedOption)}
-        />
-        <TableExpenses expensesList={getItemsTotal.length > 0 ? getItemsTotal : expenses} />
-   </div>
+  //   <div className='container mx-auto px-4 my-5'>
+        // <h2 className='text-center text-3xl font-bold text-main'>المصاريف</h2>
+        // <Buttons
+        //      title='اضافة' 
+        //      urlAdd={'/homepage/expensespage/addexpenses'} 
+        // />
+        // <FormInventory 
+        //     dateoptions={getdates} 
+        //     startDateval={startDate}
+        //     endDateval={endDate}
+        //     totalVal={calcExpenses || ''}
+        //     handleChangeStartDate={(selectedOption) => setStartDate(selectedOption)}
+        //     handleChangeEndDate={(selectedOption) => setEndDate(selectedOption)}
+        // />
+        // <TableExpenses expensesList={getItemsTotal.length > 0 ? getItemsTotal : expenses} />
+  //  </div>
+    <div>
+      <div className="flex justify-start items-start w-full gap-10">
+          <div className="w-1/5">
+            <Sidebar />
+          </div>
+          <div className="w-4/5 pl-8">
+            <h2 className='text-center text-3xl font-bold text-main'>المصاريف</h2>
+            <Buttons
+                title='اضافة' 
+                urlAdd={'/homepage/expensespage/addexpenses'} 
+            />
+            <FormInventory 
+                dateoptions={getdates} 
+                startDateval={startDate}
+                endDateval={endDate}
+                totalVal={calcExpenses || ''}
+                handleChangeStartDate={(selectedOption) => setStartDate(selectedOption)}
+                handleChangeEndDate={(selectedOption) => setEndDate(selectedOption)}
+            />
+            <TableExpenses expensesList={getItemsTotal.length > 0 ? getItemsTotal : expenses} />
+          </div>
+      </div>
+    </div>
   )
 }
 

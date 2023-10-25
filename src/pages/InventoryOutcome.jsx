@@ -4,6 +4,7 @@ import TableInwardbills from '../components/tablemodels/TableInwardbills';
 import FormInventory from '../components/formmodels/FormInventory';
 import moment from 'moment';
 import isEqual from 'lodash/isEqual';
+import Sidebar from '../components/Sidebar';
 
 const InventoryOutcome = () => {
 
@@ -75,8 +76,25 @@ const InventoryOutcome = () => {
   const inventory =  uniqueDataInvoice.map((e) => e.totalwd).reduce((a, b)=> a+b, 0);
 
   return (
-    <div className='container mx-auto px-4 my-5'>
-    <FormInventory 
+  //   <div className='container mx-auto px-4 my-5'>
+    // <FormInventory 
+    //     title='بيانات جرد الداخل'
+    //     dateoptions={getdates} 
+    //     startDateval={startDate}
+    //     endDateval={endDate}
+    //     totalVal={inventory || ''}
+    //     handleChangeStartDate={(selectedOption) => setStartDate(selectedOption)}
+    //     handleChangeEndDate={(selectedOption) => setEndDate(selectedOption)}
+    // />
+    // <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[28rem]' />
+  //  </div>
+  <div>
+  <div className="flex justify-start items-start w-full gap-10">
+      <div className="w-1/5">
+        <Sidebar />
+      </div>
+      <div className="w-4/5 pl-8">
+        <FormInventory 
         title='بيانات جرد الداخل'
         dateoptions={getdates} 
         startDateval={startDate}
@@ -86,7 +104,9 @@ const InventoryOutcome = () => {
         handleChangeEndDate={(selectedOption) => setEndDate(selectedOption)}
     />
     <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[28rem]' />
-</div>
+      </div>
+  </div>
+  </div>
   )
 }
 

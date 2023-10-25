@@ -3,6 +3,7 @@ import TableInwardbills from '../components/tablemodels/TableInwardbills'
 import FilterInvoices from '../components/handleinvoices/FilterInvoices'
 import { useStateValue } from '../context/stateProvider'
 import isEqual from 'lodash/isEqual';
+import Sidebar from '../components/Sidebar';
 
 const OutwardBills = () => {
 
@@ -107,7 +108,33 @@ const handlecancel = () => {
 }
 
   return (
-    <div className='container mx-auto px-4'>
+    // <div className='container mx-auto px-4'>
+        // <FilterInvoices title='فواتير الخارج' 
+        //     handlecancel={handlecancel} 
+        //     getinvoices={getinvoices}
+        //     handleChangeInvoices={(value) => handleSelectChange(value, 'filterinvoices')}
+        //     handleChangeDates={(value) => handleSelectChange(value, 'filterdates')}
+        //     handleChangeSuppliers={(value) => handleSelectChange(value, 'filtersuppliers')}
+        //     handleChangeItems={(value) => handleSelectChange(value, 'filteritems')}
+        //     getdates={getdates}
+        //     getsuppliers={getsuppliers}
+        //     getitems={getitems}
+        //     handleSubmit={handleSubmit}
+        //     invoiceval={selectedValues.filterinvoices}
+        //     dateval={selectedValues.filterdates}
+        //     suppliername={selectedValues.filtersuppliers}
+        //     itemname={selectedValues.filteritems}
+        //     name='اسم العميل'
+        //     nameplaceholder='اختر اسم العميل'
+        // />
+        // <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[25rem]' />
+    // </div>
+    <div>
+    <div className="flex justify-start items-start w-full gap-10">
+        <div className="w-1/5">
+          <Sidebar />
+        </div>
+        <div className="w-4/5 pl-8">
         <FilterInvoices title='فواتير الخارج' 
             handlecancel={handlecancel} 
             getinvoices={getinvoices}
@@ -127,6 +154,8 @@ const handlecancel = () => {
             nameplaceholder='اختر اسم العميل'
         />
         <TableInwardbills invoicesList={newDataSets} code='كود العميل' name='اسم العميل' height='max-h-[25rem]' />
+        </div>
+    </div>
     </div>
   )
 }

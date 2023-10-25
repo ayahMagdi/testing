@@ -5,6 +5,7 @@ import { useStateValue } from '../context/stateProvider';
 import TableReduction from '../components/tablemodels/TableReduction';
 import ConfirmationButton from '../components/ConfirmationButton';
 import { useNavigate } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
 
 const SupplierReduction = ({recordReduction}) => {
 
@@ -74,8 +75,30 @@ const SupplierReduction = ({recordReduction}) => {
    }
 
   return (
-    <div className='container mx-auto px-4 max-h-screen'>
-       <FormReduction 
+    // <div className='container mx-auto px-4 max-h-screen'>
+      //  <FormReduction 
+      //     codeText='كود المورد'
+      //     nameText='اسم المورد'
+      //     codeval={reductionInfo.code}
+      //     nameval={reductionInfo.name}
+      //     dateval={reductionInfo.date}
+      //     reductionval={reductionInfo.reduction}
+      //     handleChange={handleChange}
+      //     handleSubmit={handleSubmit}
+      //     checkTotal={checkTotal}
+      //     checkValue={checkValue}
+      //  />
+      //  <ModelBtns form='my-form' handlecancel={() => setShow(true)} title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-9'} />
+      //  <TableReduction listReduction={uniqueDataInvoice} />
+      //  {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}
+    // </div>
+    <div>
+      <div className="flex justify-start items-start w-full gap-10">
+          <div className="w-1/5">
+            <Sidebar />
+          </div>
+          <div className="w-4/5 pl-8">
+          <FormReduction 
           codeText='كود المورد'
           nameText='اسم المورد'
           codeval={reductionInfo.code}
@@ -90,7 +113,9 @@ const SupplierReduction = ({recordReduction}) => {
        <ModelBtns form='my-form' handlecancel={() => setShow(true)} title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-9'} />
        <TableReduction listReduction={uniqueDataInvoice} />
        {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}
-    </div>
+          </div>
+      </div>
+   </div>
   )
 }
 
