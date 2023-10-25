@@ -49,7 +49,6 @@ const AllsuppliersPage = ({editedSuppliers , getSupplier , searchItem , search ,
              : editMsg ? <SuccessMsg title='تم تعديل المورد' /> 
              : ''
            }
-         <Navbar handleSearch={() => handleSearch}  searchItem={searchItem} />
          <Navbar handleSearch={() => handleSearch} searchItem={searchItem} />
          <Buttons 
               title='اضافة مورد جديد' 
