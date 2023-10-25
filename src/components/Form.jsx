@@ -18,7 +18,7 @@ const Form = () => {
       e.preventDefault()
       setSuccess(true)
       localStorage.setItem("success" , "true")
-      navigate('/homepage')
+      navigate('/landingpage')
     }
 
     useEffect(() => {

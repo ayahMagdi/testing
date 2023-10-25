@@ -274,8 +274,8 @@ const Sidebar = () => {
             let checkLocationNestedLik = checkLocationNested?.branches?.filter(e => e.link === location.pathname)
          setActiveLink(checkLocation ? checkLocation?.active : checkLocationNested?.active)
 
-         setActiveBranch(checkLocationNestedLik?.length > 1 ? checkLocationNestedLik?.find(e => e.active === targetValue)?.active : checkLocationNestedLik[0]?.active) 
-        //  console.log(checkLocationNestedLik[1]?.active) 
+        //  setActiveBranch(checkLocationNestedLik?.length > 1 ? checkLocationNestedLik?.find(e => e.active === targetValue)?.active : checkLocationNestedLik[0]?.active) 
+         console.log(checkLocationNested) 
         }
 
     },[location])
