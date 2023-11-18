@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useStateValue } from '../../context/stateProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormClientsModel from '../formmodels/FormClientsModel';
@@ -17,6 +17,8 @@ const AddClient = ({isAdded}) => {
  const [nameExist ,setNameExist] = useState(false)
  const [checkPhone ,setCheckPhone] = useState(false)
  const navigate = useNavigate();
+ const locatin = useLocation()
+ const initial_url = locatin.pathname.split('/')
 
  function handleChange(event){
     if (event.target.name === 'phone') {
@@ -56,13 +58,15 @@ const AddClient = ({isAdded}) => {
     if(!checkPhone && !nameExist){
         addClient(code , name , phone ,address)
         isAdded(true)
-        navigate(-1)
+        navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+        localStorage.setItem('branch' , 'clinetsList')
     }
  }
 
  const cancelAdd = () => {
     isAdded(false)
-    navigate(-1)
+    navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+    localStorage.setItem('branch' , 'clinetsList')
 }
 
 

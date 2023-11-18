@@ -1,8 +1,9 @@
-import { faAdd, faArrowDown, faBoxesPacking, faBoxesStacked, faChartArea, faChartBar, faChevronDown, faChevronUp, faCircleXmark, faCoins, faEdit, faFileAlt, faFileInvoice, faFileLines, faFilePowerpoint, faFilter, faFingerprint, faGears, faGripLinesVertical, faHome, faList, faListDots, faMoneyCheck, faPhoneVolume, faPrint, faRemove, faStar, faStore, faStoreAlt, faStoreSlash, faTrash, faTrashAlt, faUserAltSlash, faUserCheck, faUserGroup, faUserPlus, faUsers, faUsersBetweenLines, faUsersCog, faUsersLine, faWallet } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faBoxesStacked, faChartArea, faChartBar, faChevronDown, faChevronUp, faCircleXmark, faCoins, faEdit, faFileAlt, faFileInvoice, faFileLines, faFilePowerpoint, faFilter, faFingerprint, faGears, faGripLinesVertical, faHome, faList, faListDots, faMoneyCheck, faPhoneVolume, faPrint, faRemove, faStar, faStore, faStoreAlt, faStoreSlash, faTrash, faTrashAlt, faUserAltSlash, faUserCheck, faUserGroup, faUserPlus, faUsers, faUsersBetweenLines, faUsersCog, faUsersLine, faWallet } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link , useLocation } from 'react-router-dom'
 import logoImg from '../assets/730d1b67.png'
+import SignOut from './SignOut'
 
 const Sidebar = () => {
 
@@ -217,7 +218,7 @@ const Sidebar = () => {
         },
         {
             title: 'المصاريف',
-            link: '',
+            link: '/expensespage',
             icon: faWallet,
             active: 'expenses'
         },
@@ -242,43 +243,70 @@ const Sidebar = () => {
     ])
 
     const location = useLocation()
-    const [getLocation , setGetLocation] = useState({})
     const [stop , setStop] = useState(false)
 
     const handleClick = (link) => {
         setStop(true) 
         setActiveLink(link);
-        // setActiveBranch('')
-        setActiveBranch(activeBranch)
+        localStorage.removeItem('branch')
+        if (link === activeLink) {
+            setActiveLink(null);
+          } else {
+            setActiveLink(link);
+          }
     };
 
-    const [targetValue, setTargetValue] = useState("");
+    // console.log(activeLink)
+    // console.log(activeBranch)
+
+    const [myObject, setMyObject] = useState();
+
     const handleClickBranch = (link) => {
-        setActiveBranch(link);
-        setTargetValue(link);
-    };
+        setStop(true) 
+        const activeBranchData = localStorage.setItem('branch' , link)
+        setActiveBranch(activeBranchData);
+        // const newData = {
+        //   ...location,
+        //   state: link
+        // }
 
-
-    console.log(targetValue)
-    console.log(activeBranch)
-    console.log(activeLink)
+        // localStorage.setItem('myData', JSON.stringify(newData));
+        // setMyObject(newData);
+    };  
     
     useEffect(() => {
 
-        const checkBranch = activeBranch ? setTargetValue(activeBranch) : setTargetValue('')
-        // const checkStop = activeLink ? setStop(true) : setStop(false)
+        const storedBranch = localStorage.getItem('branch');
+        // const storedData = JSON.parse(localStorage.getItem('myData'));
 
+        setActiveBranch(storedBranch);
+        // setMyObject(storedData);
+
+        let checkLocation = sidebarLinks?.find(e => e.link === location.pathname)
+        let checkLocationNested = sidebarLinks?.find(e => e.branches?.find(b => b.link === location.pathname))
+        let checkTest = checkLocationNested?.branches.filter(e => e.link === location.pathname)
         if(!stop) {
-            let checkLocation = sidebarLinks?.find(e => e.link === location.pathname)
-            let checkLocationNested = sidebarLinks?.find(e => e.branches?.find(b => b.link === location.pathname))
             let checkLocationNestedLik = checkLocationNested?.branches?.filter(e => e.link === location.pathname)
-         setActiveLink(checkLocation ? checkLocation?.active : checkLocationNested?.active)
+              setActiveLink(checkLocation ? checkLocation?.active : checkLocationNested?.active)
+              
+            let checkLocalStorage = localStorage.getItem('branch') && sidebarLinks?.find(e => e.branches?.find(b => b.active === localStorage.getItem('branch')))
+              checkLocalStorage && setActiveLink(checkLocalStorage?.active)
+            }
 
-        //  setActiveBranch(checkLocationNestedLik?.length > 1 ? checkLocationNestedLik?.find(e => e.active === targetValue)?.active : checkLocationNestedLik[0]?.active) 
-         console.log(checkLocationNested) 
+        // if(activeLink === null){
+        //     setActiveLink(checkLocation?.active)
+        // }
+        
+        let emptyLocalStorage = sidebarLinks?.find(e => e.branches?.find(b => b.link === location.pathname))
+         
+        if(!emptyLocalStorage){
+             localStorage.removeItem('branch')
         }
 
-    },[location])
+        // console.log(emptyLocalStorage)
+
+
+    }, [location])
 
   return (
     <div className='fixed px-6 top-0 bottom-0 right-0 w-1/5 bg-gradient-to-b from-main to-[rgb(51_159_247)] text-white shadow-3xl h-full'>
@@ -287,7 +315,7 @@ const Sidebar = () => {
         </div>
        <div>
         {sidebarLinks?.map(e => (
-            <div className='border-b border-[#e5e7eb24] last-of-type:border-none'>
+            <div className='border-b border-[#e5e7eb24] last-of-type:border-none' key={e.active}>
                 <div className={`py-1 px-6 font-bold rounded-2xl cursor-pointer ${activeLink === e.active && 'bg-gradient-to-l from-[rgb(250_250_250)] to-[rgb(225_234_238)] transition-all'}`} onClick={() => handleClick(e.active)}>
                     <Link to={e.branches ? '' : e.link} className={`flex justify-between transition-all relative ${activeLink === e.active && 'text-main'}`}>
                         <div className={`flex justify-start items-center gap-3`}>
@@ -303,7 +331,7 @@ const Sidebar = () => {
                 </div>
                 {e.branches && <div className={`py-1 px-7 transition-all ${activeLink === e.active ? 'h-auto opacity-100 block' : 'h-0 opacity-0 hidden'}`}>
                     {e.branches?.map(b => (
-                        <div className='border-b border-[#e5e7eb24] cursor-pointer font-bold last-of-type:border-none' onClick={() => handleClickBranch(b.active)}>
+                        <div className='border-b border-[#e5e7eb24] cursor-pointer font-bold last-of-type:border-none hover:bg-gradient-to-l hover:from-[rgb(250_250_250)] hover:to-[rgb(225_234_238)] hover:text-main hover:rounded-2xl' key={b.active} onClick={() => handleClickBranch(b.active)}>
                             <Link to={b.link}>
                                 <div className={`flex justify-start text-sm items-center transition-all gap-3 rounded-2xl p-2 px-4 ${activeBranch === b.active && 'bg-gradient-to-l from-[rgb(250_250_250)] to-[rgb(225_234_238)] text-main'}`}>
                                     <FontAwesomeIcon icon={b.icon} />
@@ -316,6 +344,7 @@ const Sidebar = () => {
             </div>
         ))
         }
+        <SignOut />
        </div>
     </div>
   )

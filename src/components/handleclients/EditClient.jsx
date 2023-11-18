@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useStateValue } from '../../context/stateProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormClientsModel from '../formmodels/FormClientsModel';
@@ -19,6 +19,8 @@ const EditClient = ({client,isEdited}) => {
             address: client.address,
         })
     const navigate = useNavigate();
+    const locatin = useLocation()
+    const initial_url = locatin.pathname.split('/')
 
     const  {code , name , phone , address} = newArr
 
@@ -61,13 +63,15 @@ const EditClient = ({client,isEdited}) => {
         if(!checkPhone && !nameExist){
             editClient(client.code , editedClients)
             isEdited(true)
-            navigate(-1)
+            navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+            localStorage.setItem('branch' , 'clinetsList')
         }
     }
 
     const cancelEdit = () => {
         isEdited(false)
-        navigate(-1)
+        navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+        localStorage.setItem('branch' , 'clinetsList')
     }
 
   return (

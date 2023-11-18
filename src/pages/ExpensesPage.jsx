@@ -73,7 +73,7 @@ const ExpensesPage = () => {
             <Sidebar />
           </div>
           <div className="w-4/5 pl-8">
-            <h2 className='text-center text-3xl font-bold text-main'>المصاريف</h2>
+            <h2 className='text-center text-3xl my-5 font-bold text-main'>المصاريف</h2>
             <Buttons
                 title='اضافة' 
                 urlAdd={'/homepage/expensespage/addexpenses'} 

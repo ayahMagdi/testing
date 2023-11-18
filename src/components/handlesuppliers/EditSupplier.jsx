@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useStateValue } from '../../context/stateProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormSuppliersModel from '../formmodels/FormSuppliersModel'
@@ -18,6 +18,8 @@ const EditSupplier = ({supplier,isEdited}) => {
             phone: supplier.phone,
         })
     const navigate = useNavigate();
+    const locatin = useLocation()
+    const initial_url = locatin.pathname.split('/')
 
     const  {code , name , phone} = newArr
 
@@ -60,13 +62,15 @@ const EditSupplier = ({supplier,isEdited}) => {
         if(!checkPhone && !nameExist){
             editSupplier(supplier.code , editedSuppliers)
             isEdited(true)
-            navigate(-1)
+            navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+            localStorage.setItem('branch' , 'suppliersList')
         }
     }
 
     const cancelEdit = () => {
         isEdited(false)
-        navigate(-1)
+        navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+        localStorage.setItem('branch' , 'suppliersList')
     }
 
   return (

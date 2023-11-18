@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useStateValue } from '../../context/stateProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormSuppliersModel from '../formmodels/FormSuppliersModel';
@@ -16,6 +16,8 @@ const AddSupplier = ({isAdded}) => {
  const [nameExist ,setNameExist] = useState(false)
  const [checkPhone ,setCheckPhone] = useState(false)
  const navigate = useNavigate();
+ const locatin = useLocation()
+ const initial_url = locatin.pathname.split('/')
 
 
  function handleChange(event){
@@ -56,13 +58,15 @@ const AddSupplier = ({isAdded}) => {
     if(!checkPhone && !nameExist){
         addSupplier(code , name , phone)
         isAdded(true)
-        navigate(-1)
+        navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+        localStorage.setItem('branch' , 'suppliersList')
     }
  }
 
  const cancelAdd = () => {
     isAdded(false)
-    navigate(-1)
+    navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+    localStorage.setItem('branch' , 'suppliersList')
 }
 
   return (

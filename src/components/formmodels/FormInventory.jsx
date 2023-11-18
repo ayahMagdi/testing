@@ -2,7 +2,7 @@ import Select from 'react-select'
 
 const FormInventory = ({title,handleSubmit ,dateoptions ,startDateval,endDateval,totalVal,handleChangeStartDate ,handleChangeEndDate}) => {
   return (
-    <div className='mt-1'>
+    <div className='my-5'>
     <h2 className='text-center text-3xl font-bold text-main'>{title}</h2>
         <form className='mt-5' onSubmit={handleSubmit} id='my-form'>
             <div className='grid grid-cols-3 gap-6 mb-4'>

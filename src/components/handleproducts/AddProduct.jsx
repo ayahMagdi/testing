@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useStateValue } from '../../context/stateProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
 import FormItemsModel from '../formmodels/FormItemsModel';
 import ModelBtns from '../ModelBtns';
@@ -25,6 +25,8 @@ const AddProduct = ({isAdded}) => {
     const [codeExist ,setCodeExist] = useState(false)
     const [nameExist ,setNameExist] = useState(false)
     const navigate = useNavigate();
+    const locatin = useLocation()
+    const initial_url = locatin.pathname.split('/')
 
     function handleChange(event){
         if (event.target.name === 'income' || event.target.name === 'outcome') {
@@ -77,13 +79,15 @@ const AddProduct = ({isAdded}) => {
             addItem(code , name , unit , income , outcome)
             addToStore(code,name,unit,income,outcome, 0,0,0,0)
             isAdded(true)
-            navigate(-1)
+            navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+            localStorage.setItem('branch' , 'itemsList')
         }
     }
 
     const cancelAdd = () => {
         isAdded(false)
-        navigate(-1)
+        navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+        localStorage.setItem('branch' , 'itemsList')
     }
 
   return (
@@ -104,7 +108,7 @@ const AddProduct = ({isAdded}) => {
           isDisabled={false}
           handleSelectChange={handleSelectChange}
         />
-        <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تسجيل" cancelTitle='الغاء' btnStyle={'w-60 py-3 text-lg'} margin={'mt-10'} />
+        <ModelBtns handlecancel={() => setShow(true)} form='my-form' title="تسجيل" cancelTitle='الغاء' btnStyle={'w-48 py-3 text-lg'} margin={'mt-10'} />
         {show && <ConfirmationButton title='هل تريد الغاء التسجيل؟' confirm={cancelAdd} cancel={() => setShow(false)} />}
     </div>
   )

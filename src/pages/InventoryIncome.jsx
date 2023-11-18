@@ -97,7 +97,7 @@ const InventoryIncome = () => {
   } , [startDate , endDate , getItemsTotal])
 
   
-  const inventory =  uniqueDataInvoice.map((e) => parseInt(e.totalwd)).reduce((a, b)=> a+b, 0);
+  const inventory =  uniqueDataInvoice?.map((e) => parseInt(e.totalwd)).reduce((a, b)=> a+b, 0);
 
   return (
     // <div className='container mx-auto px-4 my-5'>

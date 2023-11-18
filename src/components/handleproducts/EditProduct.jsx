@@ -1,6 +1,6 @@
 import { useEffect, useState,useMemo } from 'react'
 import { useStateValue } from '../../context/stateProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
 import ModelBtns from '../ModelBtns';
 import FormItemsModel from '../formmodels/FormItemsModel';
@@ -58,6 +58,8 @@ const EditProduct = ({record , isEdited}) => {
     })
     
     const navigate = useNavigate();
+    const locatin = useLocation()
+    const initial_url = locatin.pathname.split('/')
 
     const  {code , name , unit , income , outcome , avlqty , soldqty , store ,total} = newArr
 
@@ -108,13 +110,15 @@ const EditProduct = ({record , isEdited}) => {
             editItem(record.code , editedItems)
             editStoresInfo(record.code,editedItems)
             isEdited(true)
-            navigate(-1)
+            navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+            localStorage.setItem('branch' , 'itemsList')
         }
     }
 
     const cancelEdit = () => {
         isEdited(false)
-        navigate(-1)
+        navigate(`/${initial_url.slice(1 , -1).join('/')}`)
+        localStorage.setItem('branch' , 'itemsList')
     }
 
   return (

@@ -38,7 +38,7 @@ const FormClientsModel = ({handleSubmit ,title ,handleChange,checkPhone ,codeVal
                 <div>
                     <label className='mb-4 block'>رقم الهاتف</label>
                       <input
-                        type='tel'
+                        type='text'
                         minLength="11" 
                         maxLength="11"
                         pattern="^01\d{9}$"

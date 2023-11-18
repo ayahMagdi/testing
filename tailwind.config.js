@@ -20,6 +20,14 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-radial': 'linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%)',
+        'background-textmove': 'linear-gradient(90deg, #000, #fff, #000)',
+        'hero-pattern': "url('/src/assets/networkbg.png')",
+      },
+      keyframes: {
+        wiggle: {
+          '0%': { left: '150px' },
+          '100%': { left: '-1400px' },
+        }
       }
   },
   plugins: [],

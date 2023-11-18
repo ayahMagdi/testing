@@ -5,6 +5,7 @@ import { useStateValue } from "../context/stateProvider"
 import isEqual from 'lodash/isEqual';
 import Goback from "../components/Goback";
 import Sidebar from "../components/Sidebar";
+import Search from "../components/Search";
 
 const SupplierBills = ({searchItem , search}) => {
 
@@ -41,13 +42,14 @@ const SupplierBills = ({searchItem , search}) => {
           <div className="w-1/5">
             <Sidebar />
           </div>
-          <div className="w-4/5 pl-8">
-            <Navbar handleSearch={() => handleSearch} searchItem={searchItem} />
+          <div className="w-4/5 pl-8 h-screen max-h-screen">
+            {/* <Navbar handleSearch={() => handleSearch} searchItem={searchItem} /> */}
+            <h2 className='text-center text-4xl font-bold my-5 text-main'>فواتير الموردين</h2>
+            <Search handleSearch={() => handleSearch} searchItem={searchItem} />
             <TableSupplierbills 
                 isSearched={handleSearch.length && search.length} 
                 filteredItems={handleSearch} 
-                bills={uniqueDataInvoice}
-                title='فواتير الموردين' 
+                bills={uniqueDataInvoice} 
                 name='اسم المورد'
                 checkInvoice={false}
                 allbills={inwardBills}

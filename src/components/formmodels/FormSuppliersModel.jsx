@@ -32,7 +32,7 @@ const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal
                             onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                             onInput={F => F.target.setCustomValidity('')}
                             onChange={handleChange}
-                            placeholder='مثال (اسم المنتج)'
+                            placeholder='مثال (محمد احمد)'
                             value={nameVal}
                         />
                         {nameExist && <p className='text-red-500 mt-3'>هذا المورد موجود بالفعل</p>}
@@ -40,7 +40,7 @@ const FormSuppliersModel = ({handleSubmit ,title ,handleChange ,codeVal ,nameVal
                     <div>
                         <label className='mb-4 block'>رقم الهاتف</label>
                         <input
-                            type='tel'
+                            type='text'
                             minLength="11" 
                             maxLength="11"
                             pattern="^01\d{9}$"

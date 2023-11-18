@@ -36,9 +36,8 @@ const TableSupplierbills = ({allbills,filteredItems , isSearched , bills ,title 
 
 
   return (
-    <div className='my-5'>
-      <h2 className='text-center text-4xl font-bold mb-10 text-main'>{title}</h2>
-      <div className='my-10 mx-auto w-full h-auto max-h-[27rem] border shadow overflow-y-auto'>
+    <div className='h-3/4'>
+      <div className='my-5 mx-auto w-full h-auto max-h-full border shadow overflow-y-auto'>
         <table className="table-auto w-full text-center border" style={{borderCollapse: 'collapse'}}>
          <thead className="sticky top-0 bg-main text-white border-b">
                <tr className='border-b border-slate-300'>

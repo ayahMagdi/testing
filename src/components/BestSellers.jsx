@@ -22,14 +22,26 @@ const BestSellers = () => {
         progress: '#e99a4beb',
         percentageBg: '#e2862a3b'
       },
+      {
+        progressBg: '#9fc8ef4f',
+        progress: '#a2d2ff',
+        percentageBg: '#a2d2ff38',
+      },
+      {
+        progressBg: '#ffafcc4f',
+        progress: '#ffafcc',
+        percentageBg: '#ffafcc5c'
+      },
     ]
   
     useEffect(() => {
       const getFirstItem = stores?.reduce((cur, acc) => parseInt(acc.soldqty) > parseInt(cur.soldqty) ? acc : cur)
       const getSecondItem = stores?.filter(e => e !== getFirstItem).reduce((acc, cur) => parseInt(acc.soldqty) > parseInt(cur.soldqty) ? acc : cur)
       const getThirdItem = stores?.filter(e => e !== getFirstItem && e !== getSecondItem).reduce((acc, cur) => parseInt(acc.soldqty) > parseInt(cur.soldqty) ? acc : cur)
+      // const getFourItem = stores?.filter(e => e !== getFirstItem && e !== getSecondItem && e !== getThirdItem).reduce((acc, cur) => parseInt(acc.soldqty) > parseInt(cur.soldqty) ? acc : cur)
+      // const getFiveItem = stores?.filter(e => e !== getFirstItem && e !== getSecondItem && e !== getThirdItem && e !== getFourItem).reduce((acc, cur) => parseInt(acc.soldqty) > parseInt(cur.soldqty) ? acc : cur)
       
-       setMostWantedItems([{...getFirstItem} , {...getSecondItem} , {...getThirdItem}])
+       setMostWantedItems([{...getFirstItem} , {...getSecondItem} , {...getThirdItem} ])
   
       const productSales = [getFirstItem?.soldqty, getSecondItem?.soldqty, getThirdItem?.soldqty];
       const totalSales = productSales?.reduce((acc, current) => parseInt(acc) + parseInt(current), 0);
@@ -40,6 +52,8 @@ const BestSellers = () => {
         { id: 1, mainValue: productPercentages[0] || 0, progress: 0 },
         { id: 2, mainValue: productPercentages[1] || 0, progress: 0 },
         { id: 3, mainValue: productPercentages[2] || 0, progress: 0 },
+        // { id: 4, mainValue: productPercentages[3] || 0, progress: 0 },
+        // { id: 5, mainValue: productPercentages[4] || 0, progress: 0 },
       ];
       
       setProgressBars(progressBarData);
@@ -75,62 +89,20 @@ const BestSellers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                  {mostWantedItems?.map((e , i) => (
-                    <tr className='border-b border-slate-100' key={i}>
-                      <td className="px-6 py-3 text-sm">0{i + 1}</td>
+                  {mostWantedItems?.map((e, i) => (
+                    <tr className="border-b border-slate-100 last-of-type:border-0" key={`item-${i}`}>
+                      <td className="px-6 py-3 text-sm">{`0${i + 1}`}</td>
                       <td className="px-6 py-3 text-sm">{e.name}</td>
                       <td className="px-6 py-3 w-6/12">
-                        <div className={`w-full bg-[${tableColors[i].progressBg}] rounded-full h-1 relative`}>
-                            <div className={`bg-[${tableColors[i].progress}] h-1 rounded-full absolute left-0`} style={{width: `${progressBars[i]?.progress}%`}}></div>
-                          </div>
+                        <div className="w-full rounded-full h-1 relative" style={{ backgroundColor: tableColors[i].progressBg }}>
+                          <div className="h-1 rounded-full absolute left-0" style={{ width: `${progressBars[i]?.progress}%`, backgroundColor: tableColors[i].progress }}></div>
+                        </div>
                       </td>
                       <td className="px-6 py-3 text-sm">
-                          <div className={`rounded-md border bg-[${tableColors[i].percentageBg}] border-[${tableColors[i].progress}] px-2 py-1`}>{Math.round(progressBars[i]?.progress)}%</div>
+                        <div className="rounded-md border px-2 py-1" style={{ backgroundColor: tableColors[i].percentageBg, borderColor: tableColors[i].progress }}>{Math.round(progressBars[i]?.progress)}%</div>
                       </td>
                     </tr>
                   ))}
-                    {/* <tr className='border-b border-slate-100'>
-                        <td className="px-6 py-3 text-sm">01</td>
-                        <td className="px-6 py-3 text-sm"> 
-                            لاب توب
-                        </td>
-                        <td className="px-6 py-3 w-6/12">
-                           <div class="w-full bg-[#5047cf40] rounded-full h-1 relative">
-                              <div class="bg-[#606ae4eb] h-1 rounded-full w-3/5 absolute left-0"></div>
-                            </div>
-                        </td>
-                        <td className="px-6 py-3 text-sm">
-                            <div className='rounded-md border bg-[#1846cd17] border-[#606ae4eb] px-2 py-1'>45%</div>
-                        </td>
-                    </tr>
-                    <tr className='border-b border-slate-100'>
-                        <td className="px-6 py-3 text-sm">01</td>
-                        <td className="px-6 py-3 text-sm"> 
-                            لاب توب
-                        </td>
-                        <td className="px-6 py-3 w-6/12">
-                           <div class="w-full bg-[#f299ec87] rounded-full h-1 relative">
-                              <div class={`bg-[#cd18c0eb] h-1 rounded-full absolute left-0`} style={{width: `${progressBars[0]?.progress}%`}} ></div>
-                            </div>
-                        </td>
-                        <td className="px-6 py-3 text-sm">
-                            <div className='rounded-md border bg-[#cd18c017] border-[#cd18c0eb] px-2 py-1'>{Math.round(progressBars[0]?.progress)}%</div>
-                        </td>
-                    </tr>
-                    <tr className='border-b border-slate-100'>
-                        <td className="px-6 py-3 text-sm">01</td>
-                        <td className="px-6 py-3 text-sm"> 
-                            لاب توب
-                        </td>
-                        <td className="px-6 py-3 w-6/12">
-                           <div class="w-full bg-[#e99a4b4a] rounded-full h-1 relative">
-                              <div class="bg-[#e99a4beb] h-1 rounded-full w-1/5 absolute left-0"></div>
-                            </div>
-                        </td>
-                        <td className="px-6 py-3 text-sm">
-                            <div className='rounded-md border bg-[#e2862a3b] border-[#e99a4beb] px-2 py-1'>25%</div>
-                        </td>
-                    </tr> */}
                 </tbody>
         </table>
     </div>

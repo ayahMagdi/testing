@@ -3,14 +3,14 @@ const ModelBtns = ({handlecancel , title , cancelTitle ,btnStyle , margin ,handl
   return (
     <div className={`flex justify-center gap-6 ${margin}`}>
         <button 
-              className={`bg-main text-white rounded-md cursor-pointer ${btnStyle}`}
+              className={`bg-main text-white rounded-3xl cursor-pointer ${btnStyle}`}
               form={form} type="submit"
               onClick={handleRegistration}
         >
            {title}
         </button>
         <button 
-          className={`text-red-500 border-2 border-red-500 rounded-md cursor-pointer ${btnStyle}`}
+          className={`border-2 border-red-500 rounded-3xl cursor-pointer bg-white text-red-500  ${btnStyle}`}
           onClick={handlecancel}
         >
             {cancelTitle}
