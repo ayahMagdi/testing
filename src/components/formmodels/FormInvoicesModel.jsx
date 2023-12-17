@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 
 const FormInvoicesModel = (
-     {title,handleSubmit, edit,handleChange,supplierErr,itemErr,qtyErr,codeExist,emptyCode,nameText,codeText,qtyZero,errorText,avlQty,purchasVal,existing,dateVal,supplierCodeVal,supplierNameVal,itemCodeVal,itemNameVal,unitVal,qtyVal,priceVal,totalVal}
+     {title,handleSubmit,returns,purchasErr,existingReturn,emptyPurchas, edit,handleChange,supplierErr,itemErr,qtyErr,codeExist,emptyCode,nameText,codeText,qtyZero,errorText,avlQty,purchasVal,existing,dateVal,supplierCodeVal,supplierNameVal,itemCodeVal,itemNameVal,unitVal,qtyVal,priceVal,totalVal}
  ) => {
 
     const userRef = useRef()
@@ -19,13 +19,16 @@ const FormInvoicesModel = (
                     <label className='mb-2 block font-bold'>رقم الفاتورة</label>
                     <input
                         type='text'
-                        className='w-full border p-2 rounded-lg border-gray-500 focus:outline-none'
+                        className={`w-full border p-2 rounded-lg focus:border-2 focus:outline-none ${purchasErr ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
                         name='purchas'
                         placeholder='مثال (123456789)'
                         value={purchasVal}
                         onChange={handleChange}
-                        disabled
+                        disabled={!returns || existingReturn}
+                        ref={returns ? userRef : null} 
+                        autoComplete="off"
                     />
+                    {purchasErr && <p className="text-sm text-red-500 m-0">رقم الفاتورة غلط</p>}
                 </div>
                 <div>
                     <label className='mb-2 block font-bold'>التاريخ</label>
@@ -45,10 +48,10 @@ const FormInvoicesModel = (
                         type='text'
                         className={`w-full border p-2 rounded-lg focus:border-2 focus:outline-none ${supplierErr ? 'border-red-500 focus:empty:border-red-500' : 'border-gray-500 focus:empty:border-main'}`}
                         name='supplierCode'
-                        ref={userRef} 
+                        ref={returns ? null : userRef} 
                         required
                         autoComplete="off"
-                        disabled={edit || existing ? true : false}
+                        disabled={edit || existing || returns}
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                         onInput={F => F.target.setCustomValidity('')}
                         placeholder='مثال (123456789123)'
@@ -79,7 +82,7 @@ const FormInvoicesModel = (
                         name='itemCode'
                         required
                         autoComplete="off"
-                        disabled={edit ? true : false}
+                        disabled={edit || emptyPurchas ? true : false}
                         onInvalid={F => F.target.setCustomValidity('يرجي ملء هذا الحقل')} 
                         onInput={F => F.target.setCustomValidity('')}
                         onChange={handleChange}

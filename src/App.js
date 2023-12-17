@@ -30,6 +30,7 @@ import Store from "./pages/Store";
 import ExpensesPage from "./pages/ExpensesPage";
 import AddExpenses from "./pages/AddExpenses";
 import Landing from "./pages/Landing";
+import ReturnsPage from "./pages/ReturnsPage";
 
 function App() {
 
@@ -113,8 +114,9 @@ function App() {
          <Route path="/homepage/storepage/allproducts/editproduct" element={<EditPage record={record} isEdited={isEditedItem} />} />
          <Route path="/homepage/suppliers/allsuppliers/editSupplier" element={<EditSupplierPage supplier={supplier} isEdited={isEditedSupplier} />} />
          <Route path="/homepage/clients/allclients/editClient" element={<EditClientPage client={client} isEdited={isEditedClient} />} />
-         <Route path="/purchases" element={<PurchasesPage searchItem={searchItem} />} />
-         <Route path="/sales" element={<SalesPage searchItem={searchItem} />} />
+         <Route path="/purchases" element={<PurchasesPage />} />
+         <Route path="/sales" element={<SalesPage />} />
+         <Route path="/homepage/returns" element={<ReturnsPage />} />
          <Route path="/homepage/storepage/store" element={<StorePage searchItem={searchItem} search={search} />} />
          <Route path="/inwardbills" element={<InwardBills />} />
          <Route path="/outwardbills" element={<OutwardBills />} />

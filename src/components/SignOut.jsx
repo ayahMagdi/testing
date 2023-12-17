@@ -15,16 +15,17 @@ const SignOut = () => {
   const handleCancel = () => {setShow(() => false)}
 
   return (
-    <div className='p-4 flex justify-end'>
-      <div className='w-12 h-12 bg-[rgba(255,255,255,.3)] rounded-full flex justify-center transition-all items-center hover:bg-white'>
-        <FontAwesomeIcon 
-            icon={faSignOut} 
-            className='rotate-180 text-white text-xl font-light cursor-pointer transition-all hover:text-main' 
-            onClick={logOut}
-        />
+    <div>
+      <div className='flex cursor-pointer gap-3 py-[6px] px-6 font-bold items-center' onClick={logOut}>
+        <div>
+          <FontAwesomeIcon 
+              icon={faSignOut} 
+              className='rotate-180 text-white text-xl font-light' 
+          />
+        </div>
+        <h2>تسجيل الخروج </h2>
       </div>
-        {/* <h2>تسجيل الخروج </h2> */}
-        {show && <ConfirmationButton title='هل تريد تسجيل الخروج؟' confirm={handleConfirm} cancel={handleCancel} />}
+      {show && <ConfirmationButton title='هل تريد تسجيل الخروج؟' confirm={handleConfirm} cancel={handleCancel} />}
     </div>
   )
 }

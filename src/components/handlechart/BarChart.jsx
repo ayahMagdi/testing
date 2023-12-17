@@ -144,12 +144,6 @@ const BarChart = ({chartData}) => {
       setDataCurrentWeek(getDataWeeks(datesBetweenCurrentWeek))
       setDataLastWeek(getDataWeeks(datesBetweenLastWeek))
 
-      // setCurrentWeek(currentWeekSales)
-      // setLastWeek(lastWeekSales)
-
-      // console.log(currentWeekSales)
-      // console.log(lastWeekSales)
-
     },[outwardBills])
 
     return (

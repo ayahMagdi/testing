@@ -114,26 +114,26 @@ export const StateProvider = (props) => {
         {invoice: '3' , date: '10/21/2023' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: 11 , itemName: 'فاونديشن', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
         {invoice: '4' , date: '10/25/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 15 , itemName: 'صبغة', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
         {invoice: '4' , date: '10/25/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 17 , itemName: 'شادو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '11/1/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '4' , date: '11/1/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '5' , date: '11/1/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '6' , date: '11/2/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '7' , date: '11/3/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '12/4/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 20 , itemName: 'ماسكرا', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '4' , date: '12/4/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '5' , date: '12/5/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'سيروم', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '6' , date: '12/6/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '7' , date: '12/7/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
         // {invoice: '8' , date: '11/4/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '8' , date: '11/4/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 5000,reduction: 100,remaining: 3000},
-        {invoice: '9' , date: '11/5/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 3200,reduction: 100,remaining: 3000},
-        {invoice: '10' , date: '11/6/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '11' , date: '11/7/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '12' , date: '11/8/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '13' , date: '11/9/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '14' , date: '11/10/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '15' , date: '11/11/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '16' , date: '11/12/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 7000,reduction: 100,remaining: 3000},
-        {invoice: '17' , date: '11/13/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 5000,reduction: 100,remaining: 3000},
-        {invoice: '18' , date: '11/14/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 3500,reduction: 100,remaining: 3000},
-        {invoice: '19' , date: '11/15/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 5500,reduction: 100,remaining: 3000},
-        {invoice: '20' , date: '11/16/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
-        {invoice: '21' , date: '11/16/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '8' , date: '12/8/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 5000,reduction: 100,remaining: 3000},
+        {invoice: '9' , date: '12/8/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 3200,reduction: 100,remaining: 3000},
+        {invoice: '10' , date: '12/9/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '11' , date: '12/10/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '12' , date: '12/11/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '13' , date: '12/12/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '14' , date: '12/12/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '15' , date: '12/13/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '16' , date: '12/14/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 7000,reduction: 100,remaining: 3000},
+        {invoice: '17' , date: '12/14/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 5000,reduction: 100,remaining: 3000},
+        {invoice: '18' , date: '12/14/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 3500,reduction: 100,remaining: 3000},
+        {invoice: '19' , date: '12/15/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 5500,reduction: 100,remaining: 3000},
+        {invoice: '20' , date: '12/16/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
+        {invoice: '21' , date: '12/17/2023' , supplierCode: 12 , supplierName: 'اسراء' ,itemCode: 9 , itemName: 'مخمرية', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
     ])
     const [supplierBalance , setSupplierBalance] = useState([
         // {code: "1" , name: "هند مجدي" ,total: 3000,reduction: 1000,remaining: 2000},
@@ -148,20 +148,22 @@ export const StateProvider = (props) => {
         // {code: '10' ,name: 'ايه' ,total: 2000,reduction: 100,remaining: 3000},
     ])
     const [clientBalance , setClientBalance] = useState([
-        // {code: "1" , name: "هند مجدي" ,total: 3000,reduction: 1000,remaining: 2000},
-        // {code: "2" , name: "بسمة مجدي" ,total: 2000,reduction: 100,remaining: 3000},
-        // {code: "3" , name: "هبة مجدي" ,total: 2000,reduction: 100,remaining: 3000},
-        // {code: "4" , name: "رنا عبدالعزيز" , total: 2000,reduction: 100,remaining: 3000},
-        // {code: "5" , name: "ميار خالد" ,total: 2000,reduction: 100,remaining: 3000},
-        // {code: "6" , name: "ايه مجدي" ,total: 2000,reduction: 100,remaining: 3000},
-        // {code: '7' , name: 'رنا' ,total: 2000,reduction: 100,remaining: 3000},
-        // {code: '8' , name: 'شيرين' ,total: 2000,reduction: 100,remaining: 3000},
-        // {code: '9' , name: 'حسناء' ,total: 2000,reduction: 100,remaining: 3000},
-        // {code: '10' ,name: 'ايه' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: "1" , name: "هند مجدي" ,total: 3000,reduction: 1000,remaining: 2000},
+        {code: "2" , name: "بسمة مجدي" ,total: 5000,reduction: 100,remaining: 3000},
+        {code: "3" , name: "هبة مجدي" ,total: 1000,reduction: 100,remaining: 3000},
+        {code: "4" , name: "رنا عبدالعزيز" , total: 4000,reduction: 100,remaining: 3000},
+        {code: "5" , name: "ميار خالد" ,total: 1000,reduction: 100,remaining: 3000},
+        {code: "6" , name: "ايه مجدي" ,total: 9000,reduction: 100,remaining: 3000},
+        {code: '7' , name: 'رنا' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '8' , name: 'شيرين' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '9' , name: 'حسناء' ,total: 2000,reduction: 100,remaining: 3000},
+        {code: '10' ,name: 'ايه' ,total: 2000,reduction: 100,remaining: 3000},
     ])
     const [totalReduction , setTotalReduction] = useState([])
     const [totalReductionClient , setTotalReductionClient] = useState([])
     const [expenses , setExpenses] = useState([])
+    const [returns , setReturns] = useState([])
+    const [returnBills , setReturnBills] = useState([])
 
     const addItem = (code ,name, unit, income, outcome) => {
         setItems([{code,name,unit,income,outcome} , ...items])
@@ -171,6 +173,9 @@ export const StateProvider = (props) => {
     }
     const addOutwardBills = (invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining) => {
         setOutwardBills((oldvalues) => [{invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining}, ...oldvalues])
+    }
+    const addReturnBills = (invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining) => {
+        setReturnBills((oldvalues) => [{invoice ,date, supplierCode, supplierName, itemCode , itemName , unit ,price ,qty , total , totalbill ,discount,totalwd,reduction,remaining}, ...oldvalues])
     }
     const addSupplier = (code, name , phone) => {
         setSuppliers([...suppliers ,{code, name , phone}])
@@ -188,6 +193,9 @@ export const StateProvider = (props) => {
     const addSales = (invoice ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price ,total) => {
         setSales([{invoice ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price ,total} , ...sales])
     }
+    const addReturns = (invoice ,date , supplierName , supplierCode ,itemCode,itemName ,unit ,qty ,price ,total) => {
+        setReturns([{invoice ,date , supplierName , supplierCode ,itemCode,itemName,unit ,qty ,price ,total} , ...returns])
+    }
     
     const deleteItem = (code) => {
         setItems(items.filter(e => e.code !== code))
@@ -204,6 +212,9 @@ export const StateProvider = (props) => {
     const deleteSales = (code) => {
         setSales(sales.filter(e => e.itemCode !== code))
     }
+    const deleteReturns = (code) => {
+        setReturns(returns.filter(e => e.itemCode !== code))
+    }
 
     const editItem = (code,editedItems) => {
         setItems(items.map(e => e.code === code ? editedItems : e))
@@ -219,6 +230,9 @@ export const StateProvider = (props) => {
     }
     const editSales = (code,editedSales) => {
         setSales(sales.map(e => e.itemCode === code ? editedSales : e))
+    }
+    const editReturn = (code,editedReturn) => {
+        setReturns(returns.map(e => e.itemCode === code ? editedReturn : e))
     }
     const addToStore = (code , name , unit ,income ,outcome,avlqty,soldqty,store, total) => {
          setStores((oldvalues) => [{code , name , unit ,income ,outcome,avlqty,soldqty,store, total} , ...oldvalues])
@@ -306,7 +320,7 @@ export const StateProvider = (props) => {
 
     return (
         <StateContext.Provider value={
-            {items,addItem,deleteItem,totalReduction,expenses,addExpenses,addTotalReduction,editStoresInfo,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
+            {items,addItem,deleteItem,returns,deleteReturns,addReturnBills,editReturn,setReturns,addReturns,totalReduction,expenses,addExpenses,addTotalReduction,editStoresInfo,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
          }>
             {props.children}
         </StateContext.Provider>

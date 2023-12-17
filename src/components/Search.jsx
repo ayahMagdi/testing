@@ -11,22 +11,23 @@ const Search = ({handleSearch , searchItem}) => {
   },[searchTerm])
 
   return (
-    <div className='relative w-3/12'>
-       <div>
-          <input 
-                className='w-full p-4 border border-main rounded-3xl focus:outline-none' 
-                type='search' 
-                placeholder='ابحث بالكود  , الاسم '
-                value={searchTerm} 
-                onChange={(e) => setSearchTerm(e.target.value)} 
-            />
-            <div 
-               onClick={handleSearch}
-               className='absolute cursor-pointer left-0 w-20 top-0 bg-main h-full text-lg rounded-e-3xl bg-gradient-to-bl from-main to-[rgb(51_159_247)] text-white flex justify-center items-center'>
-                <FontAwesomeIcon icon={faSearch} />
-            </div>
-       </div>
-    </div>
+      <div className='relative w-3/12'>
+        <div>
+          <input
+            className='w-full p-4 border border-main rounded-3xl focus:outline-none'
+            type='search'
+            placeholder='ابحث بالكود  , الاسم '
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div
+            onClick={handleSearch}
+            className='absolute cursor-pointer left-0 w-20 top-0 bg-main h-full text-lg rounded-e-3xl bg-gradient-to-bl from-main to-[rgb(51_159_247)] text-white flex justify-center items-center'
+          >
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
+        </div>
+      </div>
   )
 }
 

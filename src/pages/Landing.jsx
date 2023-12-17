@@ -52,14 +52,8 @@ const Landing = () => {
         </div>
         <div className="w-4/5 pl-8">
           <div className="">
-
-          <BarChart />
+             <BarChart />
           </div>
-           {/* <div className="w-full mt-5 mb-3 text-white text-lg flex items-center justify-start p-4 border rounded-md bg-gradient-to-l from-main to-[rgb(98,172,232)]">
-             <div className=" overflow-hidden whitespace-nowrap w-full">
-               <p className="animate-[wiggle_10s_linear_infinite] text-3xl relative inline-block font-extrabold">مرحبا بكم في المتجر الذكي</p>
-             </div>
-           </div> */}
            <Statistics />
         </div>
       </div>

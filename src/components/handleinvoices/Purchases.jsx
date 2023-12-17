@@ -297,6 +297,7 @@ const Purchases = () => {
             title='فاتورة المشتريات' 
             handleSubmit={handleSubmit} 
             handleChange={handleChange}
+            returns= {false}
             itemCodeVal={purchasesInfo.itemCode}
             itemNameVal={!edit ? !itemErr && purchasesInfo.itemCode ? purchasesInfo.itemName : '' : purchasesInfo.itemName}
             unitVal={!edit ?!itemErr && purchasesInfo.itemCode ? purchasesInfo.unit : '' : purchasesInfo.unit}
