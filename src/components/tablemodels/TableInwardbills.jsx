@@ -2,25 +2,25 @@
 const TableInwardbills = ({invoicesList,code,name,height}) => {
     
   return (
-    <div className={`my-6 mx-auto w-full border shadow h-auto overflow-y-auto ${height}`}>
+    <div className={`mb-6 mx-auto w-full border shadow overflow-y-auto`}>
         <table className="table-auto w-full text-center" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>رقم الفاتورة</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>التاريخ</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>{code}</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>{name}</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>كود المنتج</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>اسم المنتج</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>الوحدة</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>الكمية</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>السعر</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>الاجمالي</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>اجمالي الفاتورة</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>نسبة الخصم</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>الاجمالي بعد الخصم</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>تنزيل</th>
-                    <th scope="col" className="px-2 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>باقي الحساب</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>رقم الفاتورة</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>التاريخ</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>{code}</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>{name}</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>كود المنتج</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>اسم المنتج</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>الوحدة</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>الكمية</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>السعر</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>الاجمالي</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>اجمالي الفاتورة</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>نسبة الخصم</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>الاجمالي بعد الخصم</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>تنزيل</th>
+                    <th scope="col" className="px-1 py-4 text-sm font-bold" style={{border: '1px solid #00000024'}}>باقي الحساب</th>
                 </tr>
             </thead>
             <tbody>

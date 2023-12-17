@@ -36,8 +36,7 @@ const TableSupplierbills = ({allbills,filteredItems , isSearched , bills ,title 
 
 
   return (
-    <div className='h-3/4'>
-      <div className='my-5 mx-auto w-full h-auto max-h-full border shadow overflow-y-auto'>
+      <div className={`my-5 mx-auto w-full border shadow overflow-y-auto`}>
         <table className="table-auto w-full text-center border" style={{borderCollapse: 'collapse'}}>
          <thead className="sticky top-0 bg-main text-white border-b">
                <tr className='border-b border-slate-300'>
@@ -86,8 +85,7 @@ const TableSupplierbills = ({allbills,filteredItems , isSearched , bills ,title 
                ))}
          </tbody>
         </table>
-      </div>
-      {show && <div className='bg-popup fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center'>
+        {show && <div className='bg-popup fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center'>
         <div className='bg-white p-24 rounded-lg w-7/12 relative'>
              <div onClick={() => setShow(false)} className="border-2 rounded-full flex justify-center items-center h-7 w-7 cursor-pointer border-white bg-main text-white absolute -top-3 -right-3">
                <FontAwesomeIcon icon={faClose} />
@@ -131,7 +129,7 @@ const TableSupplierbills = ({allbills,filteredItems , isSearched , bills ,title 
          remaining={billPrint[0]?.remaining}
          show={checkInvoice}
       />}
-   </div>
+      </div>
   )
 }
 

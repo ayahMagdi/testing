@@ -5,7 +5,7 @@ const FormReduction = ({handleSubmit,codeText,codeval,nameval,nameText,dateval,h
     <div className='mt-5'>
     <h2 className='text-center text-3xl font-bold text-main'>تنزيل الحساب</h2>
     <form className='mt-5' onSubmit={handleSubmit} id='my-form'>
-        <div className={`grid grid-cols-2 gap-6 mb-4`}>
+        <div className={`grid grid-cols-2 gap-6`}>
             <div>
                 <label className='mb-2 block font-bold'>{codeText}</label>
                 <input

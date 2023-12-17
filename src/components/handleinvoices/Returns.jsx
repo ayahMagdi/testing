@@ -268,7 +268,7 @@ const Returns = () => {
           )
         
           const handleReturn = returns.map((pur) => {
-            addReturnBills(pur.purchas ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount || 0,totalwd,reduction || 0,remaining)
+            addReturnBills(pur.invoice ,pur.date, pur.supplierCode, pur.supplierName, pur.itemCode , pur.itemName , pur.unit ,pur.price ,pur.qty , pur.total , totalbill ,discount || 0,totalwd,reduction || 0,remaining)
           })     
         
           // const handleSuppliers = .map((pur) => {
@@ -282,7 +282,7 @@ const Returns = () => {
           // })
         
         emptyAllForms()
-        navigate('/supplierbills')
+        navigate('/returnbills')
       }
   
     }

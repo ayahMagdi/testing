@@ -31,6 +31,9 @@ import ExpensesPage from "./pages/ExpensesPage";
 import AddExpenses from "./pages/AddExpenses";
 import Landing from "./pages/Landing";
 import ReturnsPage from "./pages/ReturnsPage";
+import ReturnBills from "./pages/ReturnBills";
+import SalesInfo from "./pages/SalesInfo";
+import PurchasesInfo from "./pages/PurchasesInfo";
 
 function App() {
 
@@ -106,6 +109,8 @@ function App() {
          <Route path="/homepage/suppliers" element={<Suppliers getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
          <Route path="/homepage/clients" element={<Clients getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
          <Route path="/homepage/storepage" element={<Store getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
+         <Route path="/homepage/salesinfo" element={<SalesInfo getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
+         <Route path="/homepage/purchasesinfo" element={<PurchasesInfo getRecord={getRecord} searchItem={searchItem} search={search} addMsg={addItemMsg} editMsg={editItemMsg} />} />
          <Route path="/homepage/suppliers/allsuppliers" element={<AllsuppliersPage getSupplier={getSupplier} searchItem={searchItem} search={search} addMsg={addSupplierMsg} editMsg={editSupplierMsg} />} />
          <Route path="/homepage/clients/allclients" element={<AllClientsPage getClient={getClient} searchItem={searchItem} search={search} addMsg={addClientMsg} editMsg={editClientMsg} />} />
          <Route path="/homepage/storepage/allproducts/addproduct" element={<AddPage isAdded={isAddedItem} searchItem={searchItem} search={search}  />} />
@@ -118,12 +123,13 @@ function App() {
          <Route path="/sales" element={<SalesPage />} />
          <Route path="/homepage/returns" element={<ReturnsPage />} />
          <Route path="/homepage/storepage/store" element={<StorePage searchItem={searchItem} search={search} />} />
-         <Route path="/inwardbills" element={<InwardBills />} />
-         <Route path="/outwardbills" element={<OutwardBills />} />
+         <Route path="/homepage/purchasesinfo/inwardbills" element={<InwardBills />} />
+         <Route path="/homepage/salesinfo/outwardbills" element={<OutwardBills />} />
          <Route path="/supplierbills" element={<SupplierBills searchItem={searchItem} search={search} />} />
          <Route path="/clientbills" element={<ClientBills searchItem={searchItem} search={search} />} />
-         <Route path="/inventoryincome" element={<InventoryIncome />} />
-         <Route path="/inventoryoutcome" element={<InventoryOutcome />} />
+         <Route path="/returnbills" element={<ReturnBills searchItem={searchItem} search={search} />} />
+         <Route path="/homepage/purchasesinfo/inventoryincome" element={<InventoryIncome />} />
+         <Route path="/homepage/salesinfo/inventoryoutcome" element={<InventoryOutcome />} />
          <Route path="/supplierbalance" element={<SupplierBalance searchItem={searchItem} search={search} getRecordReduction={getRecordReduction} />} />
          <Route path="/clientbalance" element={<ClientBalance searchItem={searchItem} search={search} getRecordReduction={getRecordReductionClient} />} />
          <Route path="/supplierreduction" element={<SupplierReduction recordReduction={recordReduction} />} />

@@ -33,7 +33,7 @@ const AllproductsPage = ({editedProduct , getRecord , searchItem , search , addM
         <div className="w-1/5">
            <Sidebar />
         </div>
-        <div className="w-4/5 pl-8 h-screen max-h-screen">
+        <div className="w-4/5 pl-8 h-screen flex flex-col">
           {addMsg ? <SuccessMsg title='تمت اضافة المنتج' /> 
              : deletedMsg ? <SuccessMsg title='تم حذف المنتج' /> 
              : editMsg ? <SuccessMsg title='تم تعديل المنتج' /> 

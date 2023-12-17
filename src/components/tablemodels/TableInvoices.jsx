@@ -27,7 +27,7 @@ const TableInvoices = ({purchases , handleDelete ,deletCode , getRecord ,handleE
     }
 
   return (
-    <div className="mt-4 h-auto max-h-48 border shadow overflow-y-auto">
+    <div className={`mt-5 mx-auto w-full border shadow overflow-y-auto`}>
         <table className="table-auto w-full text-center border h-fit" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>

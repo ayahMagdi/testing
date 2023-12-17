@@ -1,7 +1,6 @@
 const TablePrint = ({billPrint}) => {
   return (
-     <div>
-       <div className="h-auto max-h-36 border overflow-y-auto print:overflow-visible print:h-auto">
+     <div className={`mb-5 mx-auto w-full border shadow overflow-y-auto print:overflow-visible print:h-auto`}>
         <table className="table-auto w-full text-center" style={{borderCollapse: 'collapse'}}>
                <thead className="sticky top-0 bg-black text-white border-b">
                      <tr className='border-b border-slate-300'>
@@ -26,7 +25,6 @@ const TablePrint = ({billPrint}) => {
                      ))}
                </tbody>
         </table>
-        </div>
       </div>
   )
 }

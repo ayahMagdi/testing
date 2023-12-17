@@ -20,7 +20,7 @@ const StorePage = ({search , searchItem}) => {
         <div className="w-1/5">
            <Sidebar />
         </div>
-        <div className="w-4/5 pl-8 h-screen max-h-screen">
+        <div className="w-4/5 pl-8 h-screen flex flex-col">
            <h2 className='text-center text-4xl font-bold my-6 text-main'>قائمة الاصناف</h2>
           <Search handleSearch={handleSearch} searchItem={searchItem} />
           <TableStore isSearched={handleSearch.length && search.length} filteredItems={handleSearch} />

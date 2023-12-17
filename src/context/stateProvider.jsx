@@ -43,13 +43,15 @@ export const StateProvider = (props) => {
         {title: 'العملاء' , icon: faPeopleGroup , url: '/homepage/clients'},
         {title: 'المشتريات' , icon: faSackDollar , url: '/purchases'},
         {title: 'المبيعات' , icon: faBalanceScaleLeft , url: '/sales'},
+        {title: 'بيانات المشتريات' , icon: faBalanceScaleLeft , url: '/homepage/purchasesinfo'},
+        {title: 'بيانات المبيعات' , icon: faBalanceScaleLeft , url: '/homepage/salesinfo'},
         // {title: 'المخزن' , icon: faStore , url: '/store'},
-        {title: 'فواتير الداخل' , icon: faClipboardList , url: '/inwardbills'},
-        {title: 'فواتير الخارج' , icon: faClipboardCheck , url: '/outwardbills'},
+        // {title: 'فواتير الداخل' , icon: faClipboardList , url: '/inwardbills'},
+        // {title: 'فواتير الخارج' , icon: faClipboardCheck , url: '/outwardbills'},
         // {title: 'فواتير الموردين' , icon: faFileInvoice , url: '/supplierbills'},
         // {title: 'فواتير العملاء' , icon: faFileInvoiceDollar , url: '/clientbills'},
-        {title: 'جرد الداخل' , icon: faMoneyBill1Wave , url: '/inventoryincome'},
-        {title: 'جرد الخارج' , icon: faMoneyBillWave , url: '/inventoryoutcome'},
+        // {title: 'جرد الداخل' , icon: faMoneyBill1Wave , url: '/inventoryincome'},
+        // {title: 'جرد الخارج' , icon: faMoneyBillWave , url: '/inventoryoutcome'},
         {title: 'المصاريف' , icon: faMoneyCheckAlt , url: '/expensespage'},
         // {title: 'رصيد الموردين' , icon: faMoneyCheckDollar , url: '/supplierbalance'},
         // {title: 'رصيد العملاء' , icon: faCalculator , url: '/clientbalance'},
@@ -102,6 +104,17 @@ export const StateProvider = (props) => {
         // {invoice: '4' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '15' , itemName: 'صبغة', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
         // {invoice: '4' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '17' , itemName: 'شادو', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
         // {invoice: '4' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '20' , itemName: 'ماسكرا', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '7' , date: '4/26/2023' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: '7' , itemName: 'صن بلوك', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '7' , date: '4/26/2023' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: '11' , itemName: 'فاونديشن', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '6' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '15' , itemName: 'صبغة', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '6' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '17' , itemName: 'شادو', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '5' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '20' , itemName: 'ماسكرا', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '8' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '20' , itemName: 'ماسكرا', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '9' , date: '4/26/2023' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: '7' , itemName: 'صن بلوك', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '9' , date: '4/26/2023' , supplierCode: 3 , supplierName: 'رنا' ,itemCode: '11' , itemName: 'فاونديشن', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '10' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '15' , itemName: 'صبغة', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '10' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '17' , itemName: 'شادو', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
+        // {invoice: '11' , date: '4/28/2023' , supplierCode: 5 , supplierName: 'ايه' ,itemCode: '20' , itemName: 'ماسكرا', unit: 'قطع' ,price: '200' ,qty: 20 ,total: 2000,totalbill: 6000,discount: '30',totalwd: 2000,reduction: 100,remaining: 3000},
     ])
     const [outwardBills , setOutwardBills] = useState([
         {invoice: '1' , date: '10/8/2023' , supplierCode: 1 , supplierName: 'هند' ,itemCode: 1 , itemName: 'شامبو', unit: 'قطع' ,price: 200 ,qty: 20 ,total: 2000,totalbill: 6000,discount: 30,totalwd: 2000,reduction: 100,remaining: 3000},
@@ -161,7 +174,23 @@ export const StateProvider = (props) => {
     ])
     const [totalReduction , setTotalReduction] = useState([])
     const [totalReductionClient , setTotalReductionClient] = useState([])
-    const [expenses , setExpenses] = useState([])
+    const [expenses , setExpenses] = useState([
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+        // {date: '5/10/2023' ,total: 500 , reason: 'blabla' },
+    ])
     const [returns , setReturns] = useState([])
     const [returnBills , setReturnBills] = useState([])
 
@@ -320,7 +349,7 @@ export const StateProvider = (props) => {
 
     return (
         <StateContext.Provider value={
-            {items,addItem,deleteItem,returns,deleteReturns,addReturnBills,editReturn,setReturns,addReturns,totalReduction,expenses,addExpenses,addTotalReduction,editStoresInfo,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
+            {items,addItem,deleteItem,returns,deleteReturns,returnBills,addReturnBills,editReturn,setReturns,addReturns,totalReduction,expenses,addExpenses,addTotalReduction,editStoresInfo,totalReductionClient,addTotalReductionClient,editItem,supplierBalance,addSupplierBalance,editSupplierBalance,addClientBalance,editClientBalance,clientBalance, suppliers,outwardBills,addOutwardBills,addSupplier , deleteSupplier,setSales ,editSupplier ,clients , addClient , deleteClient , editClient , categorys ,purchases,setPurchases,addPurchases,deletePurchases,editPurchases,sales,stores ,addToStore,editStores,deleteFromStore ,addSales,deleteSales,editSales ,inwardBills ,addInwardBills ,setStores}
          }>
             {props.children}
         </StateContext.Provider>

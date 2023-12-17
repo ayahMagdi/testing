@@ -117,7 +117,7 @@ const InventoryIncome = () => {
         <div className="w-1/5">
           <Sidebar />
         </div>
-        <div className="w-4/5 pl-8">
+        <div className="w-4/5 pl-8 h-screen flex flex-col">
           <FormInventory 
             title='بيانات جرد الداخل'
             dateoptions={getdates} 
@@ -127,7 +127,7 @@ const InventoryIncome = () => {
             handleChangeStartDate={(selectedOption) => setStartDate(selectedOption)}
             handleChangeEndDate={(selectedOption) => setEndDate(selectedOption)}
         />
-        <TableInwardbills invoicesList={newDataSets} code='كود المورد' name='اسم المورد' height='max-h-[28rem]' />
+        <TableInwardbills invoicesList={newDataSets} code='كود المورد' name='اسم المورد' />
         </div>
     </div>
     </div>

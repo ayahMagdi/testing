@@ -22,8 +22,7 @@ const ClientBalance = ({search , searchItem ,getRecordReduction}) => {
        <div className="w-1/5">
           <Sidebar />
        </div>
-       <div className="w-4/5 pl-8 h-screen max-h-screen">
-       {/* <Navbar handleSearch={() => handleSearch} searchItem={searchItem} /> */}
+       <div className="w-4/5 pl-8 h-screen flex flex-col">
        <h2 className='text-center text-4xl font-bold my-5 text-main'>رصيد العملاء</h2>
        <Search handleSearch={() => handleSearch} searchItem={searchItem} />
        <TableBalance 
@@ -36,6 +35,10 @@ const ClientBalance = ({search , searchItem ,getRecordReduction}) => {
           url='/clientreduction'
           getRecordReduction={getRecordReduction}
       />
+       <div className='text-center mb-5'>
+           <h3>اجمالي باقي الحساب</h3>
+           <div className='border w-full p-4 rounded-md border-main mt-3 font-bold text-lg'>{totalbalance}</div>
+       </div>
       <Goback />
        </div>
      </div>

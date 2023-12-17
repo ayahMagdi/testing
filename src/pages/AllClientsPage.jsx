@@ -33,7 +33,7 @@ const AllClientsPage = ({getClient , editedClients , searchItem , search , addMs
           <div className="w-1/5">
             <Sidebar />
           </div>
-          <div className="w-4/5 pl-8 h-screen max-h-screen">
+          <div className="w-4/5 pl-8 h-screen flex flex-col">
           {addMsg ? <SuccessMsg title='تمت اضافة العميل' /> 
               : deletedMsg ? <SuccessMsg title='تم حذف العميل' /> 
               : editMsg ? <SuccessMsg title='تم تعديل العميل' /> 

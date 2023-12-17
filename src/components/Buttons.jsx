@@ -13,7 +13,7 @@ const Buttons = ({urlAdd, title , addState , cancelState , branch}) => {
     }
     
   return (
-    <div className='my-6  flex justify-start gap-4'>
+    <div className='flex justify-start gap-4 my-5'>
         <Link to={urlAdd} onClick={handleAdd}>
             <div className={`bg-main text-white rounded-md text-center py-4 cursor-pointer w-32`}>
                 <FontAwesomeIcon icon={faSquarePlus} />

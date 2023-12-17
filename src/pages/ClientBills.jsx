@@ -42,7 +42,7 @@ const ClientBills = ({searchItem , search}) => {
       <div className="w-1/5">
          <Sidebar />
       </div>
-      <div className="w-4/5 pl-8 h-screen max-h-screen">
+      <div className="w-4/5 pl-8 h-screen flex flex-col">
             {/* <Navbar handleSearch={() => handleSearch} searchItem={searchItem} /> */}
         <h2 className='text-center text-4xl font-bold my-5 text-main'>فواتير العملاء</h2>
         <Search handleSearch={() => handleSearch} searchItem={searchItem} />

@@ -20,8 +20,7 @@ const TableBalance = ({supplierList ,title,codeText ,nameText ,filteredItems ,ur
     }
 
   return (
-    <div className='h-3/5'>
-        <div className='my-5 mx-auto w-full h-auto max-h-full border shadow overflow-y-auto'>
+        <div className={`my-5 mx-auto w-full border shadow overflow-y-auto`}>
             <table className="table-auto w-full text-center border" style={{borderCollapse: 'collapse'}}>
                 <thead className="sticky top-0 bg-main text-white border-b">
                     <tr className='border-b border-slate-300'>
@@ -61,11 +60,6 @@ const TableBalance = ({supplierList ,title,codeText ,nameText ,filteredItems ,ur
                 </tbody>
             </table>
         </div>
-        <div className='text-center'>
-           <h3>اجمالي باقي الحساب</h3>
-           <div className='border w-full p-4 rounded-md border-main mt-3 font-bold text-lg'>{totalbalance}</div>
-       </div>
-    </div>
   )
 }
 

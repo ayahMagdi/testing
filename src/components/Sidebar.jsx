@@ -56,7 +56,7 @@ const Sidebar = () => {
         },
         {
             title: 'الموردين',
-            link: '',
+            link: '/homepage/suppliers',
             icon: faUsers,
             active: 'suppliers',
             branches : [
@@ -88,7 +88,7 @@ const Sidebar = () => {
         },
         {
             title: 'العملاء',
-            link: '',
+            link: '/homepage/clients',
             icon: faUsersLine,
             active: 'clients',
             branches : [
@@ -132,19 +132,19 @@ const Sidebar = () => {
         },
         {
             title: 'بيانات المشتريات',
-            link: '',
+            link: '/homepage/purchasesinfo',
             icon: faFileAlt,
             active: 'purchasesInfo',
             branches : [
                 {
                     title: 'عرض فواتير المشتريات',
                     active: 'purchasesList',
-                    link: '/inwardbills',
+                    link: '/homepage/purchasesinfo/inwardbills',
                     icon: faFileLines
                 },
                 {
                     title: 'جرد المشتريات',
-                    link: '/inventoryincome',
+                    link: '/homepage/purchasesinfo/inventoryincome',
                     icon: faFilter,
                     active: 'purchasesInventory'
                 },
@@ -152,19 +152,19 @@ const Sidebar = () => {
         },
         {
             title: 'بيانات المبيعات',
-            link: '',
+            link: '/homepage/salesinfo',
             icon: faFileAlt,
             active: 'salesInfo',
             branches : [
                 {
                     title: 'عرض فواتير المبيعات',
                     active: 'salesList',
-                    link: '/outwardbills',
+                    link: '/homepage/salesinfo/outwardbills',
                     icon: faFileLines
                 },
                 {
                     title: 'جرد المبيعات',
-                    link: '/inventoryoutcome',
+                    link: '/homepage/salesinfo/inventoryoutcome',
                     icon: faFilter,
                     active: 'salesInventory'
                 },
@@ -186,6 +186,12 @@ const Sidebar = () => {
                     title: 'طباعة فواتير العملاء',
                     active: 'clientsPrint',
                     link: '/clientbills',
+                    icon: faFileInvoice
+                },
+                {
+                    title: 'طباعة فواتير المرتجعات',
+                    active: 'returnsPrint',
+                    link: '/returnbills',
                     icon: faFileInvoice
                 },
             ]

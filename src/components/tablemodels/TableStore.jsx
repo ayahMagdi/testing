@@ -17,8 +17,7 @@ const TableStore = ({filteredItems , isSearched}) => {
  }, [filteredItems])
 
   return (
-    <div className='h-3/4'>
-        <div className='my-5 mx-auto w-full border h-auto max-h-full shadow overflow-y-auto'>
+    <div className={`my-5 mx-auto w-full border shadow overflow-y-auto`}>
         <table className="table-auto w-full text-center border" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>
@@ -62,7 +61,6 @@ const TableStore = ({filteredItems , isSearched}) => {
                 ))}
             </tbody>
         </table>
-        </div>
     </div>
   )
 }

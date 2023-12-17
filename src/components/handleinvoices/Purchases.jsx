@@ -199,7 +199,7 @@ const Purchases = () => {
                 total: purchasesInfo.qty ? parseInt(purchasesInfo.qty) * purchasesInfo.price : ''
             }
          })
-        }else{
+         }else{
           setPurchasesInfo(prevData => {
             return {
                 ...prevData, 

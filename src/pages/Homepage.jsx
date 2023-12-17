@@ -5,6 +5,7 @@ import SuccessMsg from "../components/SuccessMsg"
 import { useStateValue } from "../context/stateProvider"
 import axios from "axios"
 import Sidebar from "../components/Sidebar"
+import Search from "../components/Search"
 
 const Homepage = ({searchItem , search}) => {
 
@@ -39,8 +40,8 @@ const Homepage = ({searchItem , search}) => {
         <div className="w-1/5">
            <Sidebar />
         </div>
-        <div className="w-4/5 pl-8">
-           <Navbar handleSearch={() => handleSearch}  searchItem={searchItem} />
+        <div className="w-4/5 pl-8 mt-5">
+           <Search handleSearch={() => handleSearch}  searchItem={searchItem} />
            <Content isSearched={handleSearch.length && search.length} filteredItems={handleSearch} />
         </div>
       </div>

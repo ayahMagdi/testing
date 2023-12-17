@@ -112,7 +112,7 @@ Object.keys(countCategories).forEach((data) => {
       <div className="w-1/5">
         <Sidebar />
       </div>
-      <div className="w-4/5 pl-8">
+      <div className="w-4/5 pl-8 h-screen flex flex-col">
         <FilterInvoices title='فواتير الداخل' 
           handlecancel={handlecancel} 
           getinvoices={getinvoices}
@@ -131,7 +131,7 @@ Object.keys(countCategories).forEach((data) => {
           name='اسم المورد'
           nameplaceholder='اختر اسم المورد'
         />
-        <TableInwardbills invoicesList={newDataSets} code='كود المورد' name='اسم المورد' height='max-h-[25rem]' />
+        <TableInwardbills invoicesList={newDataSets} code='كود المورد' name='اسم المورد' />
       </div>
   </div>
   </div>

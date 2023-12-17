@@ -1,7 +1,7 @@
 const TableExpenses = ({expensesList}) => {
 
   return (
-    <div className="mt-9 h-auto max-h-[23rem] border shadow overflow-y-auto flex justify-center">
+    <div className={`mb-5 mx-auto w-full border shadow overflow-y-auto`}>
         <table className="table-auto w-full text-center border h-fit" style={{borderCollapse: 'collapse'}}>
             <thead className="sticky top-0 bg-main text-white border-b">
                 <tr className='border-b border-slate-300'>
