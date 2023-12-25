@@ -8,8 +8,9 @@ const Buttons = ({urlAdd, title , addState , cancelState , branch}) => {
     const locatin = useLocation()
     const initial_url = locatin.pathname.split('/')
 
-    const handleAdd = (e) => {
+    const handleAdd = () => {
         localStorage.setItem('branch' , branch)
+        console.log(localStorage.getItem('branch'))
     }
     
   return (

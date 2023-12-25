@@ -4,14 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ConfirmationButton from '../ConfirmationButton';
 import FormItemsModel from '../formmodels/FormItemsModel';
 import ModelBtns from '../ModelBtns';
-
+import axios from "axios";
 
 const AddProduct = ({isAdded}) => {
   
     const {addItem ,items ,addToStore} = useStateValue()
 
     const options = [
-        {value: 'قطع' , label: 'قطع'},
+        {value: 'piece' , label: 'قطع'},
         {value: 'علبة' , label: 'علبه'},
         {value: 'كرتونه' , label: 'كرتونه'}
      ]
@@ -72,6 +72,51 @@ const AddProduct = ({isAdded}) => {
 
     } , [productInfo,items])
 
+    const baseURL = 'https://electroninvenotorysystem.000webhostapp.com/api/Product'
+
+
+    const [post, setPost] = useState(null);
+
+    // https://fakestoreapi.com/products
+ 
+    useEffect(() => {
+     const getData = async () => {
+       const {data: res} = await axios.get(baseURL)
+       setPost(res);
+    }
+    getData()
+    }, []);
+  
+    // if (!post) return null
+ 
+    console.log(post)
+
+    // const asyncPostCall = async () => {
+    //     try {
+    //         const response = await fetch(baseURL, {
+    //          method: 'POST',
+    //          headers: {
+    //            'Content-Type': 'application/json'
+    //            },
+    //            body: JSON.stringify({
+    //      // your expected POST request payload goes here
+    //      "code": code,
+    //      "name": name,
+    //      "unit": unit,
+    //      "in_price": income,
+    //      "out_price": outcome
+    //             })
+    //          });
+    //          const data = await response.json();
+    //       // enter you logic when the fetch is successful
+    //          console.log(data);
+    //        } catch(error) {
+    //      // enter your logic for when there is an error (ex. error toast)
+
+    //           console.log(error)
+    //          } 
+    //     }
+
     const handleSubmit = (e) => {
        e.preventDefault()
        if(!invalidPrice && !codeExist && !nameExist){
@@ -81,6 +126,18 @@ const AddProduct = ({isAdded}) => {
             isAdded(true)
             navigate(`/${initial_url.slice(1 , -1).join('/')}`)
             localStorage.setItem('branch' , 'itemsList')
+            // asyncPostCall()
+            axios.post(baseURL, {
+                "code": code,
+                "name": name,
+                "unit": unit,
+                "in_price": income,
+                "out_price": outcome
+            }).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
         }
     }
 

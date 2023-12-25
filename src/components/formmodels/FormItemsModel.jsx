@@ -1,8 +1,8 @@
 import Barcode from 'react-barcode';
-import Select from 'react-select'
+import Select from 'react-select';
 
 const FormItemsModel = ({handleSubmit,defaultVal,title,options,isDisabled,handleChange,handleSelectChange,codeExist,nameExist,invalidPrice ,codeVal ,barcodeVal ,nameVal ,unitVal ,incomeVal ,outcomeVal}) => {
- 
+
   return (
     <div>
         <div className='mt-8'>
@@ -26,7 +26,11 @@ const FormItemsModel = ({handleSubmit,defaultVal,title,options,isDisabled,handle
                     <div>
                         <label className='mb-4 block'>الباركود</label>
                         <div className='w-full border px-4 h-14 rounded-2xl shadow-md border-gray-200'>
-                           <Barcode value={codeVal && codeVal} displayValue={false} height={35} />
+                        {codeVal ? (
+                            <Barcode value={codeVal} displayValue={false} height={35} />
+                        ) : (
+                            <p></p>
+                        )}
                         </div>
                     </div>
                     <div>
